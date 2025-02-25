@@ -2,14 +2,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../redux/authSlice';
 import { useNavigate } from 'react-router-dom';
 
-export const Profile = () => {
+const Profile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user, loading } = useSelector((state) => state.auth);
-
-  // useEffect(() => {
-  //   dispatch(fetchProfile());
-  // }, [dispatch]);
 
   const handleLogout = () => {
     dispatch(logoutUser()).then(() => {
