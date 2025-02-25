@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUser } from '../redux/authSlice.js';
+import { loginUser, fetchProfile } from '../redux/authSlice.js';
 import { useNavigate } from 'react-router-dom';
 
-function Login() {
+export const Login = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -17,6 +17,7 @@ function Login() {
     e.preventDefault();
     dispatch(loginUser(formData)).then((result) => {
       if (result.meta.requestStatus === 'fulfilled') {
+        dispatch(fetchProfile());
         navigate('/profile');
       }
     });

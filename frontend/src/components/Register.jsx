@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../redux/authSlice';
 
-function Register() {
+export const Register = () => {
   const [formData, setFormData] = useState({ username: '', email: '', password: '' });
   const dispatch = useDispatch();
 
