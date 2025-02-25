@@ -19,7 +19,7 @@ const Login = () => {
     dispatch(loginUser(formData)).then((result) => {
       if (result.meta.requestStatus === 'fulfilled') {
         dispatch(fetchProfile());
-        navigate('/profile');
+        // navigate('/');
       }
     });
   };

@@ -6,9 +6,20 @@ export const register = async (req, res) => {
     try {
       const { username, email, password } = req.body;
       
-      // Check if user already exists
-      const existingUser = await User.findOne({ email });
-      if (existingUser) return res.status(400).json({ message: "Email already registered" });
+      // // Check if user already exists
+      // const existingUser = await User.findOne({ email });
+      // if (existingUser) return res.status(400).json({ message: "Email already registered" });
+
+       // Check if email or username already exists
+       const existingUser = await User.findOne({ $or: [{ email }, { username }] });
+       if (existingUser) {
+         if (existingUser.email === email) {
+           return res.status(400).json({ message: "Email already registered" });
+         }
+         if (existingUser.username === username) {
+           return res.status(400).json({ message: "Username already taken" });
+         }
+       }
   
       // Hash password using Argon2
       const hashedPassword = await argon2.hash(password);
