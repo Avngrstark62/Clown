@@ -5,7 +5,6 @@ import User from "../models/user.model.js"
 export const register = async (req, res) => {
     try {
       const { username, email, password } = req.body;
-
       
       // Check if user already exists
       const existingUser = await User.findOne({ email });
@@ -58,5 +57,5 @@ export const logout = (req, res) => {
   export const profile = async (req, res) => {
     const userId = req.user.userId
     const user = await User.findById(userId);
-    res.json({ message: `Welcome, user ${user.username}` });
+    res.json({ user: user.username});
   }
