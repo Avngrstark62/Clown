@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import '../styles/find-user.css';
 import { searchUsers } from '../api/api';
-// import { searchUsers } from '../api/api';
+import { useNavigate } from 'react-router-dom';
 
 const FindUser = () => {
   const [query, setQuery] = useState('');
   const [users, setUsers] = useState([]);
+
+  const navigate = useNavigate();
 
   const handleSearch = async () => {
     if (query.trim()) {
@@ -18,6 +20,11 @@ const FindUser = () => {
       }
     }
   };
+
+  const handleUserClick = (e) => {
+    const username = e.currentTarget.querySelector('h3').textContent;
+    navigate(`/user/${username}`);
+  }
 
   return (
     <div className="find-user-container">
@@ -34,7 +41,7 @@ const FindUser = () => {
       <div className="user-list">
         {users.length > 0 ? (
           users.map((user) => (
-            <div key={user.id} className="user-card">
+            <div key={user._id} className="user-card" onClick={handleUserClick}>
               <h3>{user.username}</h3>
               <p>{user.name}</p>
             </div>

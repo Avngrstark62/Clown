@@ -35,7 +35,7 @@ const EditProfile = () => {
     e.preventDefault();
     try {
       await updateUserData(formData);
-      navigate('/profile');
+      navigate('/my-profile');
     } catch (error) {
       setError(error.response.data.message);
     }
@@ -67,7 +67,7 @@ const EditProfile = () => {
             placeholder="Bio"
           />
           <button type="submit" className="save-btn">Save</button>
-          <button type="button" className="cancel-btn" onClick={() => navigate('/profile')}>Cancel</button>
+          <button type="button" className="cancel-btn" onClick={() => navigate('/my-profile')}>Cancel</button>
           {error && <p className="error-message">{error}</p>}
         </form>
       </div>
