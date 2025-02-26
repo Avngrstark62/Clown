@@ -30,7 +30,7 @@ export const register = async (req, res) => {
   
       res.status(201).json({ message: "User registered successfully" });
     } catch (error) {
-      res.status(500).json({ message: "Server error" });
+      res.status(500).json({ message: "Error during registration" });
     }
   }
 
@@ -46,7 +46,7 @@ export const login = async (req, res) => {
   
       // Verify password
       const isPasswordValid = await argon2.verify(user.password, password);
-      if (!isPasswordValid) return res.status(400).json({ message: "Email and password does not match" });
+      if (!isPasswordValid) return res.status(400).json({ message: "Incorrect Password" });
   
       // Generate JWT token
       const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES });
@@ -56,7 +56,7 @@ export const login = async (req, res) => {
   
       res.json({ message: "Login successful" });
     } catch (error) {
-      res.status(500).json({ message: "Server error" });
+      res.status(500).json({ message: "Error logging in" });
     }
   }
 
@@ -65,8 +65,8 @@ export const logout = (req, res) => {
     res.json({ message: "Logged out successfully" });
   }
 
-  export const profile = async (req, res) => {
-    const userId = req.user.userId
-    const user = await User.findById(userId);
-    res.json({ user: user.username});
-  }
+export const user = async (req, res) => {
+  const userId = req.user.userId
+  const user = await User.findById(userId);
+  res.json({ user: user.username});
+}

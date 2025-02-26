@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import * as api from '../api/api';
+// import * as api from '../api/api';
+import { login, register, logout, user } from '../api/api';
 
 const loadUserFromLocalStorage = () => {
   const user = localStorage.getItem('user');
@@ -16,7 +17,7 @@ const clearUserFromLocalStorage = () => {
 
 export const registerUser = createAsyncThunk('auth/register', async (formData, { rejectWithValue }) => {
   try {
-    const response = await api.register(formData);
+    const response = await register(formData);
     return response.data.message;
   } catch (error) {
     return rejectWithValue(error.response.data.message);
@@ -25,7 +26,7 @@ export const registerUser = createAsyncThunk('auth/register', async (formData, {
 
 export const loginUser = createAsyncThunk('auth/login', async (formData, { rejectWithValue }) => {
   try {
-    const response = await api.login(formData);
+    const response = await login(formData);
     return response.data.message;
   } catch (error) {
     return rejectWithValue(error.response.data.message);
@@ -34,16 +35,16 @@ export const loginUser = createAsyncThunk('auth/login', async (formData, { rejec
 
 export const logoutUser = createAsyncThunk('auth/logout', async (_, { rejectWithValue }) => {
   try {
-    const response = await api.logout();
+    const response = await logout();
     return response.data.message;
   } catch (error) {
     return rejectWithValue(error.response.data.message);
   }
 });
 
-export const fetchProfile = createAsyncThunk('auth/profile', async (_, { rejectWithValue }) => {
+export const fetchUser = createAsyncThunk('auth/profile', async (_, { rejectWithValue }) => {
   try {
-    const response = await api.profile();
+    const response = await user();
     return response.data.user;
   } catch (error) {
     return rejectWithValue(error.response.data.message);
@@ -70,7 +71,7 @@ const authSlice = createSlice({
         state.message = action.payload;
         state.loading = false;
       })
-      .addCase(fetchProfile.fulfilled, (state, action) => {
+      .addCase(fetchUser.fulfilled, (state, action) => {
         state.user = action.payload;
         saveUserToLocalStorage(action.payload);
         state.loading = false;

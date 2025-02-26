@@ -3,6 +3,7 @@ import Layout from './components/Layout';
 import Register from './components/Register';
 import Login from './components/Login';
 import Profile from './components/Profile';
+import EditProfile from './components/EditProfile';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
@@ -17,7 +18,8 @@ function App() {
             <Route path="/feed" element={<Layout>Feed</Layout>} />
             <Route path="/messages" element={<Layout>Messages</Layout>} />
             <Route path="/profile" element={<Layout><Profile /></Layout>} />
-            <Route path="*" element={<Navigate to="/profile" />} />
+            <Route path="/edit-profile" element={<Layout><EditProfile/></Layout>} />
+            <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         ):(
           <Routes>
