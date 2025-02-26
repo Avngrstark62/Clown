@@ -3,8 +3,9 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { connectMongoDB } from "./config/mongodb.js";
 import cookieParser from "cookie-parser";
-import authRoutes from "./routes/auth.routes.js"
-import profileRoutes from "./routes/profile.routes.js"
+import authRoutes from "./routes/auth.route.js"
+import profileRoutes from "./routes/profile.route.js"
+import searchRoutes from "./routes/search.route.js"
 
 dotenv.config();
 connectMongoDB();
@@ -23,6 +24,7 @@ app.use(cookieParser());
 // Use Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/profile", profileRoutes);
+app.use("/api/search", searchRoutes);
 
 app.get('/', async (req, res) => {
     res.send('server is running');
