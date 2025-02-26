@@ -23,7 +23,7 @@ const FindUser = () => {
 
   const handleUserClick = (e) => {
     const username = e.currentTarget.querySelector('h3').textContent;
-    navigate(`/user/${username}`);
+    navigate(`/profile/${username}`);
   }
 
   return (

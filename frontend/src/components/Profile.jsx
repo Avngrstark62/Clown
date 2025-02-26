@@ -1,13 +1,16 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../redux/authSlice';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getUserData } from '../api/api';
 import default_avatar from '../images/default-avatar.png';
 import '../styles/profile.css';
 
 
-const MyProfile = () => {
+const Profile = () => {
+  const { username } = useParams();
+  const [profileType, setProfileType] = useState('');
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { loading } = useSelector((state) => state.auth);
@@ -15,12 +18,13 @@ const MyProfile = () => {
 
   useEffect(() => {
     const fetchUserData = async () => {
-      const response = await getUserData();
+      const response = await getUserData(username);
       setUserData(response.data.user);
+      setProfileType(response.data.profileType);
     };
 
     fetchUserData();
-  }, []);
+  }, [username]);
   
   const handleLogout = () => {
     dispatch(logoutUser()).then(() => {
@@ -53,11 +57,19 @@ const MyProfile = () => {
           <p><span>Following:</span> {userData.followingCount}</p>
         </div>
 
-        <button className="edit-btn" onClick={handleEditProfile}>Edit Profile</button>
-        <button className="logout-btn" onClick={handleLogout}>Logout</button>
+        {profileType === 'self' ? (
+          <div className="profile-actions">
+            <button className="edit-btn" onClick={handleEditProfile}>Edit Profile</button>
+            <button className="logout-btn" onClick={handleLogout}>Logout</button>
+          </div>
+        ):profileType === 'following' ? (
+          <button className="unfollow-btn">Unfollow</button>
+        ):(
+          <button className="follow-btn">Follow</button>
+        )}
       </div>
     </div>
   );
 }
 
-export default MyProfile;
+export default Profile;

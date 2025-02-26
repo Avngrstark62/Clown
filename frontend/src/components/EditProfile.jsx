@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { getUserData, updateUserData } from '../api/api';
 import '../styles/edit-profile.css';
 
 const EditProfile = () => {
+  const { user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: '',
@@ -14,17 +16,16 @@ const EditProfile = () => {
 
   useEffect(() => {
     const fetchUserData = async () => {
-      const response = await getUserData();
-      const user = response.data.user;
+      const response = await getUserData(user);
       setFormData({
-        username: user.username,
-        name: user.name,
-        bio: user.bio,
+        username: response.data.user.username,
+        name: response.data.user.name,
+        bio: response.data.user.bio,
       });
     };
 
     fetchUserData();
-  }, []);
+  }, [user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,7 +36,7 @@ const EditProfile = () => {
     e.preventDefault();
     try {
       await updateUserData(formData);
-      navigate('/my-profile');
+      navigate(`/profile/${user}`);
     } catch (error) {
       setError(error.response.data.message);
     }
@@ -67,7 +68,7 @@ const EditProfile = () => {
             placeholder="Bio"
           />
           <button type="submit" className="save-btn">Save</button>
-          <button type="button" className="cancel-btn" onClick={() => navigate('/my-profile')}>Cancel</button>
+          <button type="button" className="cancel-btn" onClick={() => navigate(`/profile/${user}`)}>Cancel</button>
           {error && <p className="error-message">{error}</p>}
         </form>
       </div>

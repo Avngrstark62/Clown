@@ -2,12 +2,11 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout';
 import Register from './components/Register';
 import Login from './components/Login';
-import MyProfile from './components/MyProfile';
 import EditProfile from './components/EditProfile';
 import FindUser from './components/FindUser';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
-import UserProfile from './components/UserProfile';
+import Profile from './components/Profile';
 
 function App() {
   const { user } = useSelector((state) => state.auth);
@@ -20,8 +19,8 @@ function App() {
             <Route path="/feed" element={<Layout>Feed</Layout>} />
             <Route path="/messages" element={<Layout>Messages</Layout>} />
             <Route path="/find-user" element={<Layout><FindUser/></Layout>} />
-            <Route path="/my-profile" element={<Layout><MyProfile /></Layout>} />
-            <Route path="/user/:username" element={<Layout><UserProfile/></Layout>} />
+            
+            <Route path="/profile/:username" element={<Layout><Profile/></Layout>} />
             <Route path="/edit-profile" element={<Layout><EditProfile/></Layout>} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>

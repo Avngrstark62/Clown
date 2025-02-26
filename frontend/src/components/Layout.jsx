@@ -1,7 +1,9 @@
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 import '../styles/layout.css';
 
 const Layout = ({ children }) => {
+  const { user } = useSelector((state) => state.auth);
   return (
     <div className="layout-container">
       <nav className="navbar">
@@ -10,7 +12,7 @@ const Layout = ({ children }) => {
           <li><NavLink to="/feed">Feed</NavLink></li>
           <li><NavLink to="/messages">Messages</NavLink></li>
           <li><NavLink to="/find-user">Find User</NavLink></li>
-          <li><NavLink to="/my-profile">Profile</NavLink></li>
+          <li><NavLink to={`/profile/${user}`}>Profile</NavLink></li>
         </ul>
       </nav>
       <main className="content">{children}</main>

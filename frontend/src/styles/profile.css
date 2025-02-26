@@ -97,4 +97,36 @@ body {
   .loading {
     font-size: 18px;
     color: #b3b3b3;
-  }  
+  }
+
+  .follow-btn {
+    background: #007aff;
+    margin-right: 10px;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s ease;
+  }
+  
+  .follow-btn:hover {
+    background: #005bb5;
+  }
+
+  .unfollow-btn {
+    background: #007aff;
+    margin-right: 10px;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s ease;
+  }
+  
+  .unfollow-btn:hover {
+    background: #005bb5;
+  }
