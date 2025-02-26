@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import authRoutes from "./routes/auth.route.js"
 import profileRoutes from "./routes/profile.route.js"
 import searchRoutes from "./routes/search.route.js"
+import connectionRoutes from "./routes/connection.route.js"
 
 dotenv.config();
 connectMongoDB();
@@ -25,6 +26,7 @@ app.use(cookieParser());
 app.use("/api/auth", authRoutes);
 app.use("/api/profile", profileRoutes);
 app.use("/api/search", searchRoutes);
+app.use("/api/connection", connectionRoutes);
 
 app.get('/', async (req, res) => {
     res.send('server is running');

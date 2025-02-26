@@ -14,3 +14,8 @@ export const getUserData = (username) => API.get(`/api/profile/user_data/${usern
 export const updateUserData = (formData) => API.patch('/api/profile/user_data', formData);
 
 export const searchUsers = (formData) => API.post('/api/search/users', formData);
+
+export const followUser = (formData) => API.post('/api/connection/follow', formData);
+export const unfollowUser = (formData) => API.post('/api/connection/unfollow', formData);
+export const getFollowersList = (username) => API.get(`/api/connection/followers/${username}`);
+export const getFollowingList = (username) => API.get(`/api/connection/following/${username}`);

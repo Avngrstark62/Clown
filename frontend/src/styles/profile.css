@@ -130,3 +130,7 @@ body {
   .unfollow-btn:hover {
     background: #005bb5;
   }
+
+  .see-connections:hover {
+    cursor: pointer;
+  }

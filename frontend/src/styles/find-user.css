@@ -60,6 +60,10 @@
   color: #b0b0b0;
 }
 
+.user-card:hover {
+  cursor: pointer;
+}
+
 .no-results {
   margin-top: 20px;
   color: #888;

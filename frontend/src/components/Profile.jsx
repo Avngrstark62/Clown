@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../redux/authSlice';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getUserData } from '../api/api';
+import { followUser, getUserData, unfollowUser } from '../api/api';
 import default_avatar from '../images/default-avatar.png';
 import '../styles/profile.css';
 
@@ -15,6 +15,7 @@ const Profile = () => {
   const navigate = useNavigate();
   const { loading } = useSelector((state) => state.auth);
   const [userData, setUserData] = useState(null);
+  const [buttonClicked, setButtonClicked] = useState(0);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -24,7 +25,7 @@ const Profile = () => {
     };
 
     fetchUserData();
-  }, [username]);
+  }, [username, buttonClicked]);
   
   const handleLogout = () => {
     dispatch(logoutUser()).then(() => {
@@ -34,6 +35,36 @@ const Profile = () => {
 
   const handleEditProfile = () => {
     navigate('/edit-profile');
+  };
+
+  const handleFollow = async () => {
+    try{
+      await followUser({ username });
+      setButtonClicked(buttonClicked + 1);
+    }
+    catch(error){
+      console.log(error);
+    }
+  };
+
+  const handleUnfollow = async () => {
+    try{
+      await unfollowUser({ username });
+      setButtonClicked(buttonClicked + 1);
+    }
+    catch(error){
+      console.log(error);
+    }
+  };
+
+  const handleViewFollowers = () => {
+    const type = 'followers';
+    navigate(`/profile/${username}/connections/${type}`);
+  };
+
+  const handleViewFollowing = () => {
+    const type = 'following';
+    navigate(`/profile/${username}/connections/${type}`);
   };
 
   if (loading) return <p className="loading">Loading...</p>;
@@ -53,8 +84,8 @@ const Profile = () => {
 
         <div className="profile-info">
           <p><span>Name:</span> {userData.name}</p>
-          <p><span>Followers:</span> {userData.followersCount}</p>
-          <p><span>Following:</span> {userData.followingCount}</p>
+          <p className='see-connections' onClick={handleViewFollowers}><span>Followers:</span> {userData.followersCount}</p>
+          <p className='see-connections' onClick={handleViewFollowing}><span>Following:</span> {userData.followingCount}</p>
         </div>
 
         {profileType === 'self' ? (
@@ -63,9 +94,9 @@ const Profile = () => {
             <button className="logout-btn" onClick={handleLogout}>Logout</button>
           </div>
         ):profileType === 'following' ? (
-          <button className="unfollow-btn">Unfollow</button>
+          <button className="unfollow-btn" onClick={handleUnfollow}>Unfollow</button>
         ):(
-          <button className="follow-btn">Follow</button>
+          <button className="follow-btn" onClick={handleFollow}>Follow</button>
         )}
       </div>
     </div>

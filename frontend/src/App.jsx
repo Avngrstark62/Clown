@@ -7,6 +7,7 @@ import FindUser from './components/FindUser';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import Profile from './components/Profile';
+import Connections from './components/Connections';
 
 function App() {
   const { user } = useSelector((state) => state.auth);
@@ -19,9 +20,9 @@ function App() {
             <Route path="/feed" element={<Layout>Feed</Layout>} />
             <Route path="/messages" element={<Layout>Messages</Layout>} />
             <Route path="/find-user" element={<Layout><FindUser/></Layout>} />
-            
             <Route path="/profile/:username" element={<Layout><Profile/></Layout>} />
             <Route path="/edit-profile" element={<Layout><EditProfile/></Layout>} />
+            <Route path="/profile/:username/connections/:type" element={<Layout><Connections/></Layout>} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         ):(
