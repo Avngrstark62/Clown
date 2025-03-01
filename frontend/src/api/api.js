@@ -19,3 +19,7 @@ export const followUser = (formData) => API.post('/api/connection/follow', formD
 export const unfollowUser = (formData) => API.post('/api/connection/unfollow', formData);
 export const getFollowersList = (username) => API.get(`/api/connection/followers/${username}`);
 export const getFollowingList = (username) => API.get(`/api/connection/following/${username}`);
+
+export const createPost = (formData) => API.post(`/api/post/create`, formData);
+export const getAllPosts = () => API.get(`/api/post/get_all`);
+export const viewPost = (postId) => API.get(`/api/post/view/${postId}`);

@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import Profile from './components/Profile';
 import Connections from './components/Connections';
+import CreatePost from './components/CreatePost';
 
 function App() {
   const { user } = useSelector((state) => state.auth);
@@ -17,12 +18,20 @@ function App() {
         {user ? (
           <Routes>
             <Route path="/" element={<Layout>Home</Layout>} />
-            <Route path="/feed" element={<Layout>Feed</Layout>} />
+            <Route path="/explore" element={<Layout>Explore</Layout>} />
+            <Route path="/live" element={<Layout>Live</Layout>} />
             <Route path="/messages" element={<Layout>Messages</Layout>} />
-            <Route path="/find-user" element={<Layout><FindUser/></Layout>} />
+            <Route path="/random-chat" element={<Layout>Random Chat</Layout>} />
+            <Route path="/search" element={<Layout><FindUser/></Layout>} />
             <Route path="/profile/:username" element={<Layout><Profile/></Layout>} />
             <Route path="/edit-profile" element={<Layout><EditProfile/></Layout>} />
             <Route path="/profile/:username/connections/:type" element={<Layout><Connections/></Layout>} />
+            <Route path="/create" element={<Layout>Create</Layout>} />
+            <Route path="/create/post" element={<Layout><CreatePost/></Layout>} />
+            <Route path="/create/live-stream" element={<Layout> Start a Live Stream</Layout>} />
+            <Route path="/create/poll" element={<Layout>Create a Poll</Layout>} />
+            <Route path="/create/discussion" element={<Layout>Create a Discussion</Layout>} />
+            <Route path="/notifications" element={<Layout>Notifications</Layout>} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         ):(

@@ -3,10 +3,11 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { connectMongoDB } from "./config/mongodb.js";
 import cookieParser from "cookie-parser";
-import authRoutes from "./routes/auth.route.js"
-import profileRoutes from "./routes/profile.route.js"
-import searchRoutes from "./routes/search.route.js"
-import connectionRoutes from "./routes/connection.route.js"
+import authRoutes from "./routes/auth.route.js";
+import profileRoutes from "./routes/profile.route.js";
+import searchRoutes from "./routes/search.route.js";
+import connectionRoutes from "./routes/connection.route.js";
+import postRoutes from "./routes/post.route.js";
 
 dotenv.config();
 connectMongoDB();
@@ -27,6 +28,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/profile", profileRoutes);
 app.use("/api/search", searchRoutes);
 app.use("/api/connection", connectionRoutes);
+app.use("/api/post", postRoutes);
 
 app.get('/', async (req, res) => {
     res.send('server is running');
