@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { followUser, getUserData, unfollowUser } from '../api/api';
 import default_avatar from '../images/default-avatar.png';
 import '../styles/profile.css';
-
+import UserPosts from './UserPosts';
 
 const Profile = () => {
   const { username } = useParams();
@@ -26,7 +26,7 @@ const Profile = () => {
 
     fetchUserData();
   }, [username, buttonClicked]);
-  
+
   const handleLogout = () => {
     dispatch(logoutUser()).then(() => {
       navigate('/login');
@@ -38,54 +38,47 @@ const Profile = () => {
   };
 
   const handleFollow = async () => {
-    try{
+    try {
       await followUser({ username });
       setButtonClicked(buttonClicked + 1);
-    }
-    catch(error){
+    } catch (error) {
       console.log(error);
     }
   };
 
   const handleUnfollow = async () => {
-    try{
+    try {
       await unfollowUser({ username });
       setButtonClicked(buttonClicked + 1);
-    }
-    catch(error){
+    } catch (error) {
       console.log(error);
     }
   };
 
   const handleViewFollowers = () => {
-    const type = 'followers';
-    navigate(`/profile/${username}/connections/${type}`);
+    navigate(`/profile/${username}/connections/followers`);
   };
 
   const handleViewFollowing = () => {
-    const type = 'following';
-    navigate(`/profile/${username}/connections/${type}`);
+    navigate(`/profile/${username}/connections/following`);
   };
 
   if (loading) return <p className="loading">Loading...</p>;
   if (!userData) return <p className="loading">Loading...</p>;
+
   return (
     <div className="profile-container">
       <div className="profile-card">
         <div className="profile-header">
-          <img 
-            src={default_avatar}
-            alt="Profile" 
-            className="profile-pic" 
-          />
+          <img src={default_avatar} alt="Profile" className="profile-pic" />
           <h1 className="username">{userData.username || 'Guest'}</h1>
           <p className="bio">{userData.bio || 'No bio available'}</p>
         </div>
 
         <div className="profile-info">
           <p><span>Name:</span> {userData.name}</p>
-          <p className='see-connections' onClick={handleViewFollowers}><span>Followers:</span> {userData.followersCount}</p>
-          <p className='see-connections' onClick={handleViewFollowing}><span>Following:</span> {userData.followingCount}</p>
+          <p className="see-connections" onClick={handleViewFollowers}><span>Followers:</span> {userData.followersCount}</p>
+          <p className="see-connections" onClick={handleViewFollowing}><span>Following:</span> {userData.followingCount}</p>
         </div>
 
         {profileType === 'self' ? (
@@ -93,14 +86,16 @@ const Profile = () => {
             <button className="edit-btn" onClick={handleEditProfile}>Edit Profile</button>
             <button className="logout-btn" onClick={handleLogout}>Logout</button>
           </div>
-        ):profileType === 'following' ? (
+        ) : profileType === 'following' ? (
           <button className="unfollow-btn" onClick={handleUnfollow}>Unfollow</button>
-        ):(
+        ) : (
           <button className="follow-btn" onClick={handleFollow}>Follow</button>
         )}
       </div>
+      
+      <UserPosts username={username} />
     </div>
   );
-}
+};
 
 export default Profile;

@@ -1,5 +1,6 @@
 import cloudinary from '../config/cloudinary.js'
 import Post from "../models/post.model.js";
+import User from "../models/user.model.js";
 
 export const createPost = async (req, res) => {
   try {
@@ -32,5 +33,25 @@ export const createPost = async (req, res) => {
   } catch (error) {
     console.error('Post creation error:', error);
     res.status(500).json({ message: 'Server error' });
+  }
+};
+
+export const fetchUserPosts = async (req, res) => {
+  try {
+    const { username } = req.params;
+
+    const user = await User.findOne({ username });
+
+    if (!user) {
+        return res.status(404).json({ message: "User not found" });
+    }
+
+    const userId = user._id
+    
+    const posts = await Post.find({ userId: userId });
+
+    res.json({ posts });
+  } catch (error) {
+      res.status(500).json({ message: "Error fetching user posts" });
   }
 };
