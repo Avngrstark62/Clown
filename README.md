@@ -1,30 +1,34 @@
-# Features:
+# Version 1:
    ## 1. Home Feed
            - not started
-   ## 2. Explore Feed
-   ## 3. Search
+
+   ## 2. Search
            - enhance the search engine
            - include features to search posts through tags
            - enhance ui
-   ## 4. Create Post
+   ## 3. Create Post
            - enhance ui
            - mentions
            - tags
-   ## 5. Profile
+   ## 4. Profile
            - profile card
            - user posts(including button to delete post)
            - pfp
            - edit profile
            - view following/followers
            - buttons(follow/edit profile/logout)
-   ## 6. Likes, Comments
+   ## 5. Likes, Comments
            - not started
-   ## 7. Follow/Unfollow System
+   ## 6. Follow/Unfollow System
            - backend changes
-   ## 8. Create Story
-   ## 9. View Stories
-   ## 10. Save Posts
-   ## 11. Messaging
-   ## 12. Notifications
-   ## 13. Save Posts
-   ## 14. Authentication Sytem
+   ## 7. Authentication Sytem
+           - enhance ui
+
+# Version 2:
+   ## 1. Explore Feed
+   ## 2. Create Story
+   ## 3. View Stories
+   ## 4. Save Posts
+   ## 5. Messaging
+   ## 6. Notifications
+   ## 7. Save Posts
