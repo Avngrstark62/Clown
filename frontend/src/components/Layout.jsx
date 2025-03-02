@@ -3,64 +3,54 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 import '../styles/layout.css';
 
-const Dropdown = ({ link, content }) => {
+const Dropdown = ({ link }) => {
   const navigate = useNavigate();
-  return (
-    <div className="dropdown">
-      {content.map((item, index) => (
-        <div key={index} className="dropdown-item" onClick={() => {navigate(`/${link.toLowerCase()}/${item.toLowerCase().replace(' ', '-')}`)}}>
-          {item}
-        </div>
-      ))}
-    </div>
-  );
+  if (link=='create'){
+    return (
+      <div className="dropdown">
+          <div className="dropdown-item" onClick={() => {navigate('/create/post')}}>
+            Post
+          </div>
+          <div className="dropdown-item" onClick={() => {navigate('/create/story')}}>
+            Story
+          </div>
+      </div>
+    );
+  }
+  else{
+    return null
+  }
 };
 
 const Layout = ({ children }) => {
   const { user } = useSelector((state) => state.auth);
   const [hoveredLink, setHoveredLink] = useState(null);
 
-  const handleMouseEnter = (link) => {
-    setHoveredLink(link);
-  };
-
-  const handleMouseLeave = () => {
-    setHoveredLink(null);
-  };
-
-  const dropdownContent = {
-    Home: ["Overview", "Updates", "Stats"],
-    Search: ["Users", "Posts", "Tags"],
-    Explore: ["Trending", "Categories", "Collections"],
-    Live: ["Streams", "Events", "Highlights"],
-    "Random Chat": ["Start Chat", "Chat Rooms", "History"],
-    Notifications: ["Mentions", "Reactions", "Messages"],
-    Create: ["Post", "Live Stream", "Discussion", "Poll"],
-    Messages: ["Inbox", "Sent", "Archived"],
-    Profile: ["Settings", "Activity", "Log out"]
-  };
+  const handleClickOnCreate = () => {
+    if (hoveredLink){
+      setHoveredLink(null);
+    }
+    else{
+      setHoveredLink('create');
+    }
+  }
 
   return (
     <div className="layout-container">
-      <nav className="layout-nav" onMouseLeave={handleMouseLeave}>
+      <nav className="layout-nav">
         <ul className="layout-nav-list">
-          {Object.keys(dropdownContent).map((link) => (
-            <li
-              key={link}
-              onMouseEnter={() => handleMouseEnter(link)}
-            >
-              <NavLink to={link === "Profile" ? `/profile/${user}` : `/${link.toLowerCase().replace(' ', '-')}`}
-                       className="nav-link">
-                {link}
-              </NavLink>
-            </li>
-          ))}
+            <li><NavLink onClick={() => {if (hoveredLink){setHoveredLink(null)}}} to='/' className="nav-link">Home</NavLink></li>
+            <li><NavLink onClick={() => {if (hoveredLink){setHoveredLink(null)}}} to='/explore' className="nav-link">Explore</NavLink></li>
+            <li><NavLink onClick={() => {if (hoveredLink){setHoveredLink(null)}}} to='/search' className="nav-link">Search</NavLink></li>
+            <li><NavLink onClick={() => {if (hoveredLink){setHoveredLink(null)}}} to='/notifications' className="nav-link">Notifications</NavLink></li>
+            <li onClick={handleClickOnCreate}><NavLink className="nav-link">Create</NavLink></li>
+            <li><NavLink onClick={() => {if (hoveredLink){setHoveredLink(null)}}} to={`/profile/${user}`} className="nav-link">Profile</NavLink></li>
         </ul>
         {hoveredLink && (
-          <Dropdown link={hoveredLink} content={dropdownContent[hoveredLink]}/>
+          <Dropdown link={hoveredLink}/>
         )}
       </nav>
-      <main className="layout-main">{children}</main>
+      <main className="layout-main" onClick={() => {if (hoveredLink){setHoveredLink(null)}}}>{children}</main>
     </div>
   );
 }
