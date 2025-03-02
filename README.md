@@ -1,27 +1,27 @@
 # Version 1:
-   ## 1. Home Feed
+   ## 1. Home Feed - 6 march
            - not started
 
-   ## 2. Search
+   ## 2. Search - 5 march
            - enhance the search engine
            - include features to search posts through tags
            - enhance ui
-   ## 3. Create Post
+   ## 3. Create Post - 5 march
            - enhance ui
            - mentions
            - tags
-   ## 4. Profile
+   ## 4. Profile - 3 march
            - profile card
            - user posts(including button to delete post)
            - pfp
            - edit profile
            - view following/followers
            - buttons(follow/edit profile/logout)
-   ## 5. Likes, Comments
+   ## 5. Likes, Comments - 3 march
            - not started
-   ## 6. Follow/Unfollow System
+   ## 6. Follow/Unfollow System - 4 march
            - backend changes
-   ## 7. Authentication Sytem
+   ## 7. Authentication Sytem - 4 march
            - enhance ui
 
 # Version 2:
