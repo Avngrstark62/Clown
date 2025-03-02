@@ -31,4 +31,3 @@
    ## 4. Save Posts
    ## 5. Messaging
    ## 6. Notifications
-   ## 7. Save Posts
