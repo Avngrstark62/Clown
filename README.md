@@ -1,8 +1,7 @@
 # Features:
    ## 1. Home Feed
            - not started
-   ## 2. Explore Feed
-           - not started
+   ## 2. Explore Feed
    ## 3. Search
            - enhance the search engine
            - include features to search posts through tags
