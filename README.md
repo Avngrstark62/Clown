@@ -1,8 +1,8 @@
 # Version 1:
-   ## 1. Home Feed - 6 march
+   ## 1. Home Feed - 5 march
            - not started
 
-   ## 2. Search - 5 march
+   ## 2. Search - 6 march
            - enhance the search engine
            - include features to search posts through tags
            - enhance ui
