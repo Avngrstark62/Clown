@@ -4,7 +4,7 @@
            - pfp
            - edit profile
            - view following/followers
-           - logout
+           - logout button
    ## 1/2. Create Post - 3 march
            - enhance ui
            - mentions
