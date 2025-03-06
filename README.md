@@ -1,11 +1,10 @@
 # Version 1:
    ## 1/2. Profile - 3 march
-           - profile card
            - user posts(including button to delete post)
            - pfp
            - edit profile
            - view following/followers
-           - buttons(follow/edit profile/logout)
+           - logout
    ## 1/2. Create Post - 3 march
            - enhance ui
            - mentions
