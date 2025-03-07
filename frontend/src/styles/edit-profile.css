@@ -2,22 +2,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: #121212;
-    color: #e0e0e0;
+    min-height: 100vh;
+    color: #000000;
   }
   
   .edit-profile-card {
-    background: #1e1e1e;
     padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-    width: 400px;
+    width: 500px;
   }
   
   .edit-profile-card h1 {
     text-align: center;
     margin-bottom: 1.5rem;
+    color: #000000;
   }
   
   .edit-profile-card input,
@@ -27,8 +24,7 @@
     margin-bottom: 1rem;
     border: 1px solid #333;
     border-radius: 8px;
-    background-color: #1e1e1e;
-    color: #e0e0e0;
+    color: #000000;
   }
   
   .edit-profile-card textarea {

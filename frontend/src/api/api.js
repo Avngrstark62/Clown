@@ -25,3 +25,4 @@ export const getFollowingList = (username) => API.get(`/api/connection/following
 // export const viewPost = (postId) => API.get(`/api/post/view/${postId}`);
 export const uploadFile = (formData) => API.post(`/api/post/create/post`, formData);
 export const fetchUserPosts = (username) => API.get(`/api/post/user-posts/${username}`);
+export const deletePost = (formData) => API.post(`/api/post/delete/post`, formData);

@@ -1,11 +1,17 @@
-import { useEffect, useState } from 'react';
-import { fetchUserPosts } from '../api/api';
+import { useEffect, useRef, useState } from 'react';
+import { deletePost, fetchUserPosts } from '../api/api';
+import { FaRegHeart, FaHeart, FaRegComment, FaEllipsisV } from 'react-icons/fa';
 import '../styles/user-posts.css';
+import { useSelector } from 'react-redux';
 
 const UserPosts = ({ username }) => {
+  const { user } = useSelector((state) => state.auth);
   const [posts, setPosts] = useState([]);
   const [likedPosts, setLikedPosts] = useState({});
   const [expandedPosts, setExpandedPosts] = useState({});
+  const [showMoreButtons, setShowMoreButtons] = useState({});
+  const [dropdownVisible, setDropdownVisible] = useState(null);
+  const contentRefs = useRef([]);
 
   useEffect(() => {
     const getUserPosts = async () => {
@@ -20,6 +26,15 @@ const UserPosts = ({ username }) => {
     getUserPosts();
   }, [username]);
 
+  useEffect(() => {
+    contentRefs.current.forEach((content, index) => {
+      if (content) {
+        const isOverflowing = content.scrollHeight > content.clientHeight;
+        setShowMoreButtons((prev) => ({ ...prev, [index]: isOverflowing }));
+      }
+    });
+  }, [posts]);
+
   const toggleLike = (index) => {
     setLikedPosts((prev) => ({ ...prev, [index]: !prev[index] }));
   };
@@ -28,38 +43,65 @@ const UserPosts = ({ username }) => {
     setExpandedPosts((prev) => ({ ...prev, [index]: !prev[index] }));
   };
 
+  const toggleDropdown = (index) => {
+    setDropdownVisible((prev) => (prev === index ? null : index));
+  };
+
+  const handleSave = (index) => {
+    console.log(`Post ${index} saved`);
+  };
+
+  const handleDelete = async (post) => {
+    const formData = { postId: post._id };
+    const response = await deletePost(formData);
+    alert(response.data.message);
+    window.location.reload();
+  };  
+
   return (
     <div className="posts-container">
-      <h2>User Posts</h2>
-      {!posts || posts.length ===0 ? (
+      {!posts || posts.length === 0 ? (
         <p className="no-posts">No posts available</p>
       ) : (
         posts.map((post, index) => (
           <div key={index} className="post-card">
-            <h3 className="post-username">{username}</h3>
+            <div className="post-header">
+              <h3 className="post-username">{username}</h3>
+              <div className="dropdown-wrapper">
+                <button className="menu-btn" onClick={() => toggleDropdown(index)}>
+                  <FaEllipsisV size={17} />
+                </button>
+                {dropdownVisible === index && (
+                  <div className="dropdown-menu">
+                    <button onClick={() => handleSave(index)}>Save</button>
+                    {username === user && <button onClick={() => handleDelete(post)}>Delete</button>}
+                  </div>
+                )}
+              </div>
+            </div>
+
             <img src={post.media[0]} alt="Post" className="post-image" />
 
             <div className="post-actions">
-              <button
-                className={`like-btn ${likedPosts[index] ? 'liked' : ''}`}
-                onClick={() => toggleLike(index)}
-              >
-                ❤️ Like
+              <button className="like-btn" onClick={() => toggleLike(index)}>
+                {likedPosts[index] ? <FaHeart color="red" size={22} /> : <FaRegHeart size={22} />}
               </button>
+
               <button className="comment-btn" onClick={() => console.log('open comments')}>
-                💬 Comment
+                <FaRegComment size={22} />
               </button>
             </div>
 
-            <p className="post-content">
-              {expandedPosts[index]
-                ? post.content
-                : post.content.split('\n').slice(0, 2).join('\n')}
+            <p
+              className={`post-content ${expandedPosts[index] ? 'expanded' : ''}`}
+              ref={(el) => (contentRefs.current[index] = el)}
+            >
+              {post.content}
             </p>
 
-            {post.content.split('\n').length > 2 && (
+            {showMoreButtons[index] && (
               <button className="more-btn" onClick={() => toggleExpand(index)}>
-                {expandedPosts[index] ? 'Show Less' : 'Show More'}
+                {expandedPosts[index] ? 'less' : 'more'}
               </button>
             )}
           </div>
@@ -70,45 +112,3 @@ const UserPosts = ({ username }) => {
 };
 
 export default UserPosts;
-
-// // UserPosts.jsx
-// import { useEffect, useState } from 'react';
-// import { fetchUserPosts } from '../api/api';
-// import '../styles/user-posts.css';
-
-// const UserPosts = ({ username }) => {
-//   const [posts, setPosts] = useState([]);
-
-//   useEffect(() => {
-//     const getUserPosts = async () => {
-//       try {
-//         // Placeholder function to simulate API call
-//         const response = await fetchUserPosts(username);
-//         setPosts(response.data.posts);
-//         // console.log('fetchUserPosts')
-//       } catch (error) {
-//         console.error('Error fetching user posts:', error);
-//       }
-//     };
-
-//     getUserPosts();
-//   }, [username]);
-
-//   return (
-//     <div className="posts-container">
-//       <h2>User Posts</h2>
-//       {posts.length === 0 ? (
-//         <p className="no-posts">No posts available</p>
-//       ) : (
-//         posts.map((post, index) => (
-//           <div key={index} className="post-card">
-//             <h3 className="post-title">{post.title}</h3>
-//             <p className="post-content">{post.content}</p>
-//           </div>
-//         ))
-//       )}
-//     </div>
-//   );
-// };
-
-// export default UserPosts;

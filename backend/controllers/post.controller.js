@@ -55,3 +55,20 @@ export const fetchUserPosts = async (req, res) => {
       res.status(500).json({ message: "Error fetching user posts" });
   }
 };
+
+export const deletedPost = async (req, res) => {
+  try {
+    const userId = req.user.userId;
+    const { postId } = req.body;
+
+    const deletedPost = await Post.findOneAndDelete({ _id: postId, userId });
+
+    if (!deletedPost) {
+      return res.status(404).json({ message: "Post not found or unauthorized" });
+    }
+
+    res.status(200).json({ message: "Post deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Error deleting post", error: error.message });
+  }
+};

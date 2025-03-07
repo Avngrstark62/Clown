@@ -1,6 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
+import { logoutUser } from '../redux/authSlice';
 import '../styles/layout.css';
 
 const Dropdown = ({ link }) => {
@@ -25,6 +26,8 @@ const Dropdown = ({ link }) => {
 const Layout = ({ children }) => {
   const { user } = useSelector((state) => state.auth);
   const [hoveredLink, setHoveredLink] = useState(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleClickOnCreate = () => {
     if (hoveredLink){
@@ -34,6 +37,12 @@ const Layout = ({ children }) => {
       setHoveredLink('create');
     }
   }
+
+  const handleLogout = () => {
+      dispatch(logoutUser()).then(() => {
+        navigate('/login');
+      });
+    };
 
   return (
     <div className="layout-container">
@@ -45,12 +54,15 @@ const Layout = ({ children }) => {
             <li><NavLink onClick={() => {if (hoveredLink){setHoveredLink(null)}}} to='/notifications' className="nav-link">Notifications</NavLink></li>
             <li onClick={handleClickOnCreate}><NavLink className="nav-link">Create</NavLink></li>
             <li><NavLink onClick={() => {if (hoveredLink){setHoveredLink(null)}}} to={`/profile/${user}`} className="nav-link">Profile</NavLink></li>
+            {/* <li onClick={handleLogout} className="nav-link">Logout</li> */}
         </ul>
+        <button onClick={handleLogout} className="logout-btn">Logout</button>
         {hoveredLink && (
           <Dropdown link={hoveredLink}/>
         )}
       </nav>
       <main className="layout-main" onClick={() => {if (hoveredLink){setHoveredLink(null)}}}>{children}</main>
+      <div className="layout-extra"></div>
     </div>
   );
 }
