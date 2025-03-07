@@ -1,6 +1,5 @@
 # Version 1:
    ## 1/2. Profile - 3 march
-           - pfp
            - edit profile
            - view following/followers
            - logout button
