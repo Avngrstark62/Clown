@@ -1,6 +1,5 @@
 # Version 1:
    ## 1/2. Profile - 3 march
-           - user posts(including button to delete post)
            - pfp
            - edit profile
            - view following/followers
