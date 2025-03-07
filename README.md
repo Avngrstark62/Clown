@@ -1,6 +1,5 @@
 # Version 1:
    ## 1/2. Profile - 3 march
-           - edit profile
            - view following/followers
            - logout button
    ## 1/2. Create Post - 3 march
