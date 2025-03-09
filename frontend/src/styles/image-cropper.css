@@ -1,0 +1,6 @@
+.cropper-container {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  background: #333;
+}

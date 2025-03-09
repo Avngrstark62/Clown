@@ -5,60 +5,117 @@
   gap: 1rem;
   padding: 1.5rem;
   border: 1px solid #ccc;
-  border-radius: 8px;
-  width: 400px;
+  width: 1000px;
+  height: 600px;
   margin: 2rem auto;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
-.upload-container h2 {
-  margin: 0;
-  font-size: 1.5rem;
-}
-
-input[type='file'] {
-  cursor: pointer;
-}
-
-.preview-image {
-  width: 100%;
-  max-height: 300px;
-  object-fit: contain;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-textarea,
-input[type='text'] {
-  width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1rem;
-}
-
-textarea.content-input {
-  height: 100px;
-  resize: none;
-}
-
-button {
-  padding: 0.5rem 1rem;
+.navigation button {
+  padding: 10px 20px;
+  margin: 10px;
   border: none;
-  border-radius: 4px;
-  background-color: #007bff;
+  border-radius: 8px;
+  background: #007bff;
   color: #fff;
   cursor: pointer;
-  font-size: 1rem;
+  transition: background 0.3s;
 }
 
-button:disabled {
-  background-color: #ccc;
+.navigation button:hover {
+  background: #0056b3;
+}
+
+.step {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow: auto;
+}
+
+.step.split {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  width: 100%;
+  height: 100%;
+}
+
+.image-container {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.preview-image, .final-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+
+.form-container {
+  margin-top: 95px;
+  width: 50%;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 1rem;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+textarea, input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.upload-container button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background: #28a745;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.upload-container button:disabled {
+  background: #ccc;
   cursor: not-allowed;
 }
 
+.upload-container button:hover:not(:disabled) {
+  background: #218838;
+}
+
 .message {
-  font-size: 1rem;
-  color: #333;
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 8px;
   text-align: center;
+}
+
+.message.success {
+  background: #d4edda;
+  color: #155724;
+}
+
+.message.error {
+  background: #f8d7da;
+  color: #721c24;
 }
