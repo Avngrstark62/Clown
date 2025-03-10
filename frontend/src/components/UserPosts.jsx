@@ -13,6 +13,7 @@ const UserPosts = ({ username }) => {
   const [showMoreButtons, setShowMoreButtons] = useState({});
   const [dropdownVisible, setDropdownVisible] = useState(null);
   const contentRefs = useRef([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getUserPosts = async () => {
@@ -83,8 +84,6 @@ const UserPosts = ({ username }) => {
     alert(response.data.message);
     window.location.reload();
   };
-
-  const navigate = useNavigate();
 
   const handleComment = (postId) => {
     navigate(`/post/${postId}`);

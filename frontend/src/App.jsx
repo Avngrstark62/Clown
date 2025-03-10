@@ -10,6 +10,7 @@ import Profile from './components/Profile';
 import Connections from './components/Connections';
 import CreatePost from './components/CreatePost';
 import Post from './components/Post';
+import Home from './components/Home';
 
 function App() {
   const { user } = useSelector((state) => state.auth);
@@ -18,7 +19,7 @@ function App() {
       <BrowserRouter>
         {user ? (
           <Routes>
-            <Route path="/" element={<Layout>Home</Layout>} />
+            <Route path="/" element={<Layout><Home/></Layout>} />
             <Route path="/explore" element={<Layout>Explore</Layout>} />
             {/* <Route path="/live" element={<Layout>Live</Layout>} /> */}
             {/* <Route path="/messages" element={<Layout>Messages</Layout>} /> */}

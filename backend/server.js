@@ -8,6 +8,7 @@ import profileRoutes from "./routes/profile.route.js";
 import searchRoutes from "./routes/search.route.js";
 import connectionRoutes from "./routes/connection.route.js";
 import postRoutes from "./routes/post.route.js";
+import homeRoutes from "./routes/home.route.js";
 
 dotenv.config();
 connectMongoDB();
@@ -22,18 +23,16 @@ app.use(
 );
 app.use(cookieParser());
 
-
-// Use Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/profile", profileRoutes);
 app.use("/api/search", searchRoutes);
 app.use("/api/connection", connectionRoutes);
 app.use("/api/post", postRoutes);
+app.use("/api/home", homeRoutes);
 
 app.get('/', async (req, res) => {
     res.send('server is running');
 });
 
-// Start Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
