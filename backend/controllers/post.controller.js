@@ -1,6 +1,8 @@
 import cloudinary from '../config/cloudinary.js'
 import Post from "../models/post.model.js";
 import User from "../models/user.model.js";
+import Comment from '../models/comment.model.js';
+import mongoose from "mongoose";
 
 export const createPost = async (req, res) => {
   try {
@@ -49,7 +51,7 @@ export const fetchUserPosts = async (req, res) => {
 
     const userId = user._id
     
-    const posts = await Post.find({ userId: userId });
+    const posts = await Post.find({ userId: userId, deleted: false });
 
     const loggedInUser = req.user.userId;
 
@@ -74,11 +76,20 @@ export const deletePost = async (req, res) => {
     const userId = req.user.userId;
     const { postId } = req.body;
 
-    const deletedPost = await Post.findOneAndDelete({ _id: postId, userId });
+    const deletedPost = await Post.findById(postId);
 
     if (!deletedPost) {
-      return res.status(404).json({ message: "Post not found or unauthorized" });
+      return res.status(404).json({ message: "Post not found" });
     }
+
+    if (!deletedPost.userId.equals(userId)) {
+      await session.abortTransaction();
+      return res.status(403).json({ message: "Unauthorized to delete this comment" });
+    }
+
+    deletedPost.deleted = true;
+
+    await deletedPost.save();
 
     res.status(200).json({ message: "Post deleted successfully" });
   } catch (error) {
@@ -114,5 +125,132 @@ export const likePost = async (req, res) => {
     res.status(200).json({ post: post, message: message });
   } catch (error) {
     res.status(500).json({ message: "Error liking post", error: error.message });
+  }
+};
+
+export const createComment = async (req, res) => {
+  const session = await mongoose.startSession();
+  session.startTransaction();
+
+  try {
+    const userId = req.user.userId;
+    let { postId, content, anonimous = false } = req.body;
+
+    content = content?.trim();
+
+    if (!content) {
+      await session.endSession();
+      return res.status(400).json({ message: "Content cannot be empty" });
+    }
+    
+    if (content.length > 1000) {
+      await session.endSession();
+      return res.status(400).json({ message: "Content exceeds maximum length (1000 characters)" });
+    }
+
+    const post = await Post.findById(postId).session(session);
+
+    if (!post) {
+      await session.abortTransaction();
+      return res.status(404).json({ message: "Post not found" });
+    }
+
+    const newComment = new Comment({
+      postId,
+      userId,
+      commentType: "text",
+      content,
+      anonimous: anonimous,
+      deleted: false,
+    });
+
+    await newComment.save({ session });
+
+    post.commentsCount += 1;
+    await post.save({ session });
+
+    await session.commitTransaction();
+    
+    res.status(201).json({ 
+      message: "Comment created successfully", 
+      comment: newComment 
+    });
+  } catch (error) {
+    await session.abortTransaction();
+    console.error("Error creating comment:", error);
+    res.status(500).json({ 
+      message: "Error creating comment", 
+      error: error.message || "Unknown error occurred" 
+    });
+  } finally {
+    session.endSession();
+  }
+};
+
+export const deleteComment = async (req, res) => {
+  const session = await mongoose.startSession();
+  session.startTransaction();
+
+  try {
+    const userId = req.user.userId;
+    const { postId, commentId } = req.body;
+
+    const postExists = await Post.exists({ _id: postId });
+    if (!postExists) {
+      await session.endSession();
+      return res.status(404).json({ message: "Post not found" });
+    }
+
+    const post = await Post.findById(postId).session(session);
+    const comment = await Comment.findById(commentId).session(session);
+
+    if (!comment || comment.deleted) {
+      await session.abortTransaction();
+      return res.status(404).json({ message: "Comment not found or already deleted" });
+    }
+
+    if (!comment.userId.equals(userId)) {
+      await session.abortTransaction();
+      return res.status(403).json({ message: "Unauthorized to delete this comment" });
+    }
+
+    comment.deleted = true;
+
+    post.commentsCount = Math.max(post.commentsCount - 1, 0);
+
+    await comment.save({ session });
+    await post.save({ session });
+
+    await session.commitTransaction();
+
+    res.status(200).json({
+      message: "Comment deleted successfully",
+    });
+  } catch (error) {
+    await session.abortTransaction();
+    console.error("Error deleting comment:", error);
+    res.status(500).json({ 
+      message: "Error deleting comment", 
+      error: error.message || "Unknown error occurred" 
+    });
+  } finally {
+    session.endSession();
+  }
+};
+
+export const fetchPostAndComments = async (req, res) => {
+  try {
+    const { postId } = req.params;
+
+    const post = await Post.findById(postId);
+
+    const comments = await Comment.find({ postId, deleted: false })
+      .populate('userId', 'username profilePic')
+      .sort({ createdAt: -1 });
+
+    res.status(200).json({ post, comments });
+  } catch (error) {
+    console.error("Error fetching comments:", error);
+    res.status(500).json({ message: "Error fetching comments", error: error.message });
   }
 };

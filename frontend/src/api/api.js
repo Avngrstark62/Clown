@@ -23,7 +23,11 @@ export const getFollowingList = (username) => API.get(`/api/connection/following
 // export const createPost = (formData) => API.post(`/api/post/create`, formData);
 // export const getAllPosts = () => API.get(`/api/post/get_all`);
 // export const viewPost = (postId) => API.get(`/api/post/view/${postId}`);
-export const uploadFile = (formData) => API.post(`/api/post/create/post`, formData);
+export const uploadFile = (formData) => API.post(`/api/post/create`, formData);
 export const fetchUserPosts = (username) => API.get(`/api/post/user-posts/${username}`);
-export const deletePost = (formData) => API.post(`/api/post/delete/post`, formData);
-export const likePost = (formData) => API.post(`/api/post/like/post`, formData);
+export const deletePost = (formData) => API.post(`/api/post/delete`, formData);
+export const likePost = (formData) => API.post(`/api/post/like`, formData);
+
+export const fetchPostAndComments = (postId) => API.get(`/api/post/${postId}`);
+export const createComment = (formData) => API.post(`/api/post/comment/create`, formData);
+export const deleteComment = (formData) => API.post(`/api/post/comment/delete`, formData);

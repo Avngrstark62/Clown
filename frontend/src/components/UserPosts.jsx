@@ -3,6 +3,7 @@ import { deletePost, fetchUserPosts, likePost } from '../api/api';
 import { FaRegHeart, FaHeart, FaRegComment, FaEllipsisV } from 'react-icons/fa';
 import '../styles/user-posts.css';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const UserPosts = ({ username }) => {
   const { user } = useSelector((state) => state.auth);
@@ -83,6 +84,12 @@ const UserPosts = ({ username }) => {
     window.location.reload();
   };
 
+  const navigate = useNavigate();
+
+  const handleComment = (postId) => {
+    navigate(`/post/${postId}`);
+  }
+
   return (
     <div className="posts-container">
       {!posts || posts.length === 0 ? (
@@ -112,7 +119,7 @@ const UserPosts = ({ username }) => {
                 {likedByUserList[index] ? <FaHeart color="red" size={22} /> : <FaRegHeart size={22} />}
               </button>
 
-              <button className="comment-btn" onClick={() => console.log('open comments')}>
+              <button className="comment-btn" onClick={() => handleComment(post._id)}>
                 <FaRegComment size={22} />
               </button>
             </div>

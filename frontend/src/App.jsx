@@ -9,6 +9,7 @@ import { Navigate } from 'react-router-dom';
 import Profile from './components/Profile';
 import Connections from './components/Connections';
 import CreatePost from './components/CreatePost';
+import Post from './components/Post';
 
 function App() {
   const { user } = useSelector((state) => state.auth);
@@ -29,6 +30,7 @@ function App() {
             {/* <Route path="/create" element={<Layout>Create</Layout>} /> */}
             <Route path="/create/post" element={<Layout><CreatePost/></Layout>} />
             <Route path="/create/story" element={<Layout>Create a Story</Layout>} />
+            <Route path="/post/:postId" element={<Layout><Post/></Layout>} />
             {/* <Route path="/create/live-stream" element={<Layout> Start a Live Stream</Layout>} /> */}
             {/* <Route path="/create/poll" element={<Layout>Create a Poll</Layout>} /> */}
             {/* <Route path="/create/discussion" element={<Layout>Create a Discussion</Layout>} /> */}
