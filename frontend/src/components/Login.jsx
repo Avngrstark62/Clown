@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser, fetchUser } from '../redux/authSlice.js';
 import { useNavigate } from 'react-router-dom';
-import '../styles/Auth.css';
+import '../styles/auth.css';
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
