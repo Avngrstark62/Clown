@@ -33,6 +33,7 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
+            cd ~/workspace/Clown
             docker pull avngrstark62/backend:latest
             docker pull avngrstark62/frontend:latest
             docker compose down
