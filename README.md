@@ -29,7 +29,7 @@ Welcome to **Clown** — a social media platform inspired by Twitter and Instagr
 ├── backend                    # Express server
 ├── frontend                   # React app
 ├── .env                       # Environment variables
-├── Dockerfile (if using Docker)
+├── Dockerfile
 ├── README.md                 # Project documentation
 ```
 
@@ -79,6 +79,7 @@ This project was inspired by modern social media platforms and built as a person
 This project is licensed under the MIT License.
 
 ## ✨ Contact Me
-- **Email:** YOUR_EMAIL
-- **LinkedIn:** [Your LinkedIn](YOUR_LINKEDIN_LINK)
-- **GitHub:** [Your GitHub](YOUR_GITHUB_LINK)
+
+- **Email:** thakurabhijeetsingh79@gmail.com
+- **LinkedIn:** [Abhijeet Singh Thakur](https://www.linkedin.com/in/abhijeet-singh-thakur-8869a532b/) 
+- **GitHub:** [Avngrstark62](https://github.com/Avngrstark62)
