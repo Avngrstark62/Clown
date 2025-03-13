@@ -16,7 +16,7 @@ jobs:
       - name: Build and Push Backend Docker Image
         run: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker build -t avngrstark62/backend .
+          docker build -t avngrstark62/backend ./backend
           docker tag avngrstark62/backend avngrstark62/backend:latest
           docker push avngrstark62/backend:latest
 
