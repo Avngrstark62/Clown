@@ -1,21 +1,18 @@
 version: '3'
 services:
   backend:
-    build: ./backend
+    image: avngrstark62/backend:latest  # Use the Docker Hub image
     ports:
       - "8000:8000"
-    volumes:
-      - ./backend:/app
     environment:
       - NODE_ENV=production
     restart: always
 
   frontend:
-    build: ./frontend
+    image: avngrstark62/frontend:latest  # Use the Docker Hub image
     ports:
       - "5173:5173"
-    volumes:
-      - ./frontend:/app
     environment:
       - NODE_ENV=production
     restart: always
+
