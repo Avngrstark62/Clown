@@ -16,15 +16,15 @@ jobs:
       - name: Build and Push Backend Docker Image
         run: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker build -t yourusername/backend .
-          docker tag yourusername/backend yourusername/backend:latest
-          docker push yourusername/backend:latest
+          docker build -t avngrstark62/backend .
+          docker tag avngrstark62/backend avngrstark62/backend:latest
+          docker push avngrstark62/backend:latest
 
       - name: Build and Push Frontend Docker Image
         run: |
-          docker build -t yourusername/frontend ./frontend
-          docker tag yourusername/frontend yourusername/frontend:latest
-          docker push yourusername/frontend:latest
+          docker build -t avngrstark62/frontend ./frontend
+          docker tag avngrstark62/frontend avngrstark62/frontend:latest
+          docker push avngrstark62/frontend:latest
 
       - name: SSH into EC2 and Deploy
         uses: appleboy/ssh-action@v0.1.6
@@ -33,7 +33,7 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            docker pull yourusername/backend:latest
-            docker pull yourusername/frontend:latest
+            docker pull avngrstark62/backend:latest
+            docker pull avngrstark62/frontend:latest
             docker-compose down
             docker-compose up -d
