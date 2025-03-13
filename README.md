@@ -76,7 +76,7 @@ npm start
 This project was inspired by modern social media platforms and built as a personal learning project. Feel free to fork and modify it as needed!
 
 ## 📝 License
-This project is licensed under the MIT License.
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/Avngrstark62/Clown/blob/main/LICENSE) file for details.
 
 ## ✨ Contact Me
 
