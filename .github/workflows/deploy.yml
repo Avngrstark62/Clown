@@ -1,0 +1,39 @@
+name: Deploy to AWS
+
+on:
+  push:
+    branches:
+      - main  # Adjust if you're using a different branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build and Push Backend Docker Image
+        run: |
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          docker build -t yourusername/backend .
+          docker tag yourusername/backend yourusername/backend:latest
+          docker push yourusername/backend:latest
+
+      - name: Build and Push Frontend Docker Image
+        run: |
+          docker build -t yourusername/frontend ./frontend
+          docker tag yourusername/frontend yourusername/frontend:latest
+          docker push yourusername/frontend:latest
+
+      - name: SSH into EC2 and Deploy
+        uses: appleboy/ssh-action@v0.1.6
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            docker pull yourusername/backend:latest
+            docker pull yourusername/frontend:latest
+            docker-compose down
+            docker-compose up -d
