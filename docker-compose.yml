@@ -6,6 +6,8 @@ services:
       - "8000:8000"
     environment:
       - NODE_ENV=production
+    env_file:
+      - ./backend/.env
     restart: always
 
   frontend:
