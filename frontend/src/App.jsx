@@ -35,8 +35,8 @@ function App() {
             {/* <Route path="/create/live-stream" element={<Layout> Start a Live Stream</Layout>} /> */}
             {/* <Route path="/create/poll" element={<Layout>Create a Poll</Layout>} /> */}
             {/* <Route path="/create/discussion" element={<Layout>Create a Discussion</Layout>} /> */}
-            <Route path="/notifications" element={<Layout>Notifications</Layout>} />
-            <Route path="*" element={<Navigate to="/" />} />
+	    {/*<Route path="/notifications" element={<Layout>Notifications</Layout>} />*/ }
+	    <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         ):(
           <Routes>
