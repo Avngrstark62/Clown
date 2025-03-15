@@ -20,7 +20,7 @@ FROM nginx:latest
 COPY --from=builder /app/dist /usr/share/nginx/html
 
 # Copy custom Nginx config
-COPY ../nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY /app/nginx/default.conf /etc/nginx/conf.d/default.conf
 
 # Expose port 80
 EXPOSE 80
