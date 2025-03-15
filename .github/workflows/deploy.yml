@@ -42,8 +42,8 @@ jobs:
           ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} <<EOF
             cd /home/ubuntu/workspace/Clown/
             git pull origin main
-            docker compose pull backend
-            docker compose up -d --no-deps backend
+            docker compose pull
+            docker compose up -d --no-deps frontend backend
             exit
           EOF
 
