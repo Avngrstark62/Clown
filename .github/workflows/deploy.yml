@@ -35,10 +35,10 @@ jobs:
       - name: 🛠 Deploy to AWS
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} <<EOF
-            cd /path/to/your/project
+            cd /workspace/Clown/
             git pull origin main
-            docker-compose pull backend
-            docker-compose up -d --no-deps backend
+            docker compose pull backend
+            docker compose up -d --no-deps backend
             exit
           EOF
 
