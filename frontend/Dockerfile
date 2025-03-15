@@ -1,28 +1,30 @@
 # Use a Node.js image to build the frontend
-FROM node:20-alpine AS builder
+FROM node:20 as builder
 
-# Set working directory
 WORKDIR /app
 
-# Copy package files and install dependencies
+# Copy package.json and install dependencies
 COPY package.json package-lock.json ./
 RUN npm install
 
-# Copy all frontend code
+# Copy the rest of the frontend code
 COPY . .
 
 # Build the frontend
 RUN npm run build
 
-# Use an Nginx image to serve the built files
+# Use Nginx to serve the frontend
 FROM nginx:latest
 
-# Copy built files from the builder stage
+# Copy built frontend files from builder stage to Nginx's default HTML directory
 COPY --from=builder /app/dist /usr/share/nginx/html
 
 # Copy custom Nginx config
-COPY ../nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 
 # Expose port 80
 EXPOSE 80
+
+# Start Nginx
+CMD ["nginx", "-g", "daemon off;"]
 

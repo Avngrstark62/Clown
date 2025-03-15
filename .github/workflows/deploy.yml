@@ -27,6 +27,11 @@ jobs:
           docker build -t avngrstark62/clown-backend:latest ./backend
           docker push avngrstark62/clown-backend:latest
 
+      - name: 🏗️ Build and Push Frontend Image
+        run: |
+          docker build -t avngrstark62/clown-frontend:latest ./frontend
+          docker push avngrstark62/clown-frontend:latest
+
       - name: 🔐 Setup SSH Key
         uses: webfactory/ssh-agent@v0.9.0
         with:

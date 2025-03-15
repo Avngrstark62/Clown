@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   frontend:
-    image: nginx:latest
+    image: avngrstark62/clown-frontend:latest  # Use your DockerHub frontend image
     ports:
       - "80:80"                  # Expose Nginx on port 80
     volumes:
