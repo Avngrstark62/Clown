@@ -7,7 +7,7 @@ services:
       - "80:80"                  # Expose Nginx on port 80
     volumes:
       - ./frontend/dist:/usr/share/nginx/html   # Mount built frontend files
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf   # Use your Nginx config
+      - ./frontend/nginx/default.conf:/etc/nginx/conf.d/default.conf   # Use your Nginx config
     depends_on:
       - backend                  # Ensure backend starts first
     restart: always
