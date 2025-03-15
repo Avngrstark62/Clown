@@ -17,10 +17,10 @@ const app = express();
 app.use(express.json());
 
 const allowedOrigins = [
-  "http://localhost:5173",
-  "http://13.232.20.120:5173",
+  // "http://localhost:5173",
+  // "http://13.232.20.120:5173",
   "http://13.232.20.120",
-  "http://13.232.20.120:80"
+  // "http://13.232.20.120:80"
 ];
 
 app.use(
