@@ -44,6 +44,10 @@ jobs:
             git pull origin main
             docker compose pull
             docker compose up -d --no-deps frontend backend
+
+            # Cleanup old Docker images
+            docker image prune -af
+
             exit
           EOF
 
