@@ -1,0 +1,14 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+RUN npm install
+
+COPY . .
+
+EXPOSE 8000
+
+# Use nodemon for auto-reloading in development
+# CMD ["npx", "nodemon", "server.js"]
+CMD ["npm", "run", "dev"]
