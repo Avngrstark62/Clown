@@ -1,17 +1,17 @@
-# Use Node.js as base image
-FROM node:18
+# Use a lightweight Node.js image
+FROM node:20-alpine
 
 # Set working directory
 WORKDIR /app
 
 # Copy package files and install dependencies
-COPY package*.json ./
+COPY package.json package-lock.json ./
 RUN npm install
 
-# Copy the entire project
+# Copy the rest of your app files
 COPY . .
 
-# Expose backend port
+# Expose the backend port
 EXPOSE 8000
 
 # Start the backend server
