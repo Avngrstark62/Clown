@@ -53,7 +53,7 @@ export const login = async (req, res) => {
   
       // Send token in HTTP-only cookie
       // res.cookie("token", token, { httpOnly: true, secure: true, sameSite: "Strict" });
-      res.cookie("token", token, { httpOnly: true, secure: false, sameSite: "Strict" });
+      res.cookie("token", token, { httpOnly: true, secure: false, sameSite: "None" });
 
       res.json({ message: "Login successful" });
     } catch (error) {
