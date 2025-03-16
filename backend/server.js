@@ -21,6 +21,8 @@ const allowedOrigins = [
   "http://13.232.20.120",
   "http://clownapp.fun",
   "http://www.clownapp.fun",
+  "https://clownapp.fun",
+  "https://www.clownapp.fun",
 ];
 
 app.use(
