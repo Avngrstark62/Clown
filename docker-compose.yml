@@ -16,8 +16,6 @@ services:
 
   backend:
     image: avngrstark62/clown-backend:latest
-    ports:
-      - "8000:8000"              # Map backend port
     environment:
       - NODE_ENV=production
     env_file:
