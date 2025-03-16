@@ -5,9 +5,11 @@ services:
     image: avngrstark62/clown-frontend:latest  # Use your DockerHub frontend image
     ports:
       - "80:80"                  # Expose Nginx on port 80
+      - "443:443"  # Expose HTTPS port
     volumes:
       - ./frontend/dist:/usr/share/nginx/html   # Mount built frontend files
       - ./frontend/nginx/default.conf:/etc/nginx/conf.d/default.conf   # Use your Nginx config
+      - /etc/letsencrypt:/etc/letsencrypt:ro  # Mount SSL certs as read-only
     depends_on:
       - backend                  # Ensure backend starts first
     restart: always
