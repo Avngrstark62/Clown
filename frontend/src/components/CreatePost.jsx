@@ -87,7 +87,7 @@ const CreatePost = () => {
             <h2>Post Details</h2>
             <textarea name="content" placeholder="Write your content here..." value={formData.content} onChange={handleInputChange} />
             <input name="tags" type="text" placeholder="Add tags (comma separated)" value={formData.tags} onChange={handleInputChange} />
-            <input name="mentions" type="text" placeholder="Mention users (comma separated)" value={formData.mentions} onChange={handleInputChange} />
+            {/* <input name="mentions" type="text" placeholder="Mention users (comma separated)" value={formData.mentions} onChange={handleInputChange} /> */}
             <button onClick={handleUpload} disabled={uploading}>{uploading ? 'Uploading...' : 'Upload Post'}</button>
           </div>
         </div>
