@@ -14,9 +14,6 @@ COPY . .
 # Generate Prisma Client
 RUN npx prisma generate
 
-# Run Prisma migrations (for production)
-RUN npx prisma migrate deploy
-
 # Expose the backend port
 EXPOSE 8000
 
