@@ -72,12 +72,12 @@ const Post = () => {
         <div className="comments-list">
           {comments.map((comment) => (
             <div key={comment._id} className="comment-item">
-              <strong>{comment.userId.username}</strong>
-              <img src={comment.userId.profilePic || default_avatar} alt="profilePic" className="commentProfilePic" />
+              <strong>{comment.profileId.username}</strong>
+              <img src={comment.profileId.profilePic || default_avatar} alt="profilePic" className="commentProfilePic" />
               <p>{comment.content}</p>
               <div className="comment-actions">
                 <button onClick={() => {console.log("liked a comment")}}>Like</button>
-                {comment.userId.username === user && 
+                {comment.profileId.username === user && 
                 <button onClick={() => handleCommentDelete(comment._id)}>Delete</button>}
               </div>
             </div>

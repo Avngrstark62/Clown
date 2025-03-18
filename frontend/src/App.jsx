@@ -19,7 +19,8 @@ function App() {
       <BrowserRouter>
         {user ? (
           <Routes>
-            <Route path="/" element={<Layout><Home/></Layout>} />
+            {/* <Route path="/" element={<Layout><Home/></Layout>} /> */}
+            <Route path="/" element={<Layout>Home</Layout>} />
             <Route path="/explore" element={<Layout>Explore</Layout>} />
             {/* <Route path="/live" element={<Layout>Live</Layout>} /> */}
             {/* <Route path="/messages" element={<Layout>Messages</Layout>} /> */}

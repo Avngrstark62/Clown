@@ -6,10 +6,16 @@ WORKDIR /app
 
 # Copy package files and install dependencies
 COPY package.json package-lock.json ./
-RUN npm install
+RUN npm install --omit=dev
 
 # Copy the rest of your app files
 COPY . .
+
+# Generate Prisma Client
+RUN npx prisma generate
+
+# Run Prisma migrations (for production)
+RUN npx prisma migrate deploy
 
 # Expose the backend port
 EXPOSE 8000
