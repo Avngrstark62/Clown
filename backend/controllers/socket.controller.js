@@ -20,10 +20,8 @@ class SocketConnection {
     }
 
     this.userId = user._id.toString();
-    // console.log("User connected:", this.userId);
-
+    
     activeConnections.set(this.userId, this.socket.id);
-    // console.log("Active connections:", activeConnections);
 
     this.socket.on("disconnect", this.handleDisconnect);
 
@@ -32,21 +30,15 @@ class SocketConnection {
 
   handleDisconnect() {
     const userId = this.userId;
-    // console.log("User disconnected:", userId);
-
     activeConnections.delete(userId);
-    // console.log("Active connections:", activeConnections);
   }
 
   async handleMessages(data, callback) {
     const { text, recipientId } = data;
 
-    // console.log("Recipient ID:", recipientId);
-
     const senderId = this.userId;
 
     try {
-      // Save the message to the database
       const message = new Message({
         senderId,
         recipientId,
@@ -54,11 +46,8 @@ class SocketConnection {
       });
 
       await message.save();
-      // console.log("Message saved to the database");
 
       const recipientSocketId = activeConnections.get(recipientId);
-      // console.log("Recipient socket ID:", recipientSocketId);
-
       if (recipientSocketId) {
         this.io.to(recipientSocketId).emit("newMessage", {
           senderId,
@@ -66,14 +55,11 @@ class SocketConnection {
           text,
           timestamp: new Date(),
         });
-        // console.log("Emitting message to recipient:", recipientSocketId);
       } else {
         console.log("Recipient is not connected");
       }
 
       const senderSocketId = activeConnections.get(senderId);
-      // console.log("Sender socket ID:", senderSocketId);
-
       if (senderSocketId) {
         this.io.to(senderSocketId).emit("newMessage", {
           senderId,
@@ -81,7 +67,6 @@ class SocketConnection {
           text,
           timestamp: new Date(),
         });
-        // console.log("Emitting message to sender:", senderSocketId);
       } else {
         console.log("Sender is not connected");
       }

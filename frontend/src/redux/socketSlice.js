@@ -1,10 +1,9 @@
-// store/socketSlice.js
 import { createSlice } from '@reduxjs/toolkit';
 
 const socketSlice = createSlice({
   name: 'socket',
   initialState: {
-    isInitialized: false, // Track if the socket is initialized
+    isInitialized: false,
     isConnected: false,
     socketId: null,
   },
