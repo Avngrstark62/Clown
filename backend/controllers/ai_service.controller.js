@@ -1,7 +1,11 @@
 import axios from "axios";
+import dotenv from "dotenv";
 
-// const AI_SERVICE_URL = "http://127.0.0.1:5000";
-const AI_SERVICE_URL = "https://clownapp.fun/ai-service";
+dotenv.config();
+
+// const AI_SERVICE_URL = "http://ai-service:8001";
+// const AI_SERVICE_URL = "https://clownapp.fun/ai-service";
+const AI_SERVICE_URL = process.env.AI_SERVICE_URL;
 
 export const generateCaption = async (req, res) => {
     try {

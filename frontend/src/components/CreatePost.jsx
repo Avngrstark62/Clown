@@ -164,6 +164,7 @@ const CreatePost = () => {
             <h2>Post Details</h2>
             <textarea name="content" placeholder="Write your content here..." value={formData.content} onChange={handleInputChange} />
 
+            <h2>Auto-Generate Captions</h2>
             <div className="tags-container">
               <input type="text" placeholder="Give a bried description to your post to generated captions" value={generateCaptionsInput} onChange={(e) => setGenerateCaptionsInput(e.target.value)} />
               <button onClick={handleGenerateCaptions}>Generate</button>
