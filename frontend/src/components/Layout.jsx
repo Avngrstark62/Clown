@@ -2,6 +2,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from '../redux/authSlice';
 import '../styles/layout.css';
+// import { disConnectSocket } from "../api/socket";
 
 const Layout = ({ children }) => {
   const { user } = useSelector((state) => state.auth);
@@ -10,6 +11,7 @@ const Layout = ({ children }) => {
 
   const handleLogout = () => {
       dispatch(logoutUser()).then(() => {
+        // disConnectSocket();
         navigate('/login');
       });
     };
@@ -21,6 +23,7 @@ const Layout = ({ children }) => {
             <li><NavLink to='/' className="nav-link">Home</NavLink></li>
             <li><NavLink to='/explore' className="nav-link">Explore</NavLink></li>
             <li><NavLink to='/search' className="nav-link">Search</NavLink></li>
+            <li><NavLink to='/chat' className="nav-link">Chat</NavLink></li>
 	    {/*<li><NavLink to='/notifications' className="nav-link">Notifications</NavLink></li> */}
             <li><NavLink to={'/create/post'} className="nav-link">Create</NavLink></li>
             <li><NavLink to={`/profile/${user}`} className="nav-link">Profile</NavLink></li>

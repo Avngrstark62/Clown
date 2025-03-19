@@ -10,10 +10,24 @@ import Profile from './components/Profile';
 import Connections from './components/Connections';
 import CreatePost from './components/CreatePost';
 import Post from './components/Post';
-import Home from './components/Home';
+import { useEffect } from 'react';
+import { disconnectSocket, initializeSocket } from './api/socket';
+import ChatComponent from './components/ChatComponent';
+import ChatPage from './components/ChatPage';
+// import Home from './components/Home';
 
 function App() {
   const { user } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (user) {
+      // Initialize the socket if the user is logged in
+      initializeSocket();
+    }
+    return () => {
+      disconnectSocket(); // Disconnect the socket when the app unmounts (optional)
+    };
+  }, [user]);
 
   return (
       <BrowserRouter>
@@ -23,7 +37,8 @@ function App() {
             <Route path="/" element={<Layout>Home</Layout>} />
             <Route path="/explore" element={<Layout>Explore</Layout>} />
             {/* <Route path="/live" element={<Layout>Live</Layout>} /> */}
-            {/* <Route path="/messages" element={<Layout>Messages</Layout>} /> */}
+            <Route path="/chat" element={<Layout><ChatPage/></Layout>} />
+            <Route path="/chat/:recipientId" element={<Layout><ChatComponent/></Layout>} />
             {/* <Route path="/random-chat" element={<Layout>Random Chat</Layout>} /> */}
             <Route path="/search" element={<Layout><FindUser/></Layout>} />
             <Route path="/profile/:username" element={<Layout><Profile/></Layout>} />

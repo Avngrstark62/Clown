@@ -69,8 +69,6 @@ export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    console.log(email)
-
     const user = await prisma.user.findUnique({ where: { email } });
     if (!user) {
       return res.status(400).json({ message: "No account with this email exists." });

@@ -103,7 +103,7 @@ export const follow = async (req, res) => {
   
       const followerIds = followers.map((f) => f.followerId);
   
-      const followerProfiles = await Profile.find({ userId: { $in: followerIds } }).select("username name");
+      const followerProfiles = await Profile.find({ userId: { $in: followerIds } }).select("username name userId");
   
       res.json({ followers: followerProfiles });
     } catch (error) {
@@ -132,7 +132,7 @@ export const getFollowingList = async (req, res) => {
 
     const followingIds = following.map((f) => f.followingId);
 
-    const followingProfiles = await Profile.find({ userId: { $in: followingIds } }).select("username name");
+    const followingProfiles = await Profile.find({ userId: { $in: followingIds } }).select("username name userId");
 
     res.json({ following: followingProfiles });
   } catch (error) {

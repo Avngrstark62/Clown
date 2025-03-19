@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 // import * as api from '../api/api';
 import { login, register, logout, user } from '../api/api';
+// import { initializeSocket } from '../api/socket';
 
 const loadUserFromLocalStorage = () => {
   const user = localStorage.getItem('user');

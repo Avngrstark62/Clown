@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginUser, fetchUser } from '../redux/authSlice.js';
 import { useNavigate } from 'react-router-dom';
 import '../styles/auth.css';
+// import { initializeSocket } from '../api/socket.js';
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
@@ -19,6 +20,7 @@ const Login = () => {
     dispatch(loginUser(formData)).then((result) => {
       if (result.meta.requestStatus === 'fulfilled') {
         dispatch(fetchUser());
+        // initializeSocket();
         // navigate('/');
       }
     });

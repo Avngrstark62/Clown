@@ -33,3 +33,5 @@ export const deleteComment = (formData) => API.post(`/api/post/comment/delete`, 
 export const fetchHomePosts = (query) => API.get(`/api/home/posts`, {    params: { lastCreatedAt: query },});
 
 export const generateCaptions = (formData) => API.post(`/api/ai-service/generate_captions`, formData);
+
+export const getChatHistory = (recipientId) => API.get(`/api/chat/history/${recipientId}`);
