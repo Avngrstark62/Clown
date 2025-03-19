@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // const AI_SERVICE_URL = "http://127.0.0.1:5000";
-const AI_SERVICE_URL = "http://clownapp.fun/ai-service";
+const AI_SERVICE_URL = "https://clownapp.fun/ai-service";
 
 export const generateCaption = async (req, res) => {
     try {

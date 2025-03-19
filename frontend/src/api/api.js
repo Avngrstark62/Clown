@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const API = axios.create({
-    // baseURL: "https://clownapp.fun/api/",
-    baseURL: "http://localhost:8000",
+    baseURL: "https://clownapp.fun/api",
+    // baseURL: "http://localhost:8000",
     withCredentials: true,
 });
 
