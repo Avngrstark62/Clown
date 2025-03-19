@@ -68,7 +68,9 @@ const Post = () => {
         )}
       </div>
       <div className="comments-section">
-        {post && <div className="post-content">{post.content}</div>}
+        {post && <div className="post-content">
+          <p>{post.content}</p>
+          </div>}
         <div className="comments-list">
           {comments.map((comment) => (
             <div key={comment._id} className="comment-item">

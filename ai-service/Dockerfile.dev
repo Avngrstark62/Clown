@@ -1,0 +1,36 @@
+# Use Python 3.10 as the base image
+FROM python:3.10-slim
+
+# Set environment variables for better debugging
+ENV PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1
+
+# Set working directory
+WORKDIR /app
+
+# Install dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+# Copy the source code (bind-mounted in dev mode)
+COPY . .
+
+# Allow the container to restart without permission issues
+RUN chmod -R 777 /app
+
+# Set the command to run the app in live-reload mode
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8001", "--reload"]
+
+# # Use Python 3.10 as the base image
+# FROM python:3.10
+
+# WORKDIR /app
+
+# COPY requirements.txt .
+# RUN pip install --no-cache-dir -r requirements.txt
+
+# COPY . .
+
+# CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8001"]

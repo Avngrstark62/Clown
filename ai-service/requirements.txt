@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+huggingface_hub
+python-dotenv
+pydantic
+gunicorn

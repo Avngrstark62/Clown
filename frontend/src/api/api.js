@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const API = axios.create({
-    baseURL: "https://clownapp.fun/api/",
-    // baseURL: "http://localhost:8000",
+    // baseURL: "https://clownapp.fun/api/",
+    baseURL: "http://localhost:8000",
     withCredentials: true,
 });
 
@@ -31,3 +31,5 @@ export const createComment = (formData) => API.post(`/api/post/comment/create`, 
 export const deleteComment = (formData) => API.post(`/api/post/comment/delete`, formData);
 
 export const fetchHomePosts = (query) => API.get(`/api/home/posts`, {    params: { lastCreatedAt: query },});
+
+export const generateCaptions = (formData) => API.post(`/api/ai-service/generate_captions`, formData);

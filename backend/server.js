@@ -9,6 +9,7 @@ import searchRoutes from "./routes/search.route.js";
 import connectionRoutes from "./routes/connection.route.js";
 import postRoutes from "./routes/post.route.js";
 import homeRoutes from "./routes/home.route.js";
+import aiServiceRoutes from "./routes/ai_service.route.js";
 
 dotenv.config();
 connectMongoDB();
@@ -40,6 +41,7 @@ app.use("/api/search", searchRoutes);
 app.use("/api/connection", connectionRoutes);
 app.use("/api/post", postRoutes);
 app.use("/api/home", homeRoutes);
+app.use("/api/ai-service", aiServiceRoutes);
 
 app.get('/', async (req, res) => {
     res.send('server is running');

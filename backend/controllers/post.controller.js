@@ -11,6 +11,8 @@ export const createPost = async (req, res) => {
       return res.status(400).json({ message: 'No image file uploaded' });
     }
 
+    const tags = req.body.content.match(/#\w+/g) || [];
+
     const profile = await Profile.findOne({ userId: req.user.userId });
     
     if (!profile) {
@@ -29,8 +31,7 @@ export const createPost = async (req, res) => {
           profileId: profile._id,
           content: req.body.content || "",
           media: [result.secure_url],
-          // tags: req.body.tags ? req.body.tags.split(',').map(tag => tag.trim()) : [],
-          // mentions: req.body.mentions ? JSON.parse(req.body.mentions) : [],
+          tags,
         });
 
         const savedPost = await newPost.save();
