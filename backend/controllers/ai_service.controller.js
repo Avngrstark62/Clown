@@ -1,11 +1,19 @@
 import axios from "axios";
 import dotenv from "dotenv";
+import cloudinary from "../config/cloudinary.js";
 
 dotenv.config();
 
-// const AI_SERVICE_URL = "http://ai-service:8001";
-// const AI_SERVICE_URL = "https://clownapp.fun/ai-service";
 const AI_SERVICE_URL = process.env.AI_SERVICE_URL;
+
+const deleteTempImages = async () => {
+  try {
+      const result = await cloudinary.api.delete_resources_by_prefix("temp_uploads/");
+      console.log("Deleted temp images:", result);
+  } catch (error) {
+      console.error("Error deleting temp images:", error.message);
+  }
+};
 
 export const generateCaption = async (req, res) => {
     try {
@@ -24,6 +32,8 @@ export const generateCaption = async (req, res) => {
 
         const captionsArray = captions.trim().split(/\n\n/).filter(Boolean).map(caption => caption.trim());
         const cleanedCaptions = captionsArray.map(caption => caption.replace(/^\d+\.\s*/, ''));
+
+        await deleteTempImages();
   
       res.status(200).json({ message: "Captions generated successfully" , captions: cleanedCaptions });
     } catch (error) {

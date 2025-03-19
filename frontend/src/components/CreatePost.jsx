@@ -37,20 +37,6 @@ const CreatePost = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  // const handleTagAdd = () => {
-  //   if (tagInput.trim() && formData.tags.length < 10) {
-  //     setFormData({ ...formData, tags: [...formData.tags, tagInput.trim()] });
-  //     setTagInput('');
-  //   }
-  // };
-
-  // const handleTagRemove = (index) => {
-  //   setFormData({
-  //     ...formData,
-  //     tags: formData.tags.filter((_, i) => i !== index),
-  //   });
-  // };
-
   const handleUpload = async () => {
     if (!croppedImage) return setMessage('Please crop the image before uploading.');
 
@@ -87,6 +73,7 @@ const CreatePost = () => {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("upload_preset", UPLOAD_PRESET);
+    formData.append("folder", "temp_uploads");
 
     const response = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, {
         method: "POST",
@@ -178,17 +165,6 @@ const CreatePost = () => {
                 </div>
               ))}
             </div>
-            {/* <div className="tags-container">
-              <input type="text" placeholder="Write tag here" value={tagInput} onChange={(e) => setTagInput(e.target.value)} />
-              <button onClick={handleTagAdd} disabled={formData.tags.length >= 10}>Add</button>
-            </div>
-            <div className="tags-list">
-              {formData.tags.map((tag, index) => (
-                <div key={index} className="tag-item">
-                  {tag} <button onClick={() => handleTagRemove(index)}>Remove</button>
-                </div>
-              ))}
-            </div> */}
             <button onClick={handleUpload} disabled={uploading}>{uploading ? 'Uploading...' : 'Upload Post'}</button>
           </div>
         </div>
