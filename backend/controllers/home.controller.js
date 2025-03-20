@@ -8,31 +8,30 @@ export const fetchPosts = async (req, res) => {
         const userId = req.user.userId; // PostgreSQL user ID
         const { lastCreatedAt } = req.query;
 
-        // First, get the user's profile from MongoDB
         const userProfile = await Profile.findOne({ userId: userId });
         if (!userProfile) {
             return res.status(404).json({ message: "User profile not found" });
         }
 
-        // Fetch the list of profiles the user is following from PostgreSQL
         const followingRelations = await prisma.follow.findMany({
             where: { followerId: parseInt(userId) },
             select: { followingId: true },
         });
 
-        // Extract the list of profile IDs the user is following
         const followingUserIds = followingRelations.map(
             (relation) => relation.followingId.toString()
         );
 
-        let followingProfileIds = [];
+        let followingProfileIds = []; // include self posts too
 
         for(let i=0;i<followingUserIds.length;i++){
             const profile = await Profile.findOne({ userId: followingUserIds[i] });
             followingProfileIds.push(profile._id)
         }
 
-        // Build the query for posts
+        followingProfileIds.push(userProfile._id)
+
+
         const query = {
             profileId: { $in: followingProfileIds },
             deleted: false,
@@ -43,22 +42,18 @@ export const fetchPosts = async (req, res) => {
             query.createdAt = { $lt: new Date(lastCreatedAt) };
         }
 
-        // Fetch posts
         const posts = await Post.find(query)
             .sort({ createdAt: -1 })
             .limit(20)
             .lean();
 
-        // Get a list of post IDs
         const postIds = posts.map(post => post._id);
 
-        // Find likes by the current user for these posts
         const userLikes = await Like.find({
             postId: { $in: postIds },
             profileId: userProfile._id
         }).select('postId');
 
-        // Create a set of post IDs that the user has liked for quick lookup
         const likedPostIds = new Set(userLikes.map(like => like.postId.toString()));
 
         // Populate posts with profile information and add likedByUser field

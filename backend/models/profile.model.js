@@ -8,7 +8,7 @@
     profilePic: { type: String, default: '' },
     gender: { type: String, default: '' },
     dob: { type: String, default: '' },
-    interests: { type: [String], default: [] },
+    interests: { type: [{type: String}], default: [] },
     country: { type: String, default: '' },
   }, {
     timestamps: true

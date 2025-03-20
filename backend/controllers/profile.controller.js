@@ -2,12 +2,13 @@ import mongoose from "mongoose";
 import cloudinary from '../config/cloudinary.js'
 import Profile from "../models/profile.model.js";
 import prisma from "../config/prisma.js";
+import { user } from "../../frontend/src/api/api.js";
 
 export const getProfile = async (req, res) => {
     try {
         const { username } = req.params;
 
-        const profile = await Profile.findOne({ username }).select('userId username name bio profilePic');
+        const profile = await Profile.findOne({ username }).select('userId username name bio profilePic gender dob interests country');
 
         if (!profile) {
             return res.status(404).json({ message: "User not found" });
@@ -78,7 +79,7 @@ export const updateProfile = async (req, res) => {
         profile.bio = bio || profile.bio;
         profile.gender = gender || profile.gender;
         profile.dob = dob || profile.dob;
-        profile.interests = interests || profile.interests;
+        profile.interests = JSON.parse(interests) || profile.interests;
         profile.country = country || profile.country;
 
         if (req.file) {

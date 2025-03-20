@@ -8,7 +8,10 @@ export const register = async (req, res) => {
   let newProfile = null;
 
   try {
-    const { username, email, password } = req.body;
+    // const { username, email, password } = req.body;
+    const username = req.body.username.toLowerCase();
+    const email = req.body.email.toLowerCase();
+    const password = req.body.password;
 
     const existingUser = await prisma.user.findFirst({
       where: {
@@ -67,7 +70,9 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    // const { email, password } = req.body;
+    const email = req.body.email.toLowerCase();
+    const password = req.body.password;
 
     const user = await prisma.user.findUnique({ where: { email } });
     if (!user) {
