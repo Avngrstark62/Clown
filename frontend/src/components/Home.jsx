@@ -9,7 +9,6 @@ const Home = () => {
     const [loading, setLoading] = useState(false);
     const [lastCreatedAt, setLastCreatedAt] = useState(null);
     const [hasMore, setHasMore] = useState(true);
-    const [likedByUserList, setLikedByUserList] = useState([]);
     const [expandedPosts, setExpandedPosts] = useState({});
     const [showMoreButtons, setShowMoreButtons] = useState({});
     const [dropdownVisible, setDropdownVisible] = useState(null);
@@ -28,10 +27,8 @@ const Home = () => {
 
             if (response?.data?.posts?.length > 0) {
                 const newPosts = response.data.posts;
-                const likedByUserList = response.data.likedByUserList;
                 setPosts((prevPosts) => (initial ? newPosts : [...prevPosts, ...newPosts]));
                 setLastCreatedAt(newPosts[newPosts.length - 1]?.createdAt);
-                setLikedByUserList((prevList) => [...prevList, ...likedByUserList]);
                 if (newPosts.length < 20) setHasMore(false);
             } else {
                 setHasMore(false);
@@ -59,28 +56,22 @@ const Home = () => {
         });
     }, [posts]);
 
-    const toggleLike = (index) => {
-        setLikedByUserList((prevList) => 
-            prevList.map((item, i) => (i === index ? !item : item))
-        );
-    };
-
-    const updateLikes = (index) => {
-        setPosts((prevPosts) => 
-          prevPosts.map((post, i) => 
-            i === index 
-              ? { ...post, likesCount: post.likesCount + (likedByUserList[index] ? -1 : 1) }
-              : post
-          )
-        );
-      };
-
     const handleLike = async (index, post) => {
         try {
             const formData = { postId: post._id };
             await likePost(formData);
-            toggleLike(index);
-            updateLikes(index);
+            
+            setPosts((prevPosts) =>
+                prevPosts.map((p, i) =>
+                    i === index
+                        ? {
+                            ...p,
+                            likedByUser: !p.likedByUser,
+                            likesCount: p.likesCount + (p.likedByUser ? -1 : 1),
+                        }
+                        : p
+                )
+            );
         } catch (error) {
             console.error('Error liking post:', error);
         }
@@ -111,19 +102,19 @@ const Home = () => {
 
     const handleComment = (postId) => {
         navigate(`/post/${postId}`);
-      }
+    }
 
     const toggleDropdown = (index) => {
-      setDropdownVisible((prev) => (prev === index ? null : index));
+        setDropdownVisible((prev) => (prev === index ? null : index));
     };
     
     const handleSave = (index) => {
-      console.log(`Post ${index} saved`);
+        console.log(`Post ${index} saved`);
     };
 
     const handleShare = (index) => {
         console.log(`Post ${index} shared`);
-      };
+    };
 
     return (
         <div className="posts-container">
@@ -135,17 +126,17 @@ const Home = () => {
                     className="post-card"
                 >
                     <div className="post-header">
-                        <h3 className="post-username">{post.username}</h3>
+                        <h3 className="post-username">{post.profileName}</h3>
                         <div className="dropdown-wrapper">
-                          <button className="menu-btn" onClick={() => toggleDropdown(index)}>
-                            <FaEllipsisV size={17} />
-                          </button>
-                          {dropdownVisible === index && (
-                            <div className="dropdown-menu">
-                              <button onClick={() => handleSave(index)}>Save</button>
-                              <button onClick={() => handleShare(index)}>Share</button>
-                            </div>
-                          )}
+                            <button className="menu-btn" onClick={() => toggleDropdown(index)}>
+                                <FaEllipsisV size={17} />
+                            </button>
+                            {dropdownVisible === index && (
+                                <div className="dropdown-menu">
+                                    <button onClick={() => handleSave(index)}>Save</button>
+                                    <button onClick={() => handleShare(index)}>Share</button>
+                                </div>
+                            )}
                         </div>
                     </div>
 
@@ -159,7 +150,7 @@ const Home = () => {
 
                     <div className="post-actions">
                         <button className="like-btn" onClick={() => handleLike(index, post)}>
-                            {likedByUserList[index] ? <FaHeart color="red" size={22} /> : <FaRegHeart size={22} />}
+                            {post.likedByUser ? <FaHeart color="red" size={22} /> : <FaRegHeart size={22} />}
                         </button>
 
                         <button className="comment-btn" onClick={() => handleComment(post._id)}>

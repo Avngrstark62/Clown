@@ -6,6 +6,10 @@
     name: { type: String, default: '' },
     bio: { type: String, default: '' },
     profilePic: { type: String, default: '' },
+    gender: { type: String, default: '' },
+    dob: { type: String, default: '' },
+    interests: { type: [String], default: [] },
+    country: { type: String, default: '' },
   }, {
     timestamps: true
   });

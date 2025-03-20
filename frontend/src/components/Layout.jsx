@@ -21,7 +21,7 @@ const Layout = ({ children }) => {
       <nav className="layout-nav">
         <ul className="layout-nav-list">
             <li><NavLink to='/' className="nav-link">Home</NavLink></li>
-            <li><NavLink to='/explore' className="nav-link">Explore</NavLink></li>
+            {/* <li><NavLink to='/explore' className="nav-link">Explore</NavLink></li> */}
             <li><NavLink to='/search' className="nav-link">Search</NavLink></li>
             <li><NavLink to='/chat' className="nav-link">Chat</NavLink></li>
 	    {/*<li><NavLink to='/notifications' className="nav-link">Notifications</NavLink></li> */}

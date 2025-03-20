@@ -64,7 +64,7 @@ export const updateProfile = async (req, res) => {
     session.startTransaction();
 
     try {
-        const { name, bio } = req.body;
+        const { name, bio, gender, dob, interests, country } = req.body;
 
         const profile = await Profile.findOne({userId: req.user.userId}).session(session);
 
@@ -76,6 +76,10 @@ export const updateProfile = async (req, res) => {
 
         profile.name = name || profile.name;
         profile.bio = bio || profile.bio;
+        profile.gender = gender || profile.gender;
+        profile.dob = dob || profile.dob;
+        profile.interests = interests || profile.interests;
+        profile.country = country || profile.country;
 
         if (req.file) {
             const result = await new Promise((resolve, reject) => {

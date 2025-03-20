@@ -14,7 +14,7 @@ import { useEffect } from 'react';
 import { disconnectSocket, initializeSocket } from './api/socket';
 import ChatComponent from './components/ChatComponent';
 import ChatPage from './components/ChatPage';
-// import Home from './components/Home';
+import Home from './components/Home';
 
 function App() {
   const { user } = useSelector((state) => state.auth);
@@ -34,8 +34,8 @@ function App() {
         {user ? (
           <Routes>
             {/* <Route path="/" element={<Layout><Home/></Layout>} /> */}
-            <Route path="/" element={<Layout>Home</Layout>} />
-            <Route path="/explore" element={<Layout>Explore</Layout>} />
+            <Route path="/" element={<Layout><Home/></Layout>} />
+            {/* <Route path="/explore" element={<Layout>Explore</Layout>} /> */}
             {/* <Route path="/live" element={<Layout>Live</Layout>} /> */}
             <Route path="/chat" element={<Layout><ChatPage/></Layout>} />
             <Route path="/chat/:recipientId" element={<Layout><ChatComponent/></Layout>} />
