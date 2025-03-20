@@ -32,8 +32,6 @@ export const fetchPosts = async (req, res) => {
             followingProfileIds.push(profile._id)
         }
 
-        console.log(followingUserIds);
-
         // Build the query for posts
         const query = {
             profileId: { $in: followingProfileIds },
@@ -65,12 +63,12 @@ export const fetchPosts = async (req, res) => {
 
         // Populate posts with profile information and add likedByUser field
         const populatedPosts = await Promise.all(posts.map(async (post) => {
-            const postProfile = await Profile.findById(post.profileId).select("name userId");
+            const postProfile = await Profile.findById(post.profileId).select("username userId");
             const likesCount = await Like.countDocuments({ postId: post._id });
             
             return {
                 ...post,
-                profileName: postProfile ? postProfile.name : "Unknown",
+                profileUsername: postProfile ? postProfile.username : "Unknown",
                 likedByUser: likedPostIds.has(post._id.toString()),
                 likesCount: likesCount,
             };

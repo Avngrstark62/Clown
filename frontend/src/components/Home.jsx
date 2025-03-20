@@ -126,7 +126,7 @@ const Home = () => {
                     className="post-card"
                 >
                     <div className="post-header">
-                        <h3 className="post-username">{post.profileName}</h3>
+                        <h3 className="post-username">{post.profileUsername}</h3>
                         <div className="dropdown-wrapper">
                             <button className="menu-btn" onClick={() => toggleDropdown(index)}>
                                 <FaEllipsisV size={17} />
