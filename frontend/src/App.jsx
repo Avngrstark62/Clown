@@ -21,11 +21,10 @@ function App() {
 
   useEffect(() => {
     if (user) {
-      // Initialize the socket if the user is logged in
       initializeSocket();
     }
     return () => {
-      disconnectSocket(); // Disconnect the socket when the app unmounts (optional)
+      disconnectSocket();
     };
   }, [user]);
 
@@ -33,7 +32,6 @@ function App() {
       <BrowserRouter>
         {user ? (
           <Routes>
-            {/* <Route path="/" element={<Layout><Home/></Layout>} /> */}
             <Route path="/" element={<Layout><Home/></Layout>} />
             {/* <Route path="/explore" element={<Layout>Explore</Layout>} /> */}
             {/* <Route path="/live" element={<Layout>Live</Layout>} /> */}
