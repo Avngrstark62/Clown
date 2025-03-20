@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 import cloudinary from '../config/cloudinary.js'
 import Profile from "../models/profile.model.js";
 import prisma from "../config/prisma.js";
-import { user } from "../../frontend/src/api/api.js";
 
 export const getProfile = async (req, res) => {
     try {
