@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { generateCaptions, uploadFile } from '../api/api.js';
 import ImageCropper from './ImageCropper';
 import getCroppedImg from '../utils/cropImage';
-import '../styles/create-post.css';
 
 const CreatePost = () => {
   const [step, setStep] = useState(1);
@@ -13,8 +12,7 @@ const CreatePost = () => {
   const [formData, setFormData] = useState({ content: '', mentions: '' });
   const [uploading, setUploading] = useState(false);
   const [message, setMessage] = useState('');
-  // const [tagInput, setTagInput] = useState('');
-  const [generateCaptionsInput, setGenerateCaptionsInput] = useState([]);
+  const [generateCaptionsInput, setGenerateCaptionsInput] = useState('');
   const [generatedCaptions, setGeneratedCaptions] = useState([]);
   const navigate = useNavigate();
 
@@ -76,13 +74,13 @@ const CreatePost = () => {
     formData.append("folder", "temp_uploads");
 
     const response = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, {
-        method: "POST",
-        body: formData,
+      method: "POST",
+      body: formData,
     });
 
     const data = await response.json();
     return data.secure_url;
-};
+  };
 
   const handleGenerateCaptionsFromImage = async () => {
     try {
@@ -92,7 +90,7 @@ const CreatePost = () => {
       const formData = {
         input: imageURL,
         type: "image",
-      }
+      };
 
       const response = await generateCaptions(formData);
       setGeneratedCaptions(response.data.captions);
@@ -102,14 +100,14 @@ const CreatePost = () => {
     } finally {
       setUploading(false);
     }
-  }
+  };
 
   const handleGenerateCaptions = async () => {
     try {
       const formData = {
         input: generateCaptionsInput,
         type: "text",
-      }
+      };
       const response = await generateCaptions(formData);
       setGeneratedCaptions(response.data.captions);
     } catch (error) {
@@ -118,59 +116,127 @@ const CreatePost = () => {
     } finally {
       setUploading(false);
     }
-  }
+  };
 
   return (
-    <div className="upload-container">
-      <div className="navigation">
-        {step > 1 && <button onClick={() => setStep(step - 1)}>Previous</button>}
-        {step < 3 && <button onClick={() => setStep(step + 1)}>Next</button>}
+    <div className="min-h-screen bg-gray-50 p-4">
+      <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6">
+        <div className="flex justify-between mb-6">
+          {step > 1 && (
+            <button
+              onClick={() => setStep(step - 1)}
+              className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
+            >
+              Previous
+            </button>
+          )}
+          {step < 3 && (
+            <button
+              onClick={() => setStep(step + 1)}
+              className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
+            >
+              Next
+            </button>
+          )}
+        </div>
+
+        {step === 1 && (
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold">Select an Image</h2>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+            />
+            {preview && (
+              <img
+                src={preview}
+                alt="Preview"
+                className="w-full h-64 object-cover rounded-lg"
+              />
+            )}
+          </div>
+        )}
+
+        {step === 2 && image && (
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold">Crop Image</h2>
+            <ImageCropper image={image} onCropComplete={handleCropComplete} />
+          </div>
+        )}
+
+        {step === 3 && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-4">
+              {croppedImage && (
+                <img
+                  src={URL.createObjectURL(croppedImage)}
+                  alt="Cropped Preview"
+                  className="w-full h-64 object-cover rounded-lg"
+                />
+              )}
+            </div>
+            <div className="space-y-4">
+              <h2 className="text-2xl font-bold">Post Details</h2>
+              <textarea
+                name="content"
+                placeholder="Write your content here..."
+                value={formData.content}
+                onChange={handleInputChange}
+                className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                rows={4}
+              />
+
+              <h2 className="text-2xl font-bold">Auto-Generate Captions</h2>
+              <div className="flex space-x-2">
+                <input
+                  type="text"
+                  placeholder="Give a brief description to your post to generate captions"
+                  value={generateCaptionsInput}
+                  onChange={(e) => setGenerateCaptionsInput(e.target.value)}
+                  className="flex-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <button
+                  onClick={handleGenerateCaptions}
+                  className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
+                >
+                  Generate
+                </button>
+              </div>
+              <button
+                onClick={handleGenerateCaptionsFromImage}
+                className="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
+              >
+                Generate from Image
+              </button>
+
+              <div className="space-y-2">
+                {generatedCaptions.map((caption, index) => (
+                  <div
+                    key={index}
+                    className="p-2 bg-gray-100 rounded-lg"
+                  >
+                    {index + 1}: {caption}
+                  </div>
+                ))}
+              </div>
+
+              <button
+                onClick={handleUpload}
+                disabled={uploading}
+                className="w-full bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition disabled:bg-gray-400"
+              >
+                {uploading ? 'Uploading...' : 'Upload Post'}
+              </button>
+            </div>
+          </div>
+        )}
+
+        {message && (
+          <p className="mt-4 text-center text-sm text-red-500">{message}</p>
+        )}
       </div>
-
-      {step === 1 && (
-        <div className="step">
-          <h2>Select an Image</h2>
-          <input type="file" accept="image/*" onChange={handleImageChange} />
-          {preview && <img src={preview} alt="Preview" className="preview-image" />}
-        </div>
-      )}
-
-      {step === 2 && image && (
-        <div className="step">
-          <h2>Crop Image</h2>
-          <ImageCropper image={image} onCropComplete={handleCropComplete} />
-        </div>
-      )}
-
-      {step === 3 && (
-        <div className="step split">
-          <div className="image-container">
-            {croppedImage && <img src={URL.createObjectURL(croppedImage)} alt="Cropped Preview" className="final-preview" />}
-          </div>
-          <div className="form-container">
-            <h2>Post Details</h2>
-            <textarea name="content" placeholder="Write your content here..." value={formData.content} onChange={handleInputChange} />
-
-            <h2>Auto-Generate Captions</h2>
-            <div className="tags-container">
-              <input type="text" placeholder="Give a bried description to your post to generated captions" value={generateCaptionsInput} onChange={(e) => setGenerateCaptionsInput(e.target.value)} />
-              <button onClick={handleGenerateCaptions}>Generate</button>
-            </div>
-            <button onClick={handleGenerateCaptionsFromImage} className="generate-from-image-button">Generate from Image</button>
-
-            <div className="generated-captions-list">
-              {generateCaptions && generatedCaptions.map((caption, index) => (
-                <div key={index} className="generated-caption-item">
-                  {index+1}:{caption}
-                </div>
-              ))}
-            </div>
-            <button onClick={handleUpload} disabled={uploading}>{uploading ? 'Uploading...' : 'Upload Post'}</button>
-          </div>
-        </div>
-      )}
-
-      {message && <p className="message">{message}</p>}
     </div>
   );
 };

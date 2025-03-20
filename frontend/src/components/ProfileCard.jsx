@@ -3,11 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { followUser, getUserData, unfollowUser } from '../api/api';
 import default_avatar from '../images/default-avatar.png';
-import '../styles/profile-card.css'
 
 const ProfileCard = ({ username }) => {
   const [profileType, setProfileType] = useState('');
-
   const navigate = useNavigate();
   const { loading } = useSelector((state) => state.auth);
   const [userData, setUserData] = useState(null);
@@ -53,37 +51,63 @@ const ProfileCard = ({ username }) => {
     navigate(`/profile/${username}/connections/following`);
   };
 
-  if (loading) return <p className="loading">Loading...</p>;
-  if (!userData) return <p className="loading">Loading...</p>;
+  if (loading || !userData) return <p className="text-center py-4">Loading...</p>;
 
   return (
-      <div className="profile-card">
-        <div className="profile-header">
-          <img src={userData.profilePic || default_avatar} alt="Profile" className="profile-pic" />
-          {console.log(userData.profilePic)}
-          <h2 className="name">{userData.name || userData.username || 'Guest'}</h2>
-          <h3 className="username">{'@'+userData.username || 'Guest'}</h3>
-        </div>
-
-        <div className="profile-actions">
-        {profileType === 'self' ? (
-            <button className="edit-btn" onClick={handleEditProfile}>Edit Profile</button>
-        ) : profileType === 'following' ? (
-          <button className="unfollow-btn" onClick={handleUnfollow}>Unfollow</button>
-        ) : (
-          <button className="follow-btn" onClick={handleFollow}>Follow</button>
-        )}
-        </div>
-
-        <div className="profile-info">
-          <p className="bio">{userData.bio || null}</p>
-          <div className='connections'>
-          <p className="see-connections" onClick={handleViewFollowers}> {userData.followersCount} Followers</p>
-          <p className="see-connections" onClick={handleViewFollowing}> {userData.followingCount} Following</p>
-          </div>
-        </div>
-
+    <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+      <div className="text-center">
+        <img
+          src={userData.profilePic || default_avatar}
+          alt="Profile"
+          className="w-24 h-24 rounded-full mx-auto mb-4"
+        />
+        <h2 className="text-xl font-bold">{userData.name || userData.username || 'Guest'}</h2>
+        <h3 className="text-gray-500">{'@' + userData.username || 'Guest'}</h3>
       </div>
+
+      <div className="flex justify-center mt-4">
+        {profileType === 'self' ? (
+          <button
+            onClick={handleEditProfile}
+            className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
+          >
+            Edit Profile
+          </button>
+        ) : profileType === 'following' ? (
+          <button
+            onClick={handleUnfollow}
+            className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition"
+          >
+            Unfollow
+          </button>
+        ) : (
+          <button
+            onClick={handleFollow}
+            className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
+          >
+            Follow
+          </button>
+        )}
+      </div>
+
+      <div className="mt-4 text-center">
+        <p className="text-gray-700">{userData.bio || null}</p>
+        <div className="flex justify-center space-x-4 mt-2">
+          <p
+            onClick={handleViewFollowers}
+            className="text-blue-500 cursor-pointer hover:underline"
+          >
+            {userData.followersCount} Followers
+          </p>
+          <p
+            onClick={handleViewFollowing}
+            className="text-blue-500 cursor-pointer hover:underline"
+          >
+            {userData.followingCount} Following
+          </p>
+        </div>
+      </div>
+    </div>
   );
 };
 

@@ -3,7 +3,6 @@ import Layout from './components/Layout';
 import Register from './components/Register';
 import Login from './components/Login';
 import EditProfile from './components/EditProfile';
-import FindUser from './components/FindUser';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import Profile from './components/Profile';
@@ -15,6 +14,7 @@ import { disconnectSocket, initializeSocket } from './api/socket';
 import ChatComponent from './components/ChatComponent';
 import ChatPage from './components/ChatPage';
 import Home from './components/Home';
+import Search from './components/Search';
 
 function App() {
   const { user } = useSelector((state) => state.auth);
@@ -40,7 +40,7 @@ function App() {
             <Route path="/chat" element={<Layout><ChatPage/></Layout>} />
             <Route path="/chat/:recipientId" element={<Layout><ChatComponent/></Layout>} />
             {/* <Route path="/random-chat" element={<Layout>Random Chat</Layout>} /> */}
-            <Route path="/search" element={<Layout><FindUser/></Layout>} />
+            <Route path="/search" element={<Layout><Search/></Layout>} />
             <Route path="/profile/:username" element={<Layout><Profile/></Layout>} />
             <Route path="/edit-profile" element={<Layout><EditProfile/></Layout>} />
             <Route path="/profile/:username/connections/:type" element={<Layout><Connections/></Layout>} />

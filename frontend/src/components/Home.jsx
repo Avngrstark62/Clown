@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { fetchHomePosts, likePost } from '../api/api.js';
 import { FaRegHeart, FaHeart, FaRegComment, FaEllipsisV } from 'react-icons/fa';
-import '../styles/home.css';
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
@@ -60,7 +59,7 @@ const Home = () => {
         try {
             const formData = { postId: post._id };
             await likePost(formData);
-            
+
             setPosts((prevPosts) =>
                 prevPosts.map((p, i) =>
                     i === index
@@ -89,7 +88,7 @@ const Home = () => {
             observer.current = new IntersectionObserver(
                 (entries) => {
                     if (entries[0].isIntersecting) {
-                        setTimeout(fetchPosts, 300); 
+                        setTimeout(fetchPosts, 300);
                     }
                 },
                 { threshold: 0.3 }
@@ -102,12 +101,12 @@ const Home = () => {
 
     const handleComment = (postId) => {
         navigate(`/post/${postId}`);
-    }
+    };
 
     const toggleDropdown = (index) => {
         setDropdownVisible((prev) => (prev === index ? null : index));
     };
-    
+
     const handleSave = (index) => {
         console.log(`Post ${index} saved`);
     };
@@ -116,70 +115,118 @@ const Home = () => {
         console.log(`Post ${index} shared`);
     };
 
+    const handleProfileClick = (username) => {
+        navigate(`/profile/${username}`);
+    }
+
     return (
-        <div className="posts-container">
-            <h1 className="home-title">Home</h1>
+        <div className="min-h-screen bg-gray-50 p-4">
+            <h1 className="text-2xl font-bold mb-6">Home</h1>
             {posts.map((post, index) => (
                 <div
                     key={post._id}
                     ref={index === posts.length - 1 ? lastPostRef : null}
-                    className="post-card"
+                    className="bg-white rounded-lg shadow-md mb-6 p-4"
                 >
-                    <div className="post-header">
-                        <h3 className="post-username">{post.profileUsername}</h3>
-                        <div className="dropdown-wrapper">
-                            <button className="menu-btn" onClick={() => toggleDropdown(index)}>
+                    <div className="flex justify-between items-center mb-4">
+                        <h3
+                          className="text-lg font-semibold text-blue-500 cursor-pointer hover:underline"
+                          onClick={()=>{handleProfileClick(post.profileUsername)}}
+                        >
+                          {post.profileUsername}
+                        </h3>
+
+                        <div className="relative">
+                            <button
+                                onClick={() => toggleDropdown(index)}
+                                className="p-2 hover:bg-gray-100 rounded-full"
+                            >
                                 <FaEllipsisV size={17} />
                             </button>
                             {dropdownVisible === index && (
-                                <div className="dropdown-menu">
-                                    <button onClick={() => handleSave(index)}>Save</button>
-                                    <button onClick={() => handleShare(index)}>Share</button>
+                                <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+                                    <button
+                                        onClick={() => handleSave(index)}
+                                        className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                                    >
+                                        Save
+                                    </button>
+                                    <button
+                                        onClick={() => handleShare(index)}
+                                        className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                                    >
+                                        Share
+                                    </button>
                                 </div>
                             )}
                         </div>
                     </div>
 
                     {post.media && post.media.length > 0 && (
-                        <img 
-                            src={post.media[0]} 
-                            alt="Post" 
-                            className="post-image"
-                        />
+                        <div className="aspect-square w-full overflow-hidden mb-4">
+                            <img
+                                src={post.media[0]}
+                                alt="Post"
+                                className="w-full h-full object-cover rounded-lg"
+                            />
+                        </div>
                     )}
 
-                    <div className="post-actions">
-                        <button className="like-btn" onClick={() => handleLike(index, post)}>
-                            {post.likedByUser ? <FaHeart color="red" size={22} /> : <FaRegHeart size={22} />}
+                    <div className="flex space-x-4 mb-4">
+                        <button
+                            onClick={() => handleLike(index, post)}
+                            className="flex items-center space-x-2"
+                        >
+                            {post.likedByUser ? (
+                                <FaHeart color="red" size={22} />
+                            ) : (
+                                <FaRegHeart size={22} />
+                            )}
                         </button>
 
-                        <button className="comment-btn" onClick={() => handleComment(post._id)}>
+                        <button
+                            onClick={() => handleComment(post._id)}
+                            className="flex items-center space-x-2"
+                        >
                             <FaRegComment size={22} />
                         </button>
                     </div>
 
-                    <span className="likes-count">{post.likesCount} likes</span>
+                    <span className="text-sm font-semibold mb-2">
+                        {post.likesCount} likes
+                    </span>
 
                     <p
-                        className={`post-content ${expandedPosts[index] ? 'expanded' : ''}`}
+                        className={`text-gray-700 mb-2 ${
+                            expandedPosts[index] ? '' : 'line-clamp-3'
+                        }`}
                         ref={(el) => (contentRefs.current[index] = el)}
                     >
                         {post.content}
                     </p>
 
                     {showMoreButtons[index] && (
-                        <button className="more-btn" onClick={() => toggleExpand(index)}>
-                            {expandedPosts[index] ? 'less' : 'more'}
+                        <button
+                            onClick={() => toggleExpand(index)}
+                            className="text-blue-500 hover:text-blue-600 text-sm"
+                        >
+                            {expandedPosts[index] ? 'Show less' : 'Show more'}
                         </button>
                     )}
 
-                    <span className="post-date">
+                    <span className="text-sm text-gray-500">
                         {new Date(post.createdAt).toLocaleString()}
                     </span>
                 </div>
             ))}
-            {loading && <div className="loading">Loading...</div>}
-            {!hasMore && !loading && <div className="no-more-posts">No more posts</div>}
+            {loading && (
+                <div className="flex justify-center items-center py-4">
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+                </div>
+            )}
+            {!hasMore && !loading && (
+                <div className="text-center text-gray-500 py-4">No more posts</div>
+            )}
         </div>
     );
 };
