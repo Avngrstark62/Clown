@@ -1,5 +1,7 @@
 # Clown - A Fun Social Media Platform Project
 
+**Visit App** [**Here**](https://clownapp.fun)  
+
 Clown is a cool social media platform **built as a side project for fun and learning**. It mimics popular social media features like posts, likes, comments, and real-time chat, offering a hands-on way to explore full-stack development, AI integrations, and modern deployment practices. Built with cutting-edge technologies, Clown serves as a playground for experimenting with scalable architectures, authentication systems, and real-time communication. While it’s not a production-ready platform, it’s a great way to understand how social media platforms work under the hood.
 
 ---
