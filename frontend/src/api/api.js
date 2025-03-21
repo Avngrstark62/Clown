@@ -6,7 +6,12 @@ const API = axios.create({
     withCredentials: true,
 });
 
-export const register = (formData) => API.post('/api/auth/register', formData);
+// Updated registration functions
+export const initiateRegister = (formData) => API.post('/api/auth/register/initiate', formData);
+export const verifyAndRegister = (verificationData) => API.post('/api/auth/register/verify', verificationData);
+export const resendOTP = (tokenData) => API.post('/api/auth/register/resend-otp', tokenData);
+
+// export const register = (formData) => API.post('/api/auth/register', formData);
 export const login = (formData) => API.post('/api/auth/login', formData);
 export const logout = () => API.post('/api/auth/logout');
 export const user = () => API.get('/api/auth/user');
