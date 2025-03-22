@@ -15,6 +15,7 @@ Clown is a cool social media platform **built as a side project for fun and lear
 ### Backend
 - **Node.js**: A JavaScript runtime for building scalable server-side applications.
 - **Express.js**: A web application framework for Node.js.
+- **Socket.io**: For real time chat.
 
 ### Database
 - **MongoDB**: A NoSQL database for storing unstructured data like posts, comments, and user profiles.
