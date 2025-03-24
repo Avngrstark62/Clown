@@ -29,7 +29,7 @@ const ChatPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center bg-gray-100 p-4">
+    <div className="min-h-screen flex flex-col items-center bg-gray-100 p-4 pt-16">
       {/* Header */}
       <h2 className="text-2xl font-bold text-gray-800 mb-4">Messages(Only the users you follow will appear here)</h2>
 

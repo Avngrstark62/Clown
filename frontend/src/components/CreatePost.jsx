@@ -126,7 +126,7 @@ const CreatePost = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4">
+    <div className="min-h-screen bg-gray-50 p-4 pt-16">
       <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6">
         <div className="flex justify-between mb-6">
           {step > 1 && (

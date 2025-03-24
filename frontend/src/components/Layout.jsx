@@ -97,7 +97,8 @@ const Layout = ({ children }) => {
       </nav>
 
       {/* Main Content Area */}
-      <main className="ml-0 md:ml-64 flex-1 p-6 mt-16 md:mt-0">{children}</main>
+      {/* <main className="ml-0 md:ml-64 flex-1 px-6 mt-16 md:mt-0">{children}</main> */}
+      <main className="ml-0 md:ml-64 flex-1 px-6 mt-0 md:mt-0">{children}</main>
 
       {/* Extra Div (Visible only on large screens) */}
       <div className="hidden lg:block w-1/4 p-4 bg-gray-100">Extra Content</div>

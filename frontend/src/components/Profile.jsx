@@ -10,7 +10,7 @@ const Profile = () => {
   if (loading) return <p className="text-center py-4">Loading...</p>;
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 pt-16">
       <ProfileCard username={username} />
       <UserPosts username={username} />
     </div>

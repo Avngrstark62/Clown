@@ -120,7 +120,7 @@ const Home = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gray-50 p-4">
+        <div className="min-h-screen bg-gray-50 p-4 pt-16">
             <h1 className="text-2xl font-bold mb-6">Home</h1>
             {posts.map((post, index) => (
                 <div

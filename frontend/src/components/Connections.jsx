@@ -39,7 +39,7 @@ const Connections = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8 pt-16">
       <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-6">
         {/* Tab Header */}
         <div className="flex justify-center space-x-8 border-b border-gray-200 mb-6">

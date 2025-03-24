@@ -6,12 +6,10 @@ const API = axios.create({
     withCredentials: true,
 });
 
-// Updated registration functions
 export const initiateRegister = (formData) => API.post('/api/auth/register/initiate', formData);
 export const verifyAndRegister = (verificationData) => API.post('/api/auth/register/verify', verificationData);
 export const resendOTP = (tokenData) => API.post('/api/auth/register/resend-otp', tokenData);
 
-// export const register = (formData) => API.post('/api/auth/register', formData);
 export const login = (formData) => API.post('/api/auth/login', formData);
 export const logout = () => API.post('/api/auth/logout');
 export const user = () => API.get('/api/auth/user');
@@ -39,4 +37,4 @@ export const fetchHomePosts = (query) => API.get(`/api/home/posts`, {    params:
 
 export const generateCaptions = (formData) => API.post(`/api/ai-service/generate_captions`, formData);
 
-export const getChatHistory = (recipientId) => API.get(`/api/chat/history/${recipientId}`);
+export const getChatHistory = (recipientId, formData) => API.post(`/api/chat/history/${recipientId}`,formData);

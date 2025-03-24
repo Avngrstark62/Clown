@@ -44,7 +44,7 @@ const Search = () => {
   };
 
   return (
-    <div className="flex flex-col items-center p-4 min-h-screen bg-gray-100">
+    <div className="flex flex-col items-center p-4 min-h-screen bg-gray-100 pt-16">
       {/* Search Bar */}
       <div className="w-full max-w-lg flex gap-2 bg-white p-3 rounded-lg shadow-md">
         <input
