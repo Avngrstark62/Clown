@@ -82,13 +82,7 @@ const ChatComponent = () => {
       const text = messageInput;
       socket.emit("sendMessage", { recipientId, text }, (response) => {
         if (response.status !== "error") {
-          setMessagesState(prevState => {
-            const newState = new Messages();
-            newState.head = prevState.head;
-            newState.tail = prevState.tail;
-            newState.appendMessages({ senderId: user.id, text });
-            return newState;
-        });
+          // console.log(response.message);
         } else {
           console.error("Error sending message:", response.message);
         }
@@ -122,7 +116,7 @@ const ChatComponent = () => {
     }
   };
 
-  console.log(messagesState.getAllMessages());
+  // console.log(messagesState.getAllMessages());
 
   if (!isInitialized) {
     return <div className="flex items-center justify-center h-screen text-gray-600">Loading socket...</div>;
