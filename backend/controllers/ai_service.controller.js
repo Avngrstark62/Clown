@@ -38,6 +38,7 @@ export const generateCaption = async (req, res) => {
       res.status(200).json({ message: "Captions generated successfully" , captions: cleanedCaptions });
     } catch (error) {
       console.error("Error generating caption:", error.message);
+      console.error(error.toJSON ? error.toJSON() : error);
       res.status(500).json({ message: "Error generating caption" });
     }
   };

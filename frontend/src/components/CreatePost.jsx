@@ -238,7 +238,7 @@ const CreatePost = () => {
                   )}
                 </button>
               </div>
-              <button
+          {/*<button
                 onClick={handleGenerateCaptionsFromImage}
                 disabled={isGeneratingCaptions}
                 className="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition disabled:bg-gray-400"
@@ -270,7 +270,7 @@ const CreatePost = () => {
                 ) : (
                   'Generate from Image'
                 )}
-              </button>
+              </button>*/}
 
               <div className="space-y-2">
                 {generatedCaptions.map((caption, index) => (
