@@ -2,10 +2,11 @@ import traceback
 
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from configs.huggingface_connection import connectHuggingFace
-from services.caption_service import CaptionGenerator
+# from configs.huggingface_connection import connectHuggingFace
+# from services.caption_service import CaptionGenerator
+from services.caption_service_gemini import CaptionGenerator
 
-connectHuggingFace()
+# connectHuggingFace()
 
 app = FastAPI()
 
