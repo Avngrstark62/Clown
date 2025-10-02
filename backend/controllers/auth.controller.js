@@ -2,10 +2,11 @@ import jwt from "jsonwebtoken";
 import argon2 from "argon2";
 import Profile from "../models/profile.model.js";
 import prisma from "../config/prisma.js";
-import sgMail from "@sendgrid/mail";
+import emailService from "../utils/emailService.js"
+// import sgMail from "@sendgrid/mail";
 
 // Set SendGrid API key
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+// sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 // Utility to generate OTP
 const generateOTP = () => {
@@ -57,22 +58,24 @@ export const initiateRegister = async (req, res) => {
     );
 
     // Send OTP via SendGrid
-    const msg = {
-      to: email,
-      from: process.env.SENDGRID_FROM_EMAIL, // Verified sender in SendGrid
-      subject: 'Your OTP for registration',
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2>Welcome to Clown App!</h2>
-          <p>Your one-time password for registration is:</p>
-          <h1 style="color: #4285f4; font-size: 32px; letter-spacing: 2px;">${otp}</h1>
-          <p>This code will expire in 15 minutes.</p>
-          <p>If you didn't request this code, please ignore this email.</p>
-        </div>
-      `
-    };
+    // const msg = {
+    //   to: email,
+    //   from: process.env.SENDGRID_FROM_EMAIL, // Verified sender in SendGrid
+    //   subject: 'Your OTP for registration',
+    //   html: `
+    //     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+    //       <h2>Welcome to Clown App!</h2>
+    //       <p>Your one-time password for registration is:</p>
+    //       <h1 style="color: #4285f4; font-size: 32px; letter-spacing: 2px;">${otp}</h1>
+    //       <p>This code will expire in 15 minutes.</p>
+    //       <p>If you didn't request this code, please ignore this email.</p>
+    //     </div>
+    //   `
+    // };
 
-    await sgMail.send(msg);
+    await emailService.sendOTPEmail(email, otp);
+
+    // await sgMail.send(msg);
 
     // Send token to client
     res.status(200).json({ 
@@ -115,22 +118,24 @@ export const resendOTP = async (req, res) => {
     );
 
     // Send OTP via SendGrid
-    const msg = {
-      to: decoded.email,
-      from: process.env.SENDGRID_FROM_EMAIL,
-      subject: 'Your new OTP for registration',
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2>Welcome to Clown App!</h2>
-          <p>Your new one-time password for registration is:</p>
-          <h1 style="color: #4285f4; font-size: 32px; letter-spacing: 2px;">${otp}</h1>
-          <p>This code will expire in 15 minutes.</p>
-          <p>If you didn't request this code, please ignore this email.</p>
-        </div>
-      `
-    };
+    // const msg = {
+    //   to: decoded.email,
+    //   from: process.env.SENDGRID_FROM_EMAIL,
+    //   subject: 'Your new OTP for registration',
+    //   html: `
+    //     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+    //       <h2>Welcome to Clown App!</h2>
+    //       <p>Your new one-time password for registration is:</p>
+    //       <h1 style="color: #4285f4; font-size: 32px; letter-spacing: 2px;">${otp}</h1>
+    //       <p>This code will expire in 15 minutes.</p>
+    //       <p>If you didn't request this code, please ignore this email.</p>
+    //     </div>
+    //   `
+    // };
 
-    await sgMail.send(msg);
+    await emailService.sendOTPEmail(email, otp);
+
+    // await sgMail.send(msg);
 
     // Send token to client
     res.status(200).json({ 
