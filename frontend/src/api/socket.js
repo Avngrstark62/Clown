@@ -4,8 +4,9 @@ import { setSocketInitialized, setSocketConnected, setSocketDisconnected } from 
 
 let socket;
 
-// const baseURL = "https://clownapp.fun/api/";
-const baseURL = "http://localhost:8000";
+const production = false;
+
+const baseURL = production ? "https://clownapp.fun" : "http://localhost:8000";
 
 export const initializeSocket = () => {
   if (socket) {
@@ -14,7 +15,7 @@ export const initializeSocket = () => {
 
   socket = io(baseURL, {
     withCredentials: true,
-    path: "/socket.io/",
+    path: production ? "/api/socket.io" : "/socket.io",
     transports: ["websocket"],
   });
 
