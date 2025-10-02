@@ -1,10 +1,9 @@
 import { io } from 'socket.io-client';
 import store from '../redux/store.js';
 import { setSocketInitialized, setSocketConnected, setSocketDisconnected } from '../redux/socketSlice.js';
+import { production } from './api.js';
 
 let socket;
-
-const production = false;
 
 const baseURL = production ? "https://clownapp.fun" : "http://localhost:8000";
 
