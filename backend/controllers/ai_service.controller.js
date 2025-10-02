@@ -30,7 +30,8 @@ export const generateCaption = async (req, res) => {
         const response = await axios.post(`${AI_SERVICE_URL}/generate-caption`, captionsRequest);
         const captions = response.data.captions;
 
-        const captionsArray = captions.trim().split(/\n\n/).filter(Boolean).map(caption => caption.trim());
+        // const captionsArray = captions.trim().split(/\n\n/).filter(Boolean).map(caption => caption.trim());
+        const captionsArray = captions.split('\n').filter(line => line.trim() !== '').map(line => line.trim());
         const cleanedCaptions = captionsArray.map(caption => caption.replace(/^\d+\.\s*/, ''));
 
         await deleteTempImages();

@@ -29,7 +29,7 @@ class CaptionGenerator:
     def generate_from_text(self, description: str) -> str:
         """Generate captions based on a text description."""
         print(f"[generate_from_text] Generating captions for text: '{description[:50]}...'")
-        prompt = f"Generate 5 creative social media captions for this text: {description}. Make it engaging, fun, and shareable."
+        prompt = f"Generate exactly 5 creative, fun, and engaging social media captions from the text: {description}. Provide only the captions separated by line breaks. Do not add explanations or reasons."
         
         print("[generate_from_text] Sending request to Gemini API...")
         response = self.client.models.generate_content(
@@ -52,7 +52,7 @@ class CaptionGenerator:
         image_bytes = resp.content
         print(f"[generate_from_image] Image downloaded successfully, size: {len(image_bytes)} bytes")
 
-        prompt = "Generate 5 creative social media captions for this image. Make it engaging, fun, and shareable."
+        prompt = "Generate exactly 5 creative, fun, and engaging social media captions for this image. Provide only the captions separated by line breaks. Do not add explanations or reasons."
         
         # Create multimodal content with text and image
         print("[generate_from_image] Sending image to Gemini API...")
