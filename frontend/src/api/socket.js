@@ -4,8 +4,8 @@ import { setSocketInitialized, setSocketConnected, setSocketDisconnected } from 
 
 let socket;
 
-const baseURL = "https://clownapp.fun";
-// const baseURL = "http://localhost:8000";
+// const baseURL = "https://clownapp.fun/api/";
+const baseURL = "http://localhost:8000";
 
 export const initializeSocket = () => {
   if (socket) {
