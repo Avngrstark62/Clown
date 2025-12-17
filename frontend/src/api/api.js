@@ -3,7 +3,7 @@ import axios from 'axios';
 export const production = false;
 
 const API = axios.create({
-    baseURL: production ? "https://clownapp.fun/api" : "http://localhost:8000",
+    baseURL: production ? "https://api.clownapp.fun/api" : "http://localhost:8000",
     withCredentials: true,
 });
 

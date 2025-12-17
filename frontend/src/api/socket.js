@@ -5,7 +5,7 @@ import { production } from './api.js';
 
 let socket;
 
-const baseURL = production ? "https://clownapp.fun" : "http://localhost:8000";
+const baseURL = production ? "https://api.clownapp.fun" : "http://localhost:8000";
 
 export const initializeSocket = () => {
   if (socket) {
