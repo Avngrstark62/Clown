@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const production = false;
+export const production = true;
 
 const API = axios.create({
     baseURL: production ? "https://api.clownapp.fun/api" : "http://localhost:8000",
