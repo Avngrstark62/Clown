@@ -14,7 +14,7 @@ export const initializeSocket = () => {
 
   socket = io(baseURL, {
     withCredentials: true,
-    path: production ? "/api/socket.io" : "/socket.io",
+    path: production ? "/socket.io" : "/socket.io",
     transports: ["websocket"],
   });
 
