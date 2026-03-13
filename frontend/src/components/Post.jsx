@@ -59,9 +59,9 @@ const Post = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row h-screen bg-gray-50 p-4 gap-4">
+    <div className="flex flex-col md:flex-row h-screen bg-gray-50 dark:bg-gray-900 p-4 gap-4">
       {/* Post Section (Left Side) */}
-      <div className="w-full md:w-1/2 bg-white rounded-lg shadow-md p-4">
+      <div className="w-full md:w-1/2 bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
         {post && (
           <>
             <div className="aspect-square w-full overflow-hidden mb-4">
@@ -71,17 +71,17 @@ const Post = () => {
                 className="w-full h-full object-cover rounded-lg"
               />
             </div>
-            <p className="text-gray-700">{post.content}</p>
+            <p className="text-gray-700 dark:text-gray-200">{post.content}</p>
           </>
         )}
 
         {/* Comment Input (Fixed at Bottom) */}
-        <div className="p-4 border-t border-gray-200">
+        <div className="p-4 border-t border-gray-200 dark:border-gray-700">
           <textarea
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
             placeholder="Write a comment..."
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             rows={2}
           />
           <button
@@ -94,7 +94,7 @@ const Post = () => {
       </div>
 
       {/* Comments Section (Right Side) */}
-      <div className="w-full md:w-1/2 flex flex-col bg-white rounded-lg shadow-md">
+      <div className="w-full md:w-1/2 flex flex-col bg-white dark:bg-gray-800 rounded-lg shadow-md">
         {/* Comments List (Scrollable) */}
         <div className="flex-1 overflow-y-auto p-4">
           {comments.map((comment) => (
@@ -108,11 +108,11 @@ const Post = () => {
                 <strong className="text-sm font-semibold">
                   {comment.profileId.username}
                 </strong>
-                <p className="text-sm text-gray-700">{comment.content}</p>
+                <p className="text-sm text-gray-700 dark:text-gray-200">{comment.content}</p>
                 <div className="flex space-x-2 mt-1">
                   <button
                     onClick={() => console.log("liked a comment")}
-                    className="text-sm text-blue-500 hover:text-blue-600"
+                    className="text-sm text-blue-500 dark:text-blue-400 hover:text-blue-600 dark:hover:text-blue-300"
                   >
                     Like
                   </button>

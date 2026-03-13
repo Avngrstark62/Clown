@@ -120,17 +120,17 @@ const Home = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gray-50 p-4 pt-16">
+        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-4 pt-16">
             <h1 className="text-2xl font-bold mb-6">Home</h1>
             {posts.map((post, index) => (
                 <div
                     key={post._id}
                     ref={index === posts.length - 1 ? lastPostRef : null}
-                    className="bg-white rounded-lg shadow-md mb-6 p-4"
+                    className="bg-white dark:bg-gray-800 rounded-lg shadow-md mb-6 p-4"
                 >
                     <div className="flex justify-between items-center mb-4">
                         <h3
-                          className="text-lg font-semibold text-blue-500 cursor-pointer hover:underline"
+                          className="text-lg font-semibold text-blue-500 dark:text-blue-400 cursor-pointer hover:underline"
                           onClick={()=>{handleProfileClick(post.profileUsername)}}
                         >
                           {post.profileUsername}
@@ -139,21 +139,21 @@ const Home = () => {
                         <div className="relative">
                             <button
                                 onClick={() => toggleDropdown(index)}
-                                className="p-2 hover:bg-gray-100 rounded-full"
+                                className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full"
                             >
                                 <FaEllipsisV size={17} />
                             </button>
                             {dropdownVisible === index && (
-                                <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+                                <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg z-10">
                                     <button
                                         onClick={() => handleSave(index)}
-                                        className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                                        className="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
                                     >
                                         Save
                                     </button>
                                     <button
                                         onClick={() => handleShare(index)}
-                                        className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                                        className="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
                                     >
                                         Share
                                     </button>
@@ -197,7 +197,7 @@ const Home = () => {
                     </span>
 
                     <p
-                        className={`text-gray-700 mb-2 ${
+                        className={`text-gray-700 dark:text-gray-200 mb-2 ${
                             expandedPosts[index] ? '' : 'line-clamp-3'
                         }`}
                         ref={(el) => (contentRefs.current[index] = el)}
@@ -208,13 +208,13 @@ const Home = () => {
                     {showMoreButtons[index] && (
                         <button
                             onClick={() => toggleExpand(index)}
-                            className="text-blue-500 hover:text-blue-600 text-sm"
+                            className="text-blue-500 dark:text-blue-400 hover:text-blue-600 text-sm"
                         >
                             {expandedPosts[index] ? 'Show less' : 'Show more'}
                         </button>
                     )}
 
-                    <span className="text-sm text-gray-500">
+                    <span className="text-sm text-gray-500 dark:text-gray-400">
                         {new Date(post.createdAt).toLocaleString()}
                     </span>
                 </div>
@@ -225,7 +225,7 @@ const Home = () => {
                 </div>
             )}
             {!hasMore && !loading && (
-                <div className="text-center text-gray-500 py-4">No more posts</div>
+                <div className="text-center text-gray-500 dark:text-gray-400 py-4">No more posts</div>
             )}
         </div>
     );

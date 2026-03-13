@@ -126,8 +126,8 @@ const CreatePost = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 pt-16">
-      <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-4 pt-16">
+      <div className="max-w-4xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
         <div className="flex justify-between mb-6">
           {step > 1 && (
             <button
@@ -154,7 +154,7 @@ const CreatePost = () => {
               type="file"
               accept="image/*"
               onChange={handleImageChange}
-              className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+              className="block w-full text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 dark:file:bg-blue-900 file:text-blue-700 dark:file:text-blue-300 hover:file:bg-blue-100 dark:hover:file:bg-blue-800"
             />
             {preview && (
               <img
@@ -191,7 +191,7 @@ const CreatePost = () => {
                 placeholder="Write your content here..."
                 value={formData.content}
                 onChange={handleInputChange}
-                className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 rows={4}
               />
 
@@ -202,12 +202,12 @@ const CreatePost = () => {
                   placeholder="Give a brief description to your post to generate captions"
                   value={generateCaptionsInput}
                   onChange={(e) => setGenerateCaptionsInput(e.target.value)}
-                  className="flex-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="flex-1 p-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <button
                   onClick={handleGenerateCaptions}
                   disabled={isGeneratingCaptions}
-                  className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition disabled:bg-gray-400"
+                  className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition disabled:bg-gray-400 dark:disabled:bg-gray-600"
                 >
                   {isGeneratingCaptions ? (
                     <div className="flex items-center">
@@ -276,7 +276,7 @@ const CreatePost = () => {
                 {generatedCaptions.map((caption, index) => (
                   <div
                     key={index}
-                    className="p-2 bg-gray-100 rounded-lg flex justify-between items-center"
+                    className="p-2 bg-gray-100 dark:bg-gray-700 rounded-lg flex justify-between items-center"
                   >
                     <span>
                       {index + 1}: {caption}
@@ -294,7 +294,7 @@ const CreatePost = () => {
               <button
                 onClick={handleUpload}
                 disabled={uploading}
-                className="w-full bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition disabled:bg-gray-400"
+                className="w-full bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition disabled:bg-gray-400 dark:disabled:bg-gray-600"
               >
                 {uploading ? 'Uploading...' : 'Upload Post'}
               </button>

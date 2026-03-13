@@ -119,11 +119,11 @@ const ChatComponent = () => {
   // console.log(messagesState.getAllMessages());
 
   if (!isInitialized) {
-    return <div className="flex items-center justify-center h-screen text-gray-600">Loading socket...</div>;
+    return <div className="flex items-center justify-center h-screen text-gray-600 dark:text-gray-400">Loading socket...</div>;
   }
 
   return (
-    <div className="flex flex-col h-screen bg-gray-100 pt-16">
+    <div className="flex flex-col h-screen bg-gray-100 dark:bg-gray-900 pt-16">
       {/* Chat Header */}
       <div className="bg-blue-600 text-white text-lg font-semibold py-3 px-4 shadow-md">
         Chat with {recipient?.username}
@@ -140,7 +140,7 @@ const ChatComponent = () => {
             return (
                 <div key={index} className={`flex ${isSentByUser ? "justify-end" : "justify-start"}`}>
                     <div className={`px-4 py-2 rounded-lg text-white max-w-[70%] ${
-                        isSentByUser ? "bg-blue-500" : "bg-gray-600"
+                        isSentByUser ? "bg-blue-500" : "bg-gray-600 dark:bg-gray-700"
                     }`}>
                         {message.text}
                     </div>
@@ -150,11 +150,11 @@ const ChatComponent = () => {
       </div>
 
       {/* Chat Input - Fixed at the Bottom */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t p-4">
+      <div className="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 border-t dark:border-gray-700 p-4">
         <div className="flex items-center max-w-2xl mx-auto">
           <input
             type="text"
-            className="flex-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="flex-1 p-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             value={messageInput}
             onChange={(e) => setMessageInput(e.target.value)}
             placeholder="Type a message..."
