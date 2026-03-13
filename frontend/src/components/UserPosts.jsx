@@ -82,31 +82,31 @@ const UserPosts = ({ username }) => {
   return (
     <div className="space-y-6">
       {!posts || posts.length === 0 ? (
-        <p className="text-center text-gray-500">No posts available</p>
+        <p className="text-center text-gray-500 dark:text-gray-400">No posts available</p>
       ) : (
         posts.map((post, index) => (
-          <div key={index} className="bg-white rounded-lg shadow-md p-4">
+          <div key={index} className="bg-white dark:bg-gray-900 rounded-lg shadow-md p-4">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-semibold">{username}</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">{username}</h3>
               <div className="relative">
                 <button
                   onClick={() => toggleDropdown(index)}
-                  className="p-2 hover:bg-gray-100 rounded-full"
+                  className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full text-gray-700 dark:text-gray-300"
                 >
                   <FaEllipsisV size={17} />
                 </button>
                 {dropdownVisible === index && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+                  <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg z-10">
                     <button
                       onClick={() => handleSave(index)}
-                      className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                      className="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300"
                     >
                       Save
                     </button>
                     {username === user && (
                       <button
                         onClick={() => handleDelete(post)}
-                        className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-red-500"
+                        className="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-red-500"
                       >
                         Delete
                       </button>
@@ -127,7 +127,7 @@ const UserPosts = ({ username }) => {
             <div className="flex space-x-4 mb-4">
               <button
                 onClick={() => handleLike(index, post)}
-                className="flex items-center space-x-2"
+                className="flex items-center space-x-2 text-gray-700 dark:text-gray-300"
               >
                 {post.likedByUser ? (
                   <FaHeart color="red" size={22} />
@@ -138,16 +138,16 @@ const UserPosts = ({ username }) => {
 
               <button
                 onClick={() => handleComment(post._id)}
-                className="flex items-center space-x-2"
+                className="flex items-center space-x-2 text-gray-700 dark:text-gray-300"
               >
                 <FaRegComment size={22} />
               </button>
             </div>
 
-            <span className="text-sm font-semibold">{post.likesCount} likes</span>
+            <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">{post.likesCount} likes</span>
 
             <p
-              className={`text-gray-700 mt-2 ${expandedPosts[index] ? '' : 'line-clamp-3'}`}
+              className={`text-gray-700 dark:text-gray-300 mt-2 ${expandedPosts[index] ? '' : 'line-clamp-3'}`}
               ref={(el) => (contentRefs.current[index] = el)}
             >
               {post.content}

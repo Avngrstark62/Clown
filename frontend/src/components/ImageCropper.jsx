@@ -6,7 +6,7 @@ const ImageCropper = ({ image, onCropComplete }) => {
   const [zoom, setZoom] = useState(1);
 
   return (
-    <div className="relative w-full h-96 bg-gray-100 rounded-lg overflow-hidden">
+    <div className="relative w-full h-96 bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
       <Cropper
         image={URL.createObjectURL(image)}
         crop={crop}

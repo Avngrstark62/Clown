@@ -29,29 +29,29 @@ const ChatPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center bg-gray-100 p-4 pt-16">
+    <div className="min-h-screen flex flex-col items-center bg-gray-100 dark:bg-gray-950 p-4 pt-16">
       {/* Header */}
-      <h2 className="text-2xl font-bold text-gray-800 mb-4">Messages(Only the users you follow will appear here)</h2>
+      <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">Messages(Only the users you follow will appear here)</h2>
 
       {/* User List Container */}
-      <div className="w-full max-w-md bg-white shadow-md rounded-lg p-4">
+      <div className="w-full max-w-md bg-white dark:bg-gray-900 shadow-md rounded-lg p-4">
         {followingUsers.length > 0 ? (
           followingUsers.map((user) => (
             <div
               key={user._id}
-              className="flex items-center justify-between p-3 border-b last:border-none hover:bg-gray-100 cursor-pointer rounded-md transition"
+              className="flex items-center justify-between p-3 border-b border-gray-200 dark:border-gray-800 last:border-none hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer rounded-md transition"
               onClick={() => handleUserClick(user)}
             >
               <div>
-                <h3 className="text-lg font-semibold text-gray-800">
+                <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100">
                   {user.username}
                 </h3>
-                <p className="text-gray-600">{user.name}</p>
+                <p className="text-gray-600 dark:text-gray-400">{user.name}</p>
               </div>
             </div>
           ))
         ) : (
-          <p className="text-center text-gray-500">No users found</p>
+          <p className="text-center text-gray-500 dark:text-gray-400">No users found</p>
         )}
       </div>
     </div>

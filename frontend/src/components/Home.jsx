@@ -120,17 +120,17 @@ const Home = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gray-50 p-4 pt-16">
-            <h1 className="text-2xl font-bold mb-6">Home</h1>
+        <div className="min-h-screen bg-transparent p-4 pt-16">
+            <h1 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Home</h1>
             {posts.map((post, index) => (
                 <div
                     key={post._id}
                     ref={index === posts.length - 1 ? lastPostRef : null}
-                    className="bg-white rounded-lg shadow-md mb-6 p-4"
+                    className="bg-white dark:bg-gray-900 rounded-lg shadow-md mb-6 p-4 border border-gray-100 dark:border-gray-800"
                 >
                     <div className="flex justify-between items-center mb-4">
                         <h3
-                          className="text-lg font-semibold text-blue-500 cursor-pointer hover:underline"
+                          className="text-lg font-semibold text-blue-500 cursor-pointer hover:underline dark:text-blue-400"
                           onClick={()=>{handleProfileClick(post.profileUsername)}}
                         >
                           {post.profileUsername}
@@ -139,21 +139,21 @@ const Home = () => {
                         <div className="relative">
                             <button
                                 onClick={() => toggleDropdown(index)}
-                                className="p-2 hover:bg-gray-100 rounded-full"
+                                className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full text-gray-700 dark:text-gray-300"
                             >
                                 <FaEllipsisV size={17} />
                             </button>
                             {dropdownVisible === index && (
-                                <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+                                <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg z-10">
                                     <button
                                         onClick={() => handleSave(index)}
-                                        className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                                        className="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200"
                                     >
                                         Save
                                     </button>
                                     <button
                                         onClick={() => handleShare(index)}
-                                        className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                                        className="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200"
                                     >
                                         Share
                                     </button>
@@ -163,7 +163,7 @@ const Home = () => {
                     </div>
 
                     {post.media && post.media.length > 0 && (
-                        <div className="aspect-square w-full overflow-hidden mb-4">
+                        <div className="aspect-square w-full overflow-hidden mb-4 bg-gray-200 dark:bg-gray-800">
                             <img
                                 src={post.media[0]}
                                 alt="Post"
@@ -175,7 +175,7 @@ const Home = () => {
                     <div className="flex space-x-4 mb-4">
                         <button
                             onClick={() => handleLike(index, post)}
-                            className="flex items-center space-x-2"
+                            className="flex items-center space-x-2 text-gray-700 dark:text-gray-300"
                         >
                             {post.likedByUser ? (
                                 <FaHeart color="red" size={22} />
@@ -186,18 +186,18 @@ const Home = () => {
 
                         <button
                             onClick={() => handleComment(post._id)}
-                            className="flex items-center space-x-2"
+                            className="flex items-center space-x-2 text-gray-700 dark:text-gray-300"
                         >
                             <FaRegComment size={22} />
                         </button>
                     </div>
 
-                    <span className="text-sm font-semibold mb-2">
+                    <span className="text-sm font-semibold mb-2 text-gray-900 dark:text-gray-100">
                         {post.likesCount} likes
                     </span>
 
                     <p
-                        className={`text-gray-700 mb-2 ${
+                        className={`text-gray-700 dark:text-gray-300 mb-2 ${
                             expandedPosts[index] ? '' : 'line-clamp-3'
                         }`}
                         ref={(el) => (contentRefs.current[index] = el)}
@@ -208,24 +208,24 @@ const Home = () => {
                     {showMoreButtons[index] && (
                         <button
                             onClick={() => toggleExpand(index)}
-                            className="text-blue-500 hover:text-blue-600 text-sm"
+                            className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 text-sm"
                         >
                             {expandedPosts[index] ? 'Show less' : 'Show more'}
                         </button>
                     )}
 
-                    <span className="text-sm text-gray-500">
+                    <span className="text-sm text-gray-500 dark:text-gray-400">
                         {new Date(post.createdAt).toLocaleString()}
                     </span>
                 </div>
             ))}
             {loading && (
                 <div className="flex justify-center items-center py-4">
-                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 dark:border-white"></div>
                 </div>
             )}
             {!hasMore && !loading && (
-                <div className="text-center text-gray-500 py-4">No more posts</div>
+                <div className="text-center text-gray-500 dark:text-gray-400 py-4">No more posts</div>
             )}
         </div>
     );

@@ -108,9 +108,9 @@ const EditProfile = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8 pt-16">
-      <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-6">
-        <h1 className="text-2xl font-bold mb-6 text-center">Edit Profile</h1>
+    <div className="min-h-screen bg-transparent py-8 px-4 sm:px-6 lg:px-8 pt-16">
+      <div className="max-w-3xl mx-auto bg-white dark:bg-gray-900 rounded-lg shadow-lg p-6">
+        <h1 className="text-2xl font-bold mb-6 text-center text-gray-900 dark:text-gray-100">Edit Profile</h1>
 
         {/* Profile Photo Upload */}
         <div className="flex flex-col items-center mb-6">
@@ -118,7 +118,7 @@ const EditProfile = () => {
             <img
               src={preview || default_avatar}
               alt="Profile Preview"
-              className="w-full h-full rounded-full object-cover border-2 border-gray-200"
+              className="w-full h-full rounded-full object-cover border-2 border-gray-200 dark:border-gray-700"
             />
             <label
               htmlFor="profilePhoto"
@@ -151,46 +151,46 @@ const EditProfile = () => {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700">Username</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Username</label>
               <input
                 type="text"
                 name="username"
                 value={formData.username}
                 onChange={handleChange}
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="mt-1 block w-full p-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Name</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Name</label>
               <input
                 type="text"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="mt-1 block w-full p-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">Bio</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Bio</label>
             <textarea
               name="bio"
               value={formData.bio}
               onChange={handleChange}
               rows={3}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="mt-1 block w-full p-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
             />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700">Gender</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Gender</label>
               <select
                 name="gender"
                 value={formData.gender}
                 onChange={handleChange}
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="mt-1 block w-full p-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
               >
                 <option value="">Select Gender</option>
                 <option value="male">Male</option>
@@ -198,24 +198,24 @@ const EditProfile = () => {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Date of Birth</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Date of Birth</label>
               <input
                 type="date"
                 name="dob"
                 value={formData.dob}
                 onChange={handleChange}
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="mt-1 block w-full p-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">Country</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Country</label>
             <select
               name="country"
               value={formData.country}
               onChange={handleChange}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="mt-1 block w-full p-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
             >
               <option value="">Select Country</option>
               <option value="USA">USA</option>
@@ -226,7 +226,7 @@ const EditProfile = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">Interests</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Interests</label>
             <div className="flex space-x-2">
               <input
                 type="text"
@@ -234,7 +234,7 @@ const EditProfile = () => {
                 onChange={(e) => setNewInterest(e.target.value)}
                 placeholder="Add Interest"
                 disabled={formData.interests.length >= 10}
-                className="flex-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="flex-1 p-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
               />
               <button
                 type="button"
@@ -249,7 +249,7 @@ const EditProfile = () => {
               {formData.interests.map((interest, index) => (
                 <div
                   key={index}
-                  className="flex items-center bg-gray-100 px-3 py-1 rounded-full text-sm"
+                  className="flex items-center bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full text-sm text-gray-800 dark:text-gray-200"
                 >
                   <span>{interest}</span>
                   <button
