@@ -25,13 +25,13 @@ const Layout = ({ children }) => {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen bg-white">
+    <div className="flex flex-col min-h-screen bg-slate-50">
       {/* Top Navigation Bar */}
-      <nav className="fixed top-0 left-0 right-0 bg-white h-16 z-50 border-b border-gray-200 shadow-sm">
+      <nav className="fixed top-0 left-0 right-0 bg-slate-50 h-16 z-50 border-b border-emerald-200 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 h-full flex items-center justify-between">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent">
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-emerald-600 to-blue-700 bg-clip-text text-transparent">
               Clown
             </h1>
           </div>
@@ -45,8 +45,8 @@ const Layout = ({ children }) => {
                 className={({ isActive }) =>
                   `flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-200 ${
                     isActive
-                      ? "text-blue-600 bg-blue-50"
-                      : "text-gray-700 hover:text-gray-900 hover:bg-gray-100"
+                      ? "text-emerald-600 bg-emerald-50"
+                      : "text-gray-700 hover:text-gray-900 hover:bg-slate-100"
                   }`
                 }
               >
@@ -70,7 +70,7 @@ const Layout = ({ children }) => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-gray-700 hover:bg-gray-100 p-2 rounded-lg transition-colors"
+            className="md:hidden text-gray-700 hover:bg-slate-100 p-2 rounded-lg transition-colors"
           >
             {isOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
           </button>
@@ -78,7 +78,7 @@ const Layout = ({ children }) => {
 
         {/* Mobile Dropdown Menu */}
         {isOpen && (
-          <div className="md:hidden absolute top-16 left-0 right-0 bg-white border-b border-gray-200 shadow-lg">
+          <div className="md:hidden absolute top-16 left-0 right-0 bg-slate-50 border-b border-emerald-200 shadow-lg">
             <div className="max-w-7xl mx-auto px-4 py-3 space-y-2">
               {navItems.map((item) => (
                 <NavLink
@@ -87,8 +87,8 @@ const Layout = ({ children }) => {
                   className={({ isActive }) =>
                     `flex items-center space-x-3 px-3 py-3 rounded-lg transition-all duration-200 ${
                       isActive
-                        ? "text-blue-600 bg-blue-50"
-                        : "text-gray-700 hover:text-gray-900 hover:bg-gray-100"
+                        ? "text-emerald-600 bg-emerald-50"
+                        : "text-gray-700 hover:text-gray-900 hover:bg-slate-100"
                     }`
                   }
                   onClick={() => setIsOpen(false)}

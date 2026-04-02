@@ -47,14 +47,14 @@ const Connections = () => {
       </div>
 
       {/* Tab Navigation */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+      <div className="bg-slate-50 rounded-xl shadow-sm border border-emerald-200 overflow-hidden">
         <div className="flex">
           <button
             onClick={() => setActiveTab('followers')}
             className={`flex-1 py-4 font-semibold text-center border-b-2 transition-colors ${
               activeTab === 'followers'
-                ? 'text-blue-600 border-blue-600 bg-blue-50'
-                : 'text-gray-600 border-gray-200 hover:text-gray-900'
+                ? 'text-emerald-600 border-emerald-600 bg-emerald-50'
+                : 'text-gray-600 border-emerald-200 hover:text-gray-900'
             }`}
           >
             Followers
@@ -63,8 +63,8 @@ const Connections = () => {
             onClick={() => setActiveTab('following')}
             className={`flex-1 py-4 font-semibold text-center border-b-2 transition-colors ${
               activeTab === 'following'
-                ? 'text-blue-600 border-blue-600 bg-blue-50'
-                : 'text-gray-600 border-gray-200 hover:text-gray-900'
+                ? 'text-emerald-600 border-emerald-600 bg-emerald-50'
+                : 'text-gray-600 border-emerald-200 hover:text-gray-900'
             }`}
           >
             Following
@@ -78,7 +78,7 @@ const Connections = () => {
               <div
                 key={user._id}
                 onClick={handleUserClick}
-                className="flex items-center gap-4 p-4 hover:bg-gray-50 cursor-pointer transition-colors"
+                className="flex items-center gap-4 p-4 hover:bg-emerald-50 cursor-pointer transition-colors"
               >
                 <img
                   src={user.profilePic || default_avatar}

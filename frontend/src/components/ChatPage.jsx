@@ -37,13 +37,13 @@ const ChatPage = () => {
       </div>
 
       {/* User List Container */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+      <div className="bg-slate-50 rounded-xl shadow-sm border border-emerald-200 overflow-hidden">
         {followingUsers.length > 0 ? (
           <div className="divide-y divide-gray-200">
             {followingUsers.map((user) => (
               <div
                 key={user._id}
-                className="flex items-center justify-between p-4 hover:bg-gray-50 cursor-pointer transition-colors"
+                className="flex items-center justify-between p-4 hover:bg-emerald-50 cursor-pointer transition-colors"
                 onClick={() => handleUserClick(user)}
               >
                 <div>

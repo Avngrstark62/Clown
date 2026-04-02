@@ -122,7 +122,7 @@ const ChatComponent = () => {
     return (
       <div className="flex items-center justify-center h-full py-12">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-2 border-blue-600 border-t-transparent mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-2 border-emerald-600 border-t-transparent mx-auto mb-4"></div>
           <p className="text-gray-600">Initializing chat...</p>
         </div>
       </div>
@@ -130,11 +130,11 @@ const ChatComponent = () => {
   }
 
   return (
-    <div className="flex flex-col h-screen bg-white">
+    <div className="flex flex-col h-screen bg-slate-50">
       {/* Chat Header */}
-      <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white py-4 px-6 shadow-md border-b border-blue-800">
+      <div className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white py-4 px-6 shadow-md border-b border-emerald-700">
         <h2 className="text-xl font-bold">@{recipient?.username}</h2>
-        <p className="text-blue-100 text-sm">{recipient?.name}</p>
+        <p className="text-emerald-100 text-sm">{recipient?.name}</p>
       </div>
 
       {/* Chat Messages */}
@@ -158,7 +158,7 @@ const ChatComponent = () => {
                 <div
                   className={`px-5 py-3 rounded-2xl max-w-xs lg:max-w-md break-words font-medium ${
                     isSentByUser
-                      ? "bg-blue-600 text-white rounded-br-none"
+                      ? "bg-emerald-600 text-white rounded-br-none"
                       : "bg-gray-200 text-gray-900 rounded-bl-none"
                   }`}
                 >
@@ -171,18 +171,18 @@ const ChatComponent = () => {
       </div>
 
       {/* Chat Input - Fixed at the Bottom */}
-      <div className="bg-white border-t border-gray-200 p-4 sticky bottom-0">
+      <div className="bg-slate-50 border-t border-emerald-200 p-4 sticky bottom-0">
         <div className="flex items-center gap-3 max-w-4xl mx-auto">
           <input
             type="text"
-            className="flex-1 px-4 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="flex-1 px-4 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
             value={messageInput}
             onChange={(e) => setMessageInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
             placeholder="Type your message..."
           />
           <button
-            className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-medium transition-colors flex-shrink-0"
+            className="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-full font-medium transition-colors flex-shrink-0"
             onClick={sendMessage}
           >
             Send

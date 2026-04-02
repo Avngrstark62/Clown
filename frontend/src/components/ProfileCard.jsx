@@ -53,14 +53,14 @@ const ProfileCard = ({ username }) => {
 
   if (loading || !userData) return (
     <div className="flex justify-center items-center py-12">
-      <div className="animate-spin rounded-full h-12 w-12 border-2 border-blue-600 border-t-transparent"></div>
+      <div className="animate-spin rounded-full h-12 w-12 border-2 border-emerald-600 border-t-transparent"></div>
     </div>
   );
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
+    <div className="bg-slate-50 rounded-xl shadow-sm border border-emerald-200 p-8">
       {/* Cover Area */}
-      <div className="h-32 bg-gradient-to-r from-blue-400 to-blue-600 rounded-lg mb-6 -m-8 mb-0"></div>
+      <div className="h-32 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-lg mb-6 -m-8 mb-0"></div>
 
       {/* Profile Content */}
       <div className="relative pt-0">
@@ -85,7 +85,7 @@ const ProfileCard = ({ username }) => {
           {profileType === 'self' ? (
             <button
               onClick={handleEditProfile}
-              className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
+              className="px-8 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-medium transition-colors"
             >
               Edit Profile
             </button>
@@ -99,7 +99,7 @@ const ProfileCard = ({ username }) => {
           ) : (
             <button
               onClick={handleFollow}
-              className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
+              className="px-8 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-medium transition-colors"
             >
               Follow
             </button>
@@ -107,7 +107,7 @@ const ProfileCard = ({ username }) => {
         </div>
 
         {/* Stats */}
-        <div className="flex justify-center gap-8 pt-8 border-t border-gray-200">
+        <div className="flex justify-center gap-8 pt-8 border-t border-emerald-200">
           <button
             onClick={handleViewFollowers}
             className="text-center hover:opacity-70 transition-opacity"

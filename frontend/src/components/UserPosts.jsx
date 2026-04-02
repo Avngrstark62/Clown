@@ -91,29 +91,29 @@ const UserPosts = ({ username }) => {
         </div>
       ) : (
         posts.map((post, index) => (
-          <div key={index} className="bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow overflow-hidden">
+          <div key={index} className="bg-slate-50 rounded-xl shadow-sm border border-emerald-200 hover:shadow-md transition-shadow overflow-hidden">
             {/* Post Header */}
-            <div className="px-6 py-4 border-b border-gray-100 flex justify-between items-center">
+            <div className="px-6 py-4 border-b border-emerald-100 flex justify-between items-center">
               <h3 className="font-semibold text-gray-900">@{username}</h3>
               <div className="relative">
                 <button
                   onClick={() => toggleDropdown(index)}
-                  className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                  className="p-2 hover:bg-slate-100 rounded-full transition-colors"
                 >
                   <FaEllipsisV size={18} className="text-gray-600" />
                 </button>
                 {dropdownVisible === index && (
-                  <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+                  <div className="absolute right-0 mt-2 w-40 bg-slate-50 border border-emerald-200 rounded-lg shadow-lg z-10">
                     <button
                       onClick={() => handleSave(index)}
-                      className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 transition-colors"
+                      className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-emerald-50 transition-colors"
                     >
                       Save
                     </button>
                     {username === user && (
                       <button
                         onClick={() => handleDelete(post)}
-                        className="block w-full text-left px-4 py-2 text-red-600 hover:bg-red-50 transition-colors border-t border-gray-100"
+                        className="block w-full text-left px-4 py-2 text-red-600 hover:bg-red-50 transition-colors border-t border-emerald-100"
                       >
                         Delete
                       </button>
@@ -125,7 +125,7 @@ const UserPosts = ({ username }) => {
 
             {/* Post Media */}
             {post.media && (
-              <div className="aspect-video w-full overflow-hidden bg-gray-100">
+              <div className="aspect-square w-full overflow-hidden bg-slate-100">
                 <img
                   src={post.media[0]}
                   alt="Post"
@@ -146,7 +146,7 @@ const UserPosts = ({ username }) => {
               {showMoreButtons[index] && (
                 <button
                   onClick={() => toggleExpand(index)}
-                  className="text-blue-600 hover:text-blue-700 font-medium text-sm transition-colors"
+                  className="text-emerald-600 hover:text-emerald-700 font-medium text-sm transition-colors"
                 >
                   {expandedPosts[index] ? '← Show less' : 'Show more →'}
                 </button>
@@ -154,25 +154,25 @@ const UserPosts = ({ username }) => {
             </div>
 
             {/* Post Footer - Interactions */}
-            <div className="px-6 py-4 border-t border-gray-100 flex justify-between items-center text-gray-600">
+            <div className="px-6 py-4 border-t border-emerald-100 flex justify-between items-center text-gray-600">
               <div className="flex space-x-6">
                 <button
                   onClick={() => handleLike(index, post)}
-                  className="flex items-center space-x-2 hover:text-red-500 transition-colors group"
+                  className="flex items-center space-x-2 hover:text-emerald-600 transition-colors group"
                 >
                   {post.likedByUser ? (
-                    <FaHeart size={18} className="text-red-500" />
+                    <FaHeart size={18} className="text-emerald-600" />
                   ) : (
-                    <FaRegHeart size={18} className="group-hover:text-red-500" />
+                    <FaRegHeart size={18} className="group-hover:text-emerald-600" />
                   )}
                   <span className="text-sm font-medium">{post.likesCount}</span>
                 </button>
 
                 <button
                   onClick={() => handleComment(post._id)}
-                  className="flex items-center space-x-2 hover:text-blue-500 transition-colors group"
+                  className="flex items-center space-x-2 hover:text-emerald-600 transition-colors group"
                 >
-                  <FaRegComment size={18} className="group-hover:text-blue-500" />
+                  <FaRegComment size={18} className="group-hover:text-emerald-600" />
                   <span className="text-sm font-medium">Comment</span>
                 </button>
               </div>

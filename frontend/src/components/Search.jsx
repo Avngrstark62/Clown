@@ -58,11 +58,11 @@ const Search = () => {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-          className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
         />
         <button
           onClick={handleSearch}
-          className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
+          className="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-medium transition-colors"
         >
           Search
         </button>
@@ -70,12 +70,12 @@ const Search = () => {
 
       {/* User List */}
       {users.length > 0 && (
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+        <div className="bg-slate-50 rounded-xl shadow-sm border border-emerald-200 overflow-hidden">
           <div className="divide-y divide-gray-200">
             {users.map((user) => (
               <div
                 key={user._id}
-                className="p-4 hover:bg-gray-50 cursor-pointer transition-colors"
+                className="p-4 hover:bg-emerald-50 cursor-pointer transition-colors"
                 onClick={() => handleUserClick(user.username)}
               >
                 <h3 className="font-semibold text-gray-900 text-lg">

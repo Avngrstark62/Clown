@@ -61,11 +61,11 @@ const Post = () => {
   return (
     <div className="space-y-6 max-w-4xl mx-auto">
       {/* Post Section */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+      <div className="bg-slate-50 rounded-xl shadow-sm border border-emerald-200 overflow-hidden">
         {post && (
           <>
             {/* Post Media */}
-            <div className="aspect-video w-full overflow-hidden bg-gray-100">
+            <div className="aspect-square w-full overflow-hidden bg-slate-100">
               <img
                 src={post.media[0]}
                 alt="Post"
@@ -86,17 +86,17 @@ const Post = () => {
         <h2 className="text-2xl font-bold text-gray-900">Comments</h2>
 
         {/* Comment Input */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 space-y-3">
+        <div className="bg-slate-50 rounded-xl shadow-sm border border-emerald-200 p-6 space-y-3">
           <textarea
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
             placeholder="Share your thoughts..."
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent resize-none"
             rows={3}
           />
           <button
             onClick={handleCommentSubmit}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-lg font-medium transition-colors"
+            className="w-full bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-3 rounded-lg font-medium transition-colors"
           >
             Post Comment
           </button>
@@ -109,41 +109,44 @@ const Post = () => {
               <p>No comments yet. Be the first to comment!</p>
             </div>
           ) : (
-            comments.map((comment) => (
-              <div key={comment._id} className="bg-white rounded-lg border border-gray-200 p-4">
-                <div className="flex items-start gap-3">
-                  <img
-                    src={comment.profileId.profilePic || default_avatar}
-                    alt="Profile"
-                    className="w-10 h-10 rounded-full flex-shrink-0"
-                  />
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center justify-between gap-2">
-                      <strong className="text-sm font-semibold text-gray-900">
-                        @{comment.profileId.username}
-                      </strong>
-                    </div>
-                    <p className="text-gray-800 mt-1 text-sm">{comment.content}</p>
-                    <div className="flex gap-3 mt-2">
-                      <button
-                        onClick={() => console.log("liked a comment")}
-                        className="text-xs text-blue-600 hover:text-blue-700 font-medium transition-colors"
-                      >
-                        ♥ Like
-                      </button>
-                      {comment.profileId.username === user && (
+            comments.map((comment) => {
+              if (!comment.profileId) return null;
+              return (
+                <div key={comment._id} className="bg-slate-50 rounded-lg border border-emerald-200 p-4">
+                  <div className="flex items-start gap-3">
+                    <img
+                      src={comment.profileId.profilePic || default_avatar}
+                      alt="Profile"
+                      className="w-10 h-10 rounded-full flex-shrink-0"
+                    />
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center justify-between gap-2">
+                        <strong className="text-sm font-semibold text-gray-900">
+                          @{comment.profileId.username}
+                        </strong>
+                      </div>
+                      <p className="text-gray-800 mt-1 text-sm">{comment.content}</p>
+                      <div className="flex gap-3 mt-2">
                         <button
-                          onClick={() => handleCommentDelete(comment._id)}
-                          className="text-xs text-red-600 hover:text-red-700 font-medium transition-colors"
+                          onClick={() => console.log("liked a comment")}
+                          className="text-xs text-emerald-600 hover:text-emerald-700 font-medium transition-colors"
                         >
-                          Delete
+                          ♥ Like
                         </button>
-                      )}
+                        {comment.profileId.username === user && (
+                          <button
+                            onClick={() => handleCommentDelete(comment._id)}
+                            className="text-xs text-red-600 hover:text-red-700 font-medium transition-colors"
+                          >
+                            Delete
+                          </button>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))
+              );
+            })
           )}
         </div>
       </div>

@@ -132,7 +132,7 @@ const CreatePost = () => {
         <p className="text-gray-600 mt-2">Share your moment with everyone</p>
       </div>
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
+      <div className="bg-slate-50 rounded-xl shadow-sm border border-emerald-200 p-8">
         {/* Step Indicator */}
         <div className="flex justify-between items-center mb-8">
           {[1, 2, 3].map((num) => (
@@ -140,7 +140,7 @@ const CreatePost = () => {
               <div
                 className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold transition-all ${
                   step >= num
-                    ? 'bg-blue-600 text-white'
+                    ? 'bg-emerald-600 text-white'
                     : 'bg-gray-200 text-gray-600'
                 }`}
               >
@@ -149,7 +149,7 @@ const CreatePost = () => {
               {num < 3 && (
                 <div
                   className={`flex-1 h-1 mx-2 rounded transition-all ${
-                    step > num ? 'bg-blue-600' : 'bg-gray-200'
+                    step > num ? 'bg-emerald-600' : 'bg-gray-200'
                   }`}
                 ></div>
               )}
@@ -160,7 +160,7 @@ const CreatePost = () => {
         {step === 1 && (
           <div className="space-y-6">
             <h2 className="text-2xl font-bold text-gray-900">Select an Image</h2>
-            <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-blue-500 transition-colors cursor-pointer">
+            <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-emerald-500 transition-colors cursor-pointer">
               <input
                 type="file"
                 accept="image/*"
@@ -216,7 +216,7 @@ const CreatePost = () => {
                 placeholder="Write your caption here..."
                 value={formData.content}
                 onChange={handleInputChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent resize-none"
                 rows={4}
               />
             </div>
@@ -229,12 +229,12 @@ const CreatePost = () => {
                   placeholder="Describe your post..."
                   value={generateCaptionsInput}
                   onChange={(e) => setGenerateCaptionsInput(e.target.value)}
-                  className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 />
                 <button
                   onClick={handleGenerateCaptions}
                   disabled={isGeneratingCaptions || !generateCaptionsInput.trim()}
-                  className="px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white rounded-lg font-medium transition-colors"
+                  className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 disabled:bg-gray-400 text-white rounded-lg font-medium transition-colors"
                 >
                   {isGeneratingCaptions ? '⏳' : '✨'}
                 </button>
@@ -242,7 +242,7 @@ const CreatePost = () => {
               <button
                 onClick={handleGenerateCaptionsFromImage}
                 disabled={isGeneratingCaptions || !croppedImage}
-                className="w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white rounded-lg font-medium transition-colors"
+                className="w-full px-4 py-2 bg-emerald-600 hover:bg-emerald-700 disabled:bg-gray-400 text-white rounded-lg font-medium transition-colors"
               >
                 {isGeneratingCaptions ? 'Generating...' : 'Generate from Image'}
               </button>
@@ -253,7 +253,7 @@ const CreatePost = () => {
                   {generatedCaptions.map((caption, index) => (
                     <div
                       key={index}
-                      className="p-3 bg-gray-50 border border-gray-200 rounded-lg flex justify-between items-start gap-2 hover:bg-gray-100 transition-colors"
+                      className="p-3 bg-gray-50 border border-emerald-200 rounded-lg flex justify-between items-start gap-2 hover:bg-slate-100 transition-colors"
                     >
                       <p className="text-sm text-gray-800 flex-1">{caption}</p>
                       <button
@@ -281,7 +281,7 @@ const CreatePost = () => {
           {step > 1 && (
             <button
               onClick={() => setStep(step - 1)}
-              className="flex-1 px-4 py-3 border border-gray-300 text-gray-900 rounded-lg hover:bg-gray-50 font-medium transition-colors"
+              className="flex-1 px-4 py-3 border border-gray-300 text-gray-900 rounded-lg hover:bg-emerald-50 font-medium transition-colors"
             >
               ← Previous
             </button>
@@ -290,7 +290,7 @@ const CreatePost = () => {
             <button
               onClick={() => setStep(step + 1)}
               disabled={step === 1 && !preview}
-              className="flex-1 px-4 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white rounded-lg font-medium transition-colors"
+              className="flex-1 px-4 py-3 bg-emerald-600 hover:bg-emerald-700 disabled:bg-gray-400 text-white rounded-lg font-medium transition-colors"
             >
               Next →
             </button>
@@ -434,12 +434,12 @@ export default CreatePost;
 
 //   return (
 //     <div className="min-h-screen bg-gray-50 p-4">
-//       <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6">
+//       <div className="max-w-4xl mx-auto bg-slate-50 rounded-lg shadow-lg p-6">
 //         <div className="flex justify-between mb-6">
 //           {step > 1 && (
 //             <button
 //               onClick={() => setStep(step - 1)}
-//               className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
+//               className="bg-emerald-500 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition"
 //             >
 //               Previous
 //             </button>
@@ -447,7 +447,7 @@ export default CreatePost;
 //           {step < 3 && (
 //             <button
 //               onClick={() => setStep(step + 1)}
-//               className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
+//               className="bg-emerald-500 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition"
 //             >
 //               Next
 //             </button>
@@ -461,7 +461,7 @@ export default CreatePost;
 //               type="file"
 //               accept="image/*"
 //               onChange={handleImageChange}
-//               className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+//               className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-blue-100"
 //             />
 //             {preview && (
 //               <img
@@ -498,7 +498,7 @@ export default CreatePost;
 //                 placeholder="Write your content here..."
 //                 value={formData.content}
 //                 onChange={handleInputChange}
-//                 className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+//                 className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
 //                 rows={4}
 //               />
 
@@ -509,18 +509,18 @@ export default CreatePost;
 //                   placeholder="Give a brief description to your post to generate captions"
 //                   value={generateCaptionsInput}
 //                   onChange={(e) => setGenerateCaptionsInput(e.target.value)}
-//                   className="flex-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+//                   className="flex-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
 //                 />
 //                 <button
 //                   onClick={handleGenerateCaptions}
-//                   className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
+//                   className="bg-emerald-500 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition"
 //                 >
 //                   Generate
 //                 </button>
 //               </div>
 //               <button
 //                 onClick={handleGenerateCaptionsFromImage}
-//                 className="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
+//                 className="w-full bg-emerald-500 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition"
 //               >
 //                 Generate from Image
 //               </button>
@@ -529,7 +529,7 @@ export default CreatePost;
 //                 {generatedCaptions.map((caption, index) => (
 //                   <div
 //                     key={index}
-//                     className="p-2 bg-gray-100 rounded-lg"
+//                     className="p-2 bg-slate-100 rounded-lg"
 //                   >
 //                     {index + 1}: {caption}
 //                   </div>
@@ -548,7 +548,7 @@ export default CreatePost;
 //         )}
 
 //         {message && (
-//           <p className="mt-4 text-center text-sm text-red-500">{message}</p>
+//           <p className="mt-4 text-center text-sm text-emerald-600">{message}</p>
 //         )}
 //       </div>
 //     </div>

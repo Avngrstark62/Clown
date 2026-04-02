@@ -114,18 +114,18 @@ const EditProfile = () => {
         <p className="text-gray-600 mt-2">Update your profile information</p>
       </div>
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
+      <div className="bg-slate-50 rounded-xl shadow-sm border border-emerald-200 p-8">
         {/* Profile Photo Upload */}
         <div className="flex flex-col items-center mb-8">
           <div className="relative w-40 h-40 mb-4">
             <img
               src={preview || default_avatar}
               alt="Profile Preview"
-              className="w-full h-full rounded-full object-cover border-4 border-gray-200 shadow-lg"
+              className="w-full h-full rounded-full object-cover border-4 border-emerald-200 shadow-lg"
             />
             <label
               htmlFor="profilePhoto"
-              className="absolute bottom-2 right-2 bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-full cursor-pointer transition-colors shadow-lg"
+              className="absolute bottom-2 right-2 bg-emerald-600 hover:bg-emerald-700 text-white p-2 rounded-full cursor-pointer transition-colors shadow-lg"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -157,7 +157,7 @@ const EditProfile = () => {
                 name="username"
                 value={formData.username}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
               />
             </div>
             <div>
@@ -167,7 +167,7 @@ const EditProfile = () => {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
               />
             </div>
           </div>
@@ -180,7 +180,7 @@ const EditProfile = () => {
               onChange={handleChange}
               rows={4}
               placeholder="Tell us about yourself..."
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent resize-none"
             />
           </div>
 
@@ -191,7 +191,7 @@ const EditProfile = () => {
                 name="gender"
                 value={formData.gender}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
               >
                 <option value="">Select Gender</option>
                 <option value="male">Male</option>
@@ -206,7 +206,7 @@ const EditProfile = () => {
                 name="dob"
                 value={formData.dob}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
               />
             </div>
           </div>
@@ -217,7 +217,7 @@ const EditProfile = () => {
               name="country"
               value={formData.country}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
             >
               <option value="">Select Country</option>
               <option value="USA">USA</option>
@@ -236,13 +236,13 @@ const EditProfile = () => {
                 onChange={(e) => setNewInterest(e.target.value)}
                 placeholder="Add an interest..."
                 disabled={formData.interests.length >= 10}
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100"
+                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent disabled:bg-slate-100"
               />
               <button
                 type="button"
                 onClick={handleAddInterest}
                 disabled={!newInterest.trim() || formData.interests.length >= 10}
-                className="px-6 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white rounded-lg font-medium transition-colors"
+                className="px-6 py-2 bg-emerald-600 hover:bg-emerald-700 disabled:bg-gray-400 text-white rounded-lg font-medium transition-colors"
               >
                 Add
               </button>
@@ -251,13 +251,13 @@ const EditProfile = () => {
               {formData.interests.map((interest, index) => (
                 <div
                   key={index}
-                  className="flex items-center gap-2 bg-blue-100 px-4 py-2 rounded-full text-sm font-medium text-blue-900"
+                  className="flex items-center gap-2 bg-emerald-50 px-4 py-2 rounded-full text-sm font-medium text-emerald-700 border border-emerald-200"
                 >
                   <span>#{interest}</span>
                   <button
                     type="button"
                     onClick={() => handleRemoveInterest(index)}
-                    className="text-blue-600 hover:text-blue-800 font-bold"
+                    className="text-emerald-600 hover:text-emerald-800 font-bold"
                   >
                     ✕
                   </button>
@@ -286,14 +286,14 @@ const EditProfile = () => {
             <button
               type="button"
               onClick={() => navigate(`/profile/${user}`)}
-              className="flex-1 px-6 py-3 border border-gray-300 text-gray-900 rounded-lg hover:bg-gray-50 font-medium transition-colors"
+              className="flex-1 px-6 py-3 border border-gray-300 text-gray-900 bg-white rounded-lg hover:bg-emerald-50 font-medium transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={uploading}
-              className="flex-1 px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white rounded-lg font-medium transition-colors"
+              className="flex-1 px-6 py-3 bg-emerald-600 hover:bg-emerald-700 disabled:bg-gray-400 text-white rounded-lg font-medium transition-colors"
             >
               {uploading ? 'Saving...' : 'Save Changes'}
             </button>
