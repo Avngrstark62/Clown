@@ -29,29 +29,38 @@ const ChatPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center bg-gray-100 p-4 pt-16">
+    <div className="space-y-6">
       {/* Header */}
-      <h2 className="text-2xl font-bold text-gray-800 mb-4">Messages(Only the users you follow will appear here)</h2>
+      <div className="mb-8">
+        <h1 className="text-4xl font-bold text-gray-900">Messages</h1>
+        <p className="text-gray-600 mt-2">Chat with people you follow</p>
+      </div>
 
       {/* User List Container */}
-      <div className="w-full max-w-md bg-white shadow-md rounded-lg p-4">
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
         {followingUsers.length > 0 ? (
-          followingUsers.map((user) => (
-            <div
-              key={user._id}
-              className="flex items-center justify-between p-3 border-b last:border-none hover:bg-gray-100 cursor-pointer rounded-md transition"
-              onClick={() => handleUserClick(user)}
-            >
-              <div>
-                <h3 className="text-lg font-semibold text-gray-800">
-                  {user.username}
-                </h3>
-                <p className="text-gray-600">{user.name}</p>
+          <div className="divide-y divide-gray-200">
+            {followingUsers.map((user) => (
+              <div
+                key={user._id}
+                className="flex items-center justify-between p-4 hover:bg-gray-50 cursor-pointer transition-colors"
+                onClick={() => handleUserClick(user)}
+              >
+                <div>
+                  <h3 className="font-semibold text-gray-900 text-lg">
+                    {user.username}
+                  </h3>
+                  <p className="text-gray-600 text-sm mt-1">{user.name}</p>
+                </div>
+                <div className="text-2xl">→</div>
               </div>
-            </div>
-          ))
+            ))}
+          </div>
         ) : (
-          <p className="text-center text-gray-500">No users found</p>
+          <div className="p-12 text-center">
+            <p className="text-gray-500 text-lg">No users to chat with yet</p>
+            <p className="text-gray-400 text-sm mt-2">Follow people to start messaging</p>
+          </div>
         )}
       </div>
     </div>

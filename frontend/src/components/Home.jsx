@@ -120,40 +120,45 @@ const Home = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gray-50 p-4 pt-16">
-            <h1 className="text-2xl font-bold mb-6">Home</h1>
+        <div className="space-y-6">
+            <div className="mb-8">
+                <h1 className="text-4xl font-bold text-gray-900">Home</h1>
+                <p className="text-gray-600 text-lg mt-2">Your feed from people you follow</p>
+            </div>
+
             {posts.map((post, index) => (
                 <div
                     key={post._id}
                     ref={index === posts.length - 1 ? lastPostRef : null}
-                    className="bg-white rounded-lg shadow-md mb-6 p-4"
+                    className="bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-300 overflow-hidden"
                 >
-                    <div className="flex justify-between items-center mb-4">
-                        <h3
-                          className="text-lg font-semibold text-blue-500 cursor-pointer hover:underline"
-                          onClick={()=>{handleProfileClick(post.profileUsername)}}
+                    {/* Post Header */}
+                    <div className="px-6 py-4 border-b border-gray-100 flex justify-between items-center">
+                        <button
+                            onClick={() => handleProfileClick(post.profileUsername)}
+                            className="font-semibold text-gray-900 hover:text-blue-600 transition-colors"
                         >
-                          {post.profileUsername}
-                        </h3>
+                            @{post.profileUsername}
+                        </button>
 
                         <div className="relative">
                             <button
                                 onClick={() => toggleDropdown(index)}
-                                className="p-2 hover:bg-gray-100 rounded-full"
+                                className="p-2 hover:bg-gray-100 rounded-full transition-colors"
                             >
-                                <FaEllipsisV size={17} />
+                                <FaEllipsisV size={18} className="text-gray-600" />
                             </button>
                             {dropdownVisible === index && (
-                                <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+                                <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
                                     <button
                                         onClick={() => handleSave(index)}
-                                        className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                                        className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 transition-colors"
                                     >
                                         Save
                                     </button>
                                     <button
                                         onClick={() => handleShare(index)}
-                                        className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                                        className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-50 transition-colors border-t border-gray-100"
                                     >
                                         Share
                                     </button>
@@ -162,70 +167,94 @@ const Home = () => {
                         </div>
                     </div>
 
+                    {/* Post Media */}
                     {post.media && post.media.length > 0 && (
-                        <div className="aspect-square w-full overflow-hidden mb-4">
+                        <div className="aspect-video w-full overflow-hidden bg-gray-100">
                             <img
                                 src={post.media[0]}
                                 alt="Post"
-                                className="w-full h-full object-cover rounded-lg"
+                                className="w-full h-full object-cover"
                             />
                         </div>
                     )}
 
-                    <div className="flex space-x-4 mb-4">
-                        <button
-                            onClick={() => handleLike(index, post)}
-                            className="flex items-center space-x-2"
+                    {/* Post Content */}
+                    <div className="px-6 py-4 space-y-4">
+                        <p
+                            className={`text-gray-800 leading-relaxed ${
+                                expandedPosts[index] ? '' : 'line-clamp-3'
+                            }`}
+                            ref={(el) => (contentRefs.current[index] = el)}
                         >
-                            {post.likedByUser ? (
-                                <FaHeart color="red" size={22} />
-                            ) : (
-                                <FaRegHeart size={22} />
-                            )}
-                        </button>
+                            {post.content}
+                        </p>
 
-                        <button
-                            onClick={() => handleComment(post._id)}
-                            className="flex items-center space-x-2"
-                        >
-                            <FaRegComment size={22} />
-                        </button>
+                        {showMoreButtons[index] && (
+                            <button
+                                onClick={() => toggleExpand(index)}
+                                className="text-blue-600 hover:text-blue-700 font-medium text-sm transition-colors"
+                            >
+                                {expandedPosts[index] ? '← Show less' : 'Show more →'}
+                            </button>
+                        )}
+
+                        <div className="text-xs text-gray-500">
+                            {new Date(post.createdAt).toLocaleDateString('en-US', {
+                                month: 'short',
+                                day: 'numeric',
+                                year: 'numeric',
+                                hour: '2-digit',
+                                minute: '2-digit'
+                            })}
+                        </div>
                     </div>
 
-                    <span className="text-sm font-semibold mb-2">
-                        {post.likesCount} likes
-                    </span>
+                    {/* Post Footer - Interactions */}
+                    <div className="px-6 py-4 border-t border-gray-100 flex justify-between items-center text-gray-600">
+                        <div className="flex space-x-6">
+                            <button
+                                onClick={() => handleLike(index, post)}
+                                className="flex items-center space-x-2 hover:text-red-500 transition-colors group"
+                            >
+                                {post.likedByUser ? (
+                                    <FaHeart size={18} className="text-red-500" />
+                                ) : (
+                                    <FaRegHeart size={18} className="group-hover:text-red-500" />
+                                )}
+                                <span className="text-sm font-medium">{post.likesCount}</span>
+                            </button>
 
-                    <p
-                        className={`text-gray-700 mb-2 ${
-                            expandedPosts[index] ? '' : 'line-clamp-3'
-                        }`}
-                        ref={(el) => (contentRefs.current[index] = el)}
-                    >
-                        {post.content}
-                    </p>
-
-                    {showMoreButtons[index] && (
-                        <button
-                            onClick={() => toggleExpand(index)}
-                            className="text-blue-500 hover:text-blue-600 text-sm"
-                        >
-                            {expandedPosts[index] ? 'Show less' : 'Show more'}
-                        </button>
-                    )}
-
-                    <span className="text-sm text-gray-500">
-                        {new Date(post.createdAt).toLocaleString()}
-                    </span>
+                            <button
+                                onClick={() => handleComment(post._id)}
+                                className="flex items-center space-x-2 hover:text-blue-500 transition-colors group"
+                            >
+                                <FaRegComment size={18} className="group-hover:text-blue-500" />
+                                <span className="text-sm font-medium">Comment</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             ))}
+
+            {/* Loading State */}
             {loading && (
-                <div className="flex justify-center items-center py-4">
-                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+                <div className="flex justify-center items-center py-8">
+                    <div className="animate-spin rounded-full h-10 w-10 border-2 border-blue-600 border-t-transparent"></div>
                 </div>
             )}
-            {!hasMore && !loading && (
-                <div className="text-center text-gray-500 py-4">No more posts</div>
+
+            {/* No More Posts */}
+            {!hasMore && !loading && posts.length > 0 && (
+                <div className="text-center py-8">
+                    <p className="text-gray-500 font-medium">No more posts</p>
+                </div>
+            )}
+
+            {/* Empty State */}
+            {!loading && posts.length === 0 && (
+                <div className="text-center py-12">
+                    <p className="text-gray-500 text-lg">No posts yet. Start following people to see their posts!</p>
+                </div>
             )}
         </div>
     );

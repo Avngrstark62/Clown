@@ -39,56 +39,65 @@ const Connections = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8 pt-16">
-      <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-6">
-        {/* Tab Header */}
-        <div className="flex justify-center space-x-8 border-b border-gray-200 mb-6">
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="mb-8">
+        <h1 className="text-4xl font-bold text-gray-900">Connections</h1>
+        <p className="text-gray-600 mt-2">Manage your followers and following</p>
+      </div>
+
+      {/* Tab Navigation */}
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+        <div className="flex">
           <button
-            className={`pb-2 text-lg font-semibold ${
-              activeTab === 'followers'
-                ? 'text-blue-500 border-b-2 border-blue-500'
-                : 'text-gray-500 hover:text-gray-700'
-            }`}
             onClick={() => setActiveTab('followers')}
+            className={`flex-1 py-4 font-semibold text-center border-b-2 transition-colors ${
+              activeTab === 'followers'
+                ? 'text-blue-600 border-blue-600 bg-blue-50'
+                : 'text-gray-600 border-gray-200 hover:text-gray-900'
+            }`}
           >
             Followers
           </button>
           <button
-            className={`pb-2 text-lg font-semibold ${
-              activeTab === 'following'
-                ? 'text-blue-500 border-b-2 border-blue-500'
-                : 'text-gray-500 hover:text-gray-700'
-            }`}
             onClick={() => setActiveTab('following')}
+            className={`flex-1 py-4 font-semibold text-center border-b-2 transition-colors ${
+              activeTab === 'following'
+                ? 'text-blue-600 border-blue-600 bg-blue-50'
+                : 'text-gray-600 border-gray-200 hover:text-gray-900'
+            }`}
           >
             Following
           </button>
         </div>
 
         {/* User List */}
-        <div className="space-y-4">
+        <div className="divide-y divide-gray-200">
           {users.length > 0 ? (
             users.map((user) => (
               <div
                 key={user._id}
                 onClick={handleUserClick}
-                className="flex items-center p-4 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition"
+                className="flex items-center gap-4 p-4 hover:bg-gray-50 cursor-pointer transition-colors"
               >
-                <div className="flex-shrink-0">
-                  <img
-                    src={user.profilePic || default_avatar}
-                    alt="Profile"
-                    className="w-12 h-12 rounded-full object-cover"
-                  />
+                <img
+                  src={user.profilePic || default_avatar}
+                  alt="Profile"
+                  className="w-14 h-14 rounded-full object-cover flex-shrink-0"
+                />
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-semibold text-gray-900 text-lg">
+                    @{user.username}
+                  </h3>
+                  <p className="text-gray-600 text-sm">{user.name}</p>
                 </div>
-                <div className="ml-4">
-                  <h3 className="text-lg font-semibold">{user.username}</h3>
-                  <p className="text-sm text-gray-600">{user.name}</p>
-                </div>
+                <div className="text-2xl text-gray-400">→</div>
               </div>
             ))
           ) : (
-            <p className="text-center text-gray-500">No users found</p>
+            <div className="p-12 text-center">
+              <p className="text-gray-500 text-lg">No {activeTab === 'followers' ? 'followers' : 'following'} yet</p>
+            </div>
           )}
         </div>
       </div>

@@ -119,48 +119,70 @@ const ChatComponent = () => {
   // console.log(messagesState.getAllMessages());
 
   if (!isInitialized) {
-    return <div className="flex items-center justify-center h-screen text-gray-600">Loading socket...</div>;
+    return (
+      <div className="flex items-center justify-center h-full py-12">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-2 border-blue-600 border-t-transparent mx-auto mb-4"></div>
+          <p className="text-gray-600">Initializing chat...</p>
+        </div>
+      </div>
+    );
   }
 
   return (
-    <div className="flex flex-col h-screen bg-gray-100 pt-16">
+    <div className="flex flex-col h-screen bg-white">
       {/* Chat Header */}
-      <div className="bg-blue-600 text-white text-lg font-semibold py-3 px-4 shadow-md">
-        Chat with {recipient?.username}
+      <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white py-4 px-6 shadow-md border-b border-blue-800">
+        <h2 className="text-xl font-bold">@{recipient?.username}</h2>
+        <p className="text-blue-100 text-sm">{recipient?.name}</p>
       </div>
 
       {/* Chat Messages */}
       <div
         ref={chatContainerRef}
         onScroll={handleScroll}
-        className="flex-1 overflow-y-auto p-4 space-y-3 pb-20"
+        className="flex-1 overflow-y-auto px-6 py-6 space-y-4"
       >
-        {messagesState.getAllMessages().map((message, index) => {
+        {messagesState.getAllMessages().length === 0 ? (
+          <div className="text-center py-12 text-gray-500">
+            <p>No messages yet. Start the conversation!</p>
+          </div>
+        ) : (
+          messagesState.getAllMessages().map((message, index) => {
             const isSentByUser = message.senderId !== recipientId;
             return (
-                <div key={index} className={`flex ${isSentByUser ? "justify-end" : "justify-start"}`}>
-                    <div className={`px-4 py-2 rounded-lg text-white max-w-[70%] ${
-                        isSentByUser ? "bg-blue-500" : "bg-gray-600"
-                    }`}>
-                        {message.text}
-                    </div>
+              <div
+                key={index}
+                className={`flex ${isSentByUser ? "justify-end" : "justify-start"}`}
+              >
+                <div
+                  className={`px-5 py-3 rounded-2xl max-w-xs lg:max-w-md break-words font-medium ${
+                    isSentByUser
+                      ? "bg-blue-600 text-white rounded-br-none"
+                      : "bg-gray-200 text-gray-900 rounded-bl-none"
+                  }`}
+                >
+                  {message.text}
                 </div>
+              </div>
             );
-        })}
+          })
+        )}
       </div>
 
       {/* Chat Input - Fixed at the Bottom */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t p-4">
-        <div className="flex items-center max-w-2xl mx-auto">
+      <div className="bg-white border-t border-gray-200 p-4 sticky bottom-0">
+        <div className="flex items-center gap-3 max-w-4xl mx-auto">
           <input
             type="text"
-            className="flex-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="flex-1 px-4 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             value={messageInput}
             onChange={(e) => setMessageInput(e.target.value)}
-            placeholder="Type a message..."
+            onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
+            placeholder="Type your message..."
           />
           <button
-            className="ml-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+            className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-medium transition-colors flex-shrink-0"
             onClick={sendMessage}
           >
             Send

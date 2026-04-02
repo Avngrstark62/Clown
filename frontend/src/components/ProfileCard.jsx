@@ -51,60 +51,77 @@ const ProfileCard = ({ username }) => {
     navigate(`/profile/${username}/connections/following`);
   };
 
-  if (loading || !userData) return <p className="text-center py-4">Loading...</p>;
+  if (loading || !userData) return (
+    <div className="flex justify-center items-center py-12">
+      <div className="animate-spin rounded-full h-12 w-12 border-2 border-blue-600 border-t-transparent"></div>
+    </div>
+  );
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-      <div className="text-center">
-        <img
-          src={userData.profilePic || default_avatar}
-          alt="Profile"
-          className="w-24 h-24 rounded-full mx-auto mb-4"
-        />
-        <h2 className="text-xl font-bold">{userData.name || userData.username || 'Guest'}</h2>
-        <h3 className="text-gray-500">{'@' + userData.username || 'Guest'}</h3>
-      </div>
+    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
+      {/* Cover Area */}
+      <div className="h-32 bg-gradient-to-r from-blue-400 to-blue-600 rounded-lg mb-6 -m-8 mb-0"></div>
 
-      <div className="flex justify-center mt-4">
-        {profileType === 'self' ? (
-          <button
-            onClick={handleEditProfile}
-            className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
-          >
-            Edit Profile
-          </button>
-        ) : profileType === 'following' ? (
-          <button
-            onClick={handleUnfollow}
-            className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition"
-          >
-            Unfollow
-          </button>
-        ) : (
-          <button
-            onClick={handleFollow}
-            className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
-          >
-            Follow
-          </button>
+      {/* Profile Content */}
+      <div className="relative pt-0">
+        {/* Avatar */}
+        <div className="flex flex-col items-center -mt-16 mb-6">
+          <img
+            src={userData.profilePic || default_avatar}
+            alt="Profile"
+            className="w-32 h-32 rounded-full border-4 border-white shadow-lg mb-4"
+          />
+          <h2 className="text-3xl font-bold text-gray-900">{userData.name || userData.username || 'Guest'}</h2>
+          <h3 className="text-gray-600 text-lg mt-1">@{userData.username || 'guest'}</h3>
+        </div>
+
+        {/* Bio */}
+        {userData.bio && (
+          <p className="text-center text-gray-700 mb-6 text-lg">{userData.bio}</p>
         )}
-      </div>
 
-      <div className="mt-4 text-center">
-        <p className="text-gray-700">{userData.bio || null}</p>
-        <div className="flex justify-center space-x-4 mt-2">
-          <p
+        {/* Action Button */}
+        <div className="flex justify-center mb-8">
+          {profileType === 'self' ? (
+            <button
+              onClick={handleEditProfile}
+              className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
+            >
+              Edit Profile
+            </button>
+          ) : profileType === 'following' ? (
+            <button
+              onClick={handleUnfollow}
+              className="px-8 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition-colors"
+            >
+              Unfollow
+            </button>
+          ) : (
+            <button
+              onClick={handleFollow}
+              className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
+            >
+              Follow
+            </button>
+          )}
+        </div>
+
+        {/* Stats */}
+        <div className="flex justify-center gap-8 pt-8 border-t border-gray-200">
+          <button
             onClick={handleViewFollowers}
-            className="text-blue-500 cursor-pointer hover:underline"
+            className="text-center hover:opacity-70 transition-opacity"
           >
-            {userData.followersCount} Followers
-          </p>
-          <p
+            <div className="text-2xl font-bold text-gray-900">{userData.followersCount}</div>
+            <div className="text-gray-600 text-sm">Followers</div>
+          </button>
+          <button
             onClick={handleViewFollowing}
-            className="text-blue-500 cursor-pointer hover:underline"
+            className="text-center hover:opacity-70 transition-opacity"
           >
-            {userData.followingCount} Following
-          </p>
+            <div className="text-2xl font-bold text-gray-900">{userData.followingCount}</div>
+            <div className="text-gray-600 text-sm">Following</div>
+          </button>
         </div>
       </div>
     </div>
