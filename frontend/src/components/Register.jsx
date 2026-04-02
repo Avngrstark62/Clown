@@ -103,7 +103,7 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow-lg">
         <div>
           <h2 className="text-center text-3xl font-bold text-gray-900">
@@ -131,7 +131,7 @@ const Register = () => {
                   value={formData.username}
                   onChange={handleChange}
                   required
-                  className="appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  className="appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm"
                 />
                 {validationErrors.username && (
                   <p className="text-sm text-red-500 mt-1">{validationErrors.username}</p>
@@ -152,7 +152,7 @@ const Register = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  className="appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm"
                 />
               </div>
 
@@ -167,7 +167,7 @@ const Register = () => {
                   value={formData.password}
                   onChange={handleChange}
                   required
-                  className="appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  className="appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm"
                 />
                 {validationErrors.password && (
                   <p className="text-sm text-red-500 mt-1">{validationErrors.password}</p>
@@ -186,7 +186,7 @@ const Register = () => {
               <button
                 type="submit"
                 disabled={!!validationErrors.username || !!validationErrors.password || loading}
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition disabled:bg-gray-400 disabled:cursor-not-allowed"
+                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition disabled:bg-gray-400 disabled:cursor-not-allowed"
               >
                 {loading ? "Processing..." : "Continue"}
               </button>
@@ -208,7 +208,7 @@ const Register = () => {
                   onChange={handleOtpChange}
                   required
                   maxLength={6}
-                  className="appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-center text-2xl tracking-widest sm:text-sm"
+                  className="appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-center text-2xl tracking-widest sm:text-sm"
                 />
                 <p className="text-sm text-gray-500 mt-1 text-center">
                   Enter the 6-digit code sent to your email. (If you cant find it, check spam)
@@ -228,7 +228,7 @@ const Register = () => {
               <button
                 type="submit"
                 disabled={otp.length !== 6 || loading}
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition disabled:bg-gray-400 disabled:cursor-not-allowed"
+                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition disabled:bg-gray-400 disabled:cursor-not-allowed"
               >
                 {loading ? "Verifying..." : "Verify & Register"}
               </button>
@@ -237,7 +237,7 @@ const Register = () => {
                 type="button"
                 onClick={handleResendOtp}
                 disabled={resendDisabled || loading}
-                className="group relative w-full flex justify-center py-2 px-4 border border-gray-300 text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed"
+                className="group relative w-full flex justify-center py-2 px-4 border border-gray-300 text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gradient-to-br from-emerald-50 to-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed"
               >
                 {resendDisabled 
                   ? `Resend code in ${resendCounter}s` 
@@ -251,7 +251,7 @@ const Register = () => {
           <span className="text-sm text-gray-600">Already have an account?</span>
           <button
             onClick={goToLogin}
-            className="ml-2 text-sm font-medium text-blue-500 hover:text-blue-600"
+            className="ml-2 text-sm font-medium text-emerald-600 hover:text-emerald-700"
           >
             Login
           </button>
@@ -324,7 +324,7 @@ export default Register;
 //   };
 
 //   return (
-//     <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+//     <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
 //       <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow-lg">
 //         <div>
 //           <h2 className="text-center text-3xl font-bold text-gray-900">Register</h2>
@@ -342,7 +342,7 @@ export default Register;
 //                 value={formData.username}
 //                 onChange={handleChange}
 //                 required
-//                 className="appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+//                 className="appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm"
 //               />
 //               {validationErrors.username && (
 //                 <p className="text-sm text-red-500 mt-1">{validationErrors.username}</p>
@@ -363,7 +363,7 @@ export default Register;
 //                 value={formData.email}
 //                 onChange={handleChange}
 //                 required
-//                 className="appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+//                 className="appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm"
 //               />
 //             </div>
 
@@ -378,7 +378,7 @@ export default Register;
 //                 value={formData.password}
 //                 onChange={handleChange}
 //                 required
-//                 className="appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+//                 className="appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm"
 //               />
 //               {validationErrors.password && (
 //                 <p className="text-sm text-red-500 mt-1">{validationErrors.password}</p>
@@ -397,7 +397,7 @@ export default Register;
 //             <button
 //               type="submit"
 //               disabled={!!validationErrors.username || !!validationErrors.password}
-//               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition disabled:bg-gray-400 disabled:cursor-not-allowed"
+//               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition disabled:bg-gray-400 disabled:cursor-not-allowed"
 //             >
 //               Register
 //             </button>

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { generateCaptions, uploadFile } from '../api/api.js';
 import ImageCropper from './ImageCropper';
 import getCroppedImg from '../utils/cropImage';
+import { useToast } from '../hooks/useToast';
 
 const CreatePost = () => {
   const [step, setStep] = useState(1);
@@ -14,8 +15,9 @@ const CreatePost = () => {
   const [message, setMessage] = useState('');
   const [generateCaptionsInput, setGenerateCaptionsInput] = useState('');
   const [generatedCaptions, setGeneratedCaptions] = useState([]);
-  const [isGeneratingCaptions, setIsGeneratingCaptions] = useState(false); // Loading state for caption generation
+  const [isGeneratingCaptions, setIsGeneratingCaptions] = useState(false);
   const navigate = useNavigate();
+  const toast = useToast();
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -55,10 +57,11 @@ const CreatePost = () => {
     try {
       const response = await uploadFile(form);
       setMessage('Post created successfully!');
-      alert(response.data.message);
+      toast.success(response.data.message || 'Post created successfully!');
       navigate('/');
     } catch (error) {
       setMessage('Failed to create post.');
+      toast.error(error.response?.data?.message || 'Failed to create post.');
       console.error('Upload error:', error);
     } finally {
       setUploading(false);

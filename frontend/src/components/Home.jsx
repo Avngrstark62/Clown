@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { fetchHomePosts, likePost } from '../api/api.js';
 import { FaRegHeart, FaHeart, FaRegComment, FaEllipsisV } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import { useInfiniteScroll } from '../hooks/useInfiniteScroll';
 
 const Home = () => {
     const [posts, setPosts] = useState([]);
@@ -11,12 +12,11 @@ const Home = () => {
     const [expandedPosts, setExpandedPosts] = useState({});
     const [showMoreButtons, setShowMoreButtons] = useState({});
     const [dropdownVisible, setDropdownVisible] = useState(null);
-    const observer = useRef(null);
     const hasFetchedInitial = useRef(false);
     const contentRefs = useRef([]);
     const navigate = useNavigate();
 
-    const fetchPosts = async (initial = false) => {
+    const fetchPosts = useCallback(async (initial = false) => {
         if (loading || !hasMore) return;
         setLoading(true);
 
@@ -37,7 +37,7 @@ const Home = () => {
         } finally {
             setLoading(false);
         }
-    };
+    }, [loading, hasMore, lastCreatedAt]);
 
     useEffect(() => {
         if (!hasFetchedInitial.current) {
@@ -80,24 +80,13 @@ const Home = () => {
         setExpandedPosts((prev) => ({ ...prev, [index]: !prev[index] }));
     };
 
-    const lastPostRef = useCallback(
-        (node) => {
-            if (loading || !hasMore) return;
+    const handleFetchMore = useCallback(() => {
+        if (!loading && hasMore) {
+            fetchPosts(false);
+        }
+    }, [loading, hasMore, fetchPosts]);
 
-            if (observer.current) observer.current.disconnect();
-            observer.current = new IntersectionObserver(
-                (entries) => {
-                    if (entries[0].isIntersecting) {
-                        setTimeout(fetchPosts, 300);
-                    }
-                },
-                { threshold: 0.3 }
-            );
-
-            if (node) observer.current.observe(node);
-        },
-        [loading, hasMore]
-    );
+    const lastPostRef = useInfiniteScroll(handleFetchMore, { threshold: 0.3 });
 
     const handleComment = (postId) => {
         navigate(`/post/${postId}`);

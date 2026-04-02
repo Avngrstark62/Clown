@@ -15,6 +15,7 @@ import ChatComponent from './components/ChatComponent';
 import ChatPage from './components/ChatPage';
 import Home from './components/Home';
 import Search from './components/Search';
+import { ToastProvider } from './components/ToastProvider';
 
 function App() {
   const { user } = useSelector((state) => state.auth);
@@ -29,7 +30,9 @@ function App() {
   }, [user]);
 
   return (
-      <BrowserRouter>
+      <>
+        <ToastProvider />
+        <BrowserRouter>
         {user ? (
           <Routes>
             <Route path="/" element={<Layout><Home/></Layout>} />
@@ -60,6 +63,7 @@ function App() {
           </Routes>
         )}
       </BrowserRouter>
+      </>
   );
 }
 

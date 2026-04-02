@@ -3,9 +3,11 @@ import { deletePost, fetchUserPosts, likePost } from '../api/api';
 import { FaRegHeart, FaHeart, FaRegComment, FaEllipsisV } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useToast } from '../hooks/useToast';
 
 const UserPosts = ({ username }) => {
   const { user } = useSelector((state) => state.auth);
+  const toast = useToast();
   const [posts, setPosts] = useState([]);
   const [expandedPosts, setExpandedPosts] = useState({});
   const [showMoreButtons, setShowMoreButtons] = useState({});
@@ -69,10 +71,16 @@ const UserPosts = ({ username }) => {
   };
 
   const handleDelete = async (post) => {
-    const formData = { postId: post._id };
-    const response = await deletePost(formData);
-    alert(response.data.message);
-    window.location.reload();
+    try {
+      const formData = { postId: post._id };
+      const response = await deletePost(formData);
+      toast.success(response.data.message || 'Post deleted successfully');
+      setPosts((prevPosts) => prevPosts.filter((p) => p._id !== post._id));
+      setDropdownVisible(null);
+    } catch (error) {
+      toast.error(error.response?.data?.message || 'Failed to delete post');
+      console.error('Delete error:', error);
+    }
   };
 
   const handleComment = (postId) => {
