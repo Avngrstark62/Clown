@@ -44,15 +44,15 @@ const Search = () => {
   };
 
   return (
-    <div className="flex flex-col items-center p-4 min-h-screen bg-gray-100 pt-16">
+    <div className="flex flex-col items-center p-4 min-h-screen bg-gray-100 dark:bg-gray-800 pt-16">
       {/* Search Bar */}
-      <div className="w-full max-w-lg flex gap-2 bg-white p-3 rounded-lg shadow-md">
+      <div className="w-full max-w-lg flex gap-2 bg-white dark:bg-gray-700 p-3 rounded-lg shadow-md">
         <input
           type="text"
           placeholder="Search using name or username"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="flex-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="flex-1 p-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-600 dark:text-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <button
           onClick={handleSearch}
@@ -63,20 +63,20 @@ const Search = () => {
       </div>
 
       {/* User List */}
-      <div className="mt-6 w-full max-w-lg bg-white p-4 rounded-lg shadow-md">
+      <div className="mt-6 w-full max-w-lg bg-white dark:bg-gray-700 p-4 rounded-lg shadow-md">
         {users.length > 0 ? (
           users.map((user) => (
             <div
               key={user._id}
-              className="p-3 border-b last:border-none cursor-pointer hover:bg-gray-100 rounded-md transition"
+              className="p-3 border-b dark:border-gray-600 last:border-none cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 rounded-md transition"
               onClick={handleUserClick}
             >
-              <h3 className="text-lg font-semibold">{user.username}</h3>
-              <p className="text-gray-600">{user.name}</p>
+              <h3 className="text-lg font-semibold dark:text-gray-200">{user.username}</h3>
+              <p className="text-gray-600 dark:text-gray-400">{user.name}</p>
             </div>
           ))
         ) : (
-          <p className="text-center text-gray-500">No users found</p>
+          <p className="text-center text-gray-500 dark:text-gray-400">No users found</p>
         )}
       </div>
     </div>
