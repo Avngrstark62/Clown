@@ -1,8 +1,12 @@
 import express from "express";
 import { login, logout, user, initiateRegister, verifyAndRegister, resendOTP } from "../controllers/auth.controller.js";
 import authMiddleware from "../middlewares/auth.middleware.js"
+import authRateLimiter from "../middlewares/authRateLimiter.js";
 
 const router = express.Router();
+
+// Apply rate limiter to all auth routes
+router.use(authRateLimiter);
 
 // Updated registration routes
 router.post("/register/initiate", initiateRegister);
