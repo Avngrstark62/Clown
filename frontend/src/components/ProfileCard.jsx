@@ -54,15 +54,15 @@ const ProfileCard = ({ username }) => {
   if (loading || !userData) return <p className="text-center py-4">Loading...</p>;
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+    <div className="bg-white dark:bg-gray-900 rounded-lg shadow-md p-6 mb-6">
       <div className="text-center">
         <img
           src={userData.profilePic || default_avatar}
           alt="Profile"
           className="w-24 h-24 rounded-full mx-auto mb-4"
         />
-        <h2 className="text-xl font-bold">{userData.name || userData.username || 'Guest'}</h2>
-        <h3 className="text-gray-500">{'@' + userData.username || 'Guest'}</h3>
+        <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">{userData.name || userData.username || 'Guest'}</h2>
+        <h3 className="text-gray-500 dark:text-gray-400">{'@' + userData.username || 'Guest'}</h3>
       </div>
 
       <div className="flex justify-center mt-4">
@@ -91,7 +91,7 @@ const ProfileCard = ({ username }) => {
       </div>
 
       <div className="mt-4 text-center">
-        <p className="text-gray-700">{userData.bio || null}</p>
+        <p className="text-gray-700 dark:text-gray-300">{userData.bio || null}</p>
         <div className="flex justify-center space-x-4 mt-2">
           <p
             onClick={handleViewFollowers}

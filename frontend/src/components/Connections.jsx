@@ -39,15 +39,15 @@ const Connections = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8 pt-16">
-      <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-6">
+    <div className="min-h-screen bg-transparent py-8 px-4 sm:px-6 lg:px-8 pt-16">
+      <div className="max-w-3xl mx-auto bg-white dark:bg-gray-900 rounded-lg shadow-lg p-6">
         {/* Tab Header */}
-        <div className="flex justify-center space-x-8 border-b border-gray-200 mb-6">
+        <div className="flex justify-center space-x-8 border-b border-gray-200 dark:border-gray-800 mb-6">
           <button
             className={`pb-2 text-lg font-semibold ${
               activeTab === 'followers'
                 ? 'text-blue-500 border-b-2 border-blue-500'
-                : 'text-gray-500 hover:text-gray-700'
+                : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
             }`}
             onClick={() => setActiveTab('followers')}
           >
@@ -57,7 +57,7 @@ const Connections = () => {
             className={`pb-2 text-lg font-semibold ${
               activeTab === 'following'
                 ? 'text-blue-500 border-b-2 border-blue-500'
-                : 'text-gray-500 hover:text-gray-700'
+                : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
             }`}
             onClick={() => setActiveTab('following')}
           >
@@ -72,7 +72,7 @@ const Connections = () => {
               <div
                 key={user._id}
                 onClick={handleUserClick}
-                className="flex items-center p-4 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition"
+                className="flex items-center p-4 bg-gray-50 dark:bg-gray-800 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition"
               >
                 <div className="flex-shrink-0">
                   <img
@@ -82,13 +82,13 @@ const Connections = () => {
                   />
                 </div>
                 <div className="ml-4">
-                  <h3 className="text-lg font-semibold">{user.username}</h3>
-                  <p className="text-sm text-gray-600">{user.name}</p>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">{user.username}</h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">{user.name}</p>
                 </div>
               </div>
             ))
           ) : (
-            <p className="text-center text-gray-500">No users found</p>
+            <p className="text-center text-gray-500 dark:text-gray-400">No users found</p>
           )}
         </div>
       </div>

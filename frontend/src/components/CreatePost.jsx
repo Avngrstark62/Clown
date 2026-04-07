@@ -126,8 +126,8 @@ const CreatePost = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 pt-16">
-      <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6">
+    <div className="min-h-screen bg-transparent p-4 pt-16">
+      <div className="max-w-4xl mx-auto bg-white dark:bg-gray-900 rounded-lg shadow-lg p-6">
         <div className="flex justify-between mb-6">
           {step > 1 && (
             <button
@@ -148,39 +148,39 @@ const CreatePost = () => {
         </div>
 
         {step === 1 && (
-          <div className="space-y-4">
+          <div className="space-y-4 text-gray-900 dark:text-gray-100">
             <h2 className="text-2xl font-bold">Select an Image</h2>
             <input
               type="file"
               accept="image/*"
               onChange={handleImageChange}
-              className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+              className="block w-full text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 dark:file:bg-blue-900 file:text-blue-700 dark:file:text-blue-200 hover:file:bg-blue-100 dark:hover:file:bg-blue-800"
             />
             {preview && (
               <img
                 src={preview}
                 alt="Preview"
-                className="w-full h-64 object-cover rounded-lg"
+                className="w-full h-64 object-cover rounded-lg border border-gray-200 dark:border-gray-800"
               />
             )}
           </div>
         )}
 
         {step === 2 && image && (
-          <div className="space-y-4">
+          <div className="space-y-4 text-gray-900 dark:text-gray-100">
             <h2 className="text-2xl font-bold">Crop Image</h2>
             <ImageCropper image={image} onCropComplete={handleCropComplete} />
           </div>
         )}
 
         {step === 3 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-900 dark:text-gray-100">
             <div className="space-y-4">
               {croppedImage && (
                 <img
                   src={URL.createObjectURL(croppedImage)}
                   alt="Cropped Preview"
-                  className="w-full h-64 object-cover rounded-lg"
+                  className="w-full h-64 object-cover rounded-lg border border-gray-200 dark:border-gray-800"
                 />
               )}
             </div>
@@ -191,7 +191,7 @@ const CreatePost = () => {
                 placeholder="Write your content here..."
                 value={formData.content}
                 onChange={handleInputChange}
-                className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
                 rows={4}
               />
 
@@ -199,91 +199,37 @@ const CreatePost = () => {
               <div className="flex space-x-2">
                 <input
                   type="text"
-                  placeholder="Give a brief description to your post to generate captions"
+                  placeholder="Give a brief description"
                   value={generateCaptionsInput}
                   onChange={(e) => setGenerateCaptionsInput(e.target.value)}
-                  className="flex-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="flex-1 p-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
                 />
                 <button
                   onClick={handleGenerateCaptions}
                   disabled={isGeneratingCaptions}
                   className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition disabled:bg-gray-400"
                 >
-                  {isGeneratingCaptions ? (
-                    <div className="flex items-center">
-                      <svg
-                        className="animate-spin h-5 w-5 mr-2 text-white"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                      >
-                        <circle
-                          className="opacity-25"
-                          cx="12"
-                          cy="12"
-                          r="10"
-                          stroke="currentColor"
-                          strokeWidth="4"
-                        ></circle>
-                        <path
-                          className="opacity-75"
-                          fill="currentColor"
-                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                        ></path>
-                      </svg>
-                      Generating...
-                    </div>
-                  ) : (
-                    'Generate'
-                  )}
+                  {isGeneratingCaptions ? '...' : 'Generate'}
                 </button>
               </div>
-          <button
+              <button
                 onClick={handleGenerateCaptionsFromImage}
                 disabled={isGeneratingCaptions}
                 className="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition disabled:bg-gray-400"
               >
-                {isGeneratingCaptions ? (
-                  <div className="flex items-center justify-center">
-                    <svg
-                      className="animate-spin h-5 w-5 mr-2 text-white"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <circle
-                        className="opacity-25"
-                        cx="12"
-                        cy="12"
-                        r="10"
-                        stroke="currentColor"
-                        strokeWidth="4"
-                      ></circle>
-                      <path
-                        className="opacity-75"
-                        fill="currentColor"
-                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                      ></path>
-                    </svg>
-                    Generating...
-                  </div>
-                ) : (
-                  'Generate from Image'
-                )}
+                {isGeneratingCaptions ? 'Generating...' : 'Generate from Image'}
               </button>
 
-              <div className="space-y-2">
+              <div className="space-y-2 max-h-40 overflow-y-auto">
                 {generatedCaptions.map((caption, index) => (
                   <div
                     key={index}
-                    className="p-2 bg-gray-100 rounded-lg flex justify-between items-center"
+                    className="p-2 bg-gray-100 dark:bg-gray-800 rounded-lg flex justify-between items-center text-sm"
                   >
-                    <span>
-                      {index + 1}: {caption}
-                    </span>
+                    <span className="truncate mr-2">{caption}</span>
                     <button
                       onClick={() => handleChooseCaption(caption)}
-                      className="bg-green-500 text-white px-3 py-1 rounded-lg hover:bg-green-600 transition"
+                      className="bg-green-500 text-white px-2 py-1 rounded-lg text-xs hover:bg-green-600 transition"
                     >
                       Choose
                     </button>
